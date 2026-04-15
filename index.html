@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Second Song — Find Your DJ & MC</title>
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7VQ1LP5Q8Y"></script>
+<script>
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js',new Date());
+  gtag('config','G-7VQ1LP5Q8Y');
+</script>
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('-nRiu6slSToFZyqh2');</script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --burgundy:#560000;--burgundy-dk:#3d0000;
+  --cream:#f9efdd;--cream-dk:#f0e3c8;
+  --black:#000;--pink:#fdb5d5;--rose:#d2a291;
+  --white:#fff;--text-muted:#7a5a50;
+  --border:rgba(86,0,0,0.18);--border-md:rgba(86,0,0,0.28);
+  --r:4px;--rb:2px;
+  --sans:'Helvetica Now','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --serif:'Cormorant Garamond',Georgia,serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--cream);color:var(--black);min-height:100vh;padding:2rem 1rem 5rem}
+#qb{max-width:760px;margin:0 auto;background:var(--white);border-radius:var(--r);padding:3rem 2.5rem 3.5rem;border:.5px solid var(--border);box-shadow:0 4px 60px rgba(86,0,0,0.08)}
+
+/* Header (inside form) */
+.qb-header{text-align:center;margin-bottom:2.5rem;padding-bottom:1.75rem;border-bottom:1px solid var(--border)}
+.qb-eyebrow{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--burgundy);margin-bottom:12px;font-weight:500}
+.qb-title{font-family:var(--serif);font-size:38px;font-weight:500;font-style:italic;line-height:1.1;color:var(--burgundy)}
+.qb-subtitle{font-size:14px;color:var(--text-muted);margin-top:8px;line-height:1.6}
+
+/* ── Welcome screens ── */
+.welcome-screen{display:none}
+.welcome-screen.active{display:block;animation:fadeUp .4s ease}
+
+/* Screen 1 — warm editorial */
+.w1-eyebrow{
+  font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--rose);margin-bottom:1.5rem;font-weight:500;
+  display:flex;align-items:center;gap:8px;
+}
+.w1-headline{
+  font-family:var(--serif);font-size:48px;font-weight:500;font-style:italic;
+  line-height:1.05;color:var(--burgundy);margin-bottom:1.25rem;
+}
+@media(max-width:560px){.w1-headline{font-size:34px}}
+.w1-body{
+  font-size:15px;color:var(--text-muted);line-height:1.8;
+  max-width:540px;margin-bottom:2rem;
+}
+.w1-hero{
+  width:100%;height:340px;object-fit:cover;
+  border-radius:var(--r);display:block;margin-bottom:2rem;
+}
+@media(max-width:560px){.w1-hero{height:220px}}
+.w1-proof{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:1.25rem;
+  margin-bottom:2.25rem;
+  padding:1.5rem;
+  background:var(--cream);
+  border-radius:var(--r);
+  border:1px solid var(--border);
+}
+@media(max-width:560px){.w1-proof{grid-template-columns:1fr 1fr;gap:1rem;padding:1rem}}
+@media(max-width:380px){.w1-proof{grid-template-columns:1fr}}
+.w1-proof-item{display:flex;align-items:flex-start;gap:10px}
+.w1-proof-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.w1-proof-text{font-size:12px;color:var(--text-muted);line-height:1.4}
+.w1-proof-text strong{display:block;font-size:13px;color:var(--black);font-weight:600;margin-bottom:2px}
+
+/* Screen 2 — energetic photo grid */
+.w2-headline{
+  font-family:var(--serif);font-size:40px;font-weight:500;font-style:italic;
+  color:var(--burgundy);margin-bottom:.5rem;line-height:1.1;
+}
+@media(max-width:560px){.w2-headline{font-size:28px}}
+.w2-sub{font-size:14px;color:var(--text-muted);margin-bottom:1.75rem;line-height:1.6}
+.w2-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:200px 200px;
+  gap:6px;border-radius:var(--r);overflow:hidden;
+  margin-bottom:1.75rem;
+}
+@media(max-width:500px){
+  .w2-grid{grid-template-columns:1fr;grid-template-rows:180px 180px 180px 180px}
+  .w2-tall{grid-row:span 1!important}
+}
+.w2-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.w2-grid img:hover{transform:scale(1.03)}
+.w2-tall{grid-row:span 2}
+.w2-caption{
+  font-size:11px;color:var(--rose);letter-spacing:.1em;text-transform:uppercase;
+  text-align:center;margin-bottom:1.75rem;font-weight:500;
+}
+.w2-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:2rem}
+.w2-tag{
+  font-size:12px;color:var(--text-muted);
+  border:1px solid var(--border);border-radius:20px;
+  padding:5px 14px;background:var(--white);
+}
+.w2-cta-wrap{text-align:center}
+.w2-cta-btn{
+  display:inline-block;padding:16px 52px;
+  background:var(--burgundy);color:var(--cream);
+  border:none;border-radius:var(--rb);
+  font-size:14px;font-family:var(--sans);font-weight:500;
+  cursor:pointer;transition:all .25s;letter-spacing:.05em;
+}
+.w2-cta-btn:hover{background:var(--burgundy-dk);transform:translateY(-1px);box-shadow:0 6px 24px rgba(86,0,0,0.22)}
+.w2-cta-note{font-size:12px;color:var(--rose);margin-top:.85rem}
+.w2-back{
+  background:none;border:none;font-size:13px;color:var(--text-muted);
+  cursor:pointer;margin-top:1.25rem;display:block;width:100%;text-align:center;
+  padding:.5rem;transition:color .2s;font-family:var(--sans);
+}
+.w2-back:hover{color:var(--burgundy)}
+
+/* Artist panels — genre-driven reveal */
+.artist-panel{
+  margin-top:1.25rem;
+  animation:fadeUp .3s ease;
+}
+.artist-panel-label{
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--rose);margin-bottom:.65rem;font-weight:500;
+  display:flex;align-items:center;gap:8px;
+}
+.artist-panel-label::after{
+  content:'';flex:1;height:1px;background:var(--border);
+}
+.artist-panel .tag-grid{margin-bottom:0}
+.progress-bar{display:flex;gap:2px;margin-bottom:8px}
+.progress-step{flex:1;height:2px;background:var(--cream-dk);transition:background .4s}
+.progress-step.active{background:var(--burgundy)}
+.progress-step.done{background:var(--rose)}
+.progress-label{font-size:11px;color:var(--text-muted);letter-spacing:.04em}
+
+/* Step chrome */
+.step-eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
+.step-dot{width:5px;height:5px;border-radius:50%;background:var(--burgundy);flex-shrink:0}
+.step-question{font-family:var(--serif);font-size:30px;font-weight:500;margin-bottom:8px;line-height:1.2;color:var(--burgundy)}
+.step-helper{font-size:13px;color:var(--text-muted);margin-bottom:1.75rem;line-height:1.7;max-width:580px}
+.section-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);margin:1.5rem 0 .75rem;font-weight:500}
+
+/* Option cards */
+.option-list{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem}
+.option-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem}
+.option-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:1rem}
+@media(max-width:560px){.option-grid-2,.option-grid-3{grid-template-columns:1fr}}
+
+.option-card{border:1px solid var(--border);border-radius:var(--r);padding:1.1rem 1.15rem;cursor:pointer;transition:border-color .2s,background .2s,transform .15s;background:var(--white);text-align:left;position:relative}
+.option-card:hover{border-color:var(--burgundy);background:var(--cream);transform:translateY(-1px)}
+.option-card.selected{border:2px solid var(--burgundy);background:var(--cream)}
+.option-card.selected::after{content:'✓';position:absolute;top:10px;right:12px;font-size:10px;font-weight:700;color:var(--burgundy)}
+.option-card.list-card{padding:.9rem 1.25rem}
+.card-badge{display:inline-block;font-size:10px;font-weight:500;background:var(--pink);color:var(--burgundy);padding:2px 9px;border-radius:20px;margin-bottom:8px;letter-spacing:.04em}
+.card-name{font-size:14px;font-weight:500;margin-bottom:4px;color:var(--black)}
+.card-desc{font-size:12px;color:var(--text-muted);line-height:1.55}
+
+/* Big photo cards (FX pages & booth) */
+.big-photo-card{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:border-color .2s,transform .15s;position:relative;background:var(--white)}
+.big-photo-card:hover{border-color:var(--burgundy);transform:translateY(-2px)}
+.big-photo-card.selected{border:2px solid var(--burgundy)}
+.big-photo-card.selected::after{content:'✓';position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;background:var(--burgundy);color:var(--white);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:3}
+.big-photo-card img{width:100%;object-fit:cover;display:block}
+.big-photo-card .card-body{padding:1rem 1.25rem 1.25rem}
+.big-photo-card .card-body .card-name{font-size:15px}
+
+/* Qty selector */
+.qty-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:1rem}
+.qty-btn{border:1px solid var(--border-md);border-radius:var(--r);padding:1rem;cursor:pointer;background:var(--white);font-family:var(--sans);font-size:13px;color:var(--black);transition:all .2s;text-align:center;line-height:1.5}
+.qty-btn:hover{border-color:var(--burgundy);background:var(--cream)}
+.qty-btn.selected{border:2px solid var(--burgundy);background:var(--cream);font-weight:500;color:var(--burgundy)}
+
+/* Act cards (live music) */
+.acts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-bottom:1rem}
+.act-card{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:border-color .2s,transform .15s;position:relative;background:var(--white)}
+.act-card:hover{border-color:var(--burgundy);transform:translateY(-1px)}
+.act-card.selected{border:2px solid var(--burgundy)}
+.act-card.selected::after{content:'✓';position:absolute;top:10px;right:10px;width:22px;height:22px;border-radius:50%;background:var(--burgundy);color:var(--white);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:3}
+.act-thumb{position:relative;width:100%;height:130px;overflow:hidden}
+.act-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.watch-btn{position:absolute;bottom:8px;right:8px;background:rgba(86,0,0,0.88);color:#fff;font-size:10px;padding:4px 10px;border-radius:20px;text-decoration:none;letter-spacing:.04em;z-index:2;white-space:nowrap}
+.act-body{padding:.8rem 1rem .9rem}
+.act-name{font-size:14px;font-weight:500;margin-bottom:3px;color:var(--black)}
+.act-desc{font-size:12px;color:var(--text-muted);line-height:1.5}
+
+/* Artist cards */
+.artist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;margin-bottom:1rem}
+.artist-card{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:border-color .2s,transform .15s;position:relative;background:var(--white)}
+.artist-card:hover{border-color:var(--burgundy);transform:translateY(-1px)}
+.artist-card.selected{border:2px solid var(--burgundy)}
+.artist-card.selected::after{content:'✓';position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;background:var(--burgundy);color:var(--white);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.artist-card img{width:100%;height:150px;object-fit:cover;display:block}
+.artist-body{padding:.65rem .85rem .75rem}
+.artist-name{font-size:13px;font-weight:500;color:var(--black)}
+.artist-role{font-size:11px;color:var(--text-muted)}
+
+/* Tags */
+.tag-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem}
+.tag-card{border:1px solid var(--border);border-radius:20px;padding:7px 16px;cursor:pointer;background:var(--white);font-size:13px;color:var(--text-muted);transition:all .2s}
+.tag-card:hover{border-color:var(--burgundy);color:var(--burgundy);background:var(--cream)}
+.tag-card.selected{border:1.5px solid var(--burgundy);color:var(--burgundy);background:var(--cream);font-weight:500}
+
+/* Y/N */
+.yn-wrap{display:flex;gap:10px;margin-bottom:1.5rem}
+.yn-btn{flex:1;padding:1rem;border:1px solid var(--border);border-radius:var(--r);cursor:pointer;background:var(--white);font-family:var(--sans);font-size:14px;font-weight:500;color:var(--text-muted);transition:all .2s;text-align:center}
+.yn-btn:hover{border-color:var(--burgundy);color:var(--burgundy);background:var(--cream)}
+.yn-btn.selected{border:2px solid var(--burgundy);color:var(--burgundy);background:var(--cream);font-weight:600}
+
+/* Inputs */
+.form-label{font-size:10px;color:var(--text-muted);margin-bottom:6px;display:block;letter-spacing:.12em;text-transform:uppercase;font-weight:500}
+.form-input{width:100%;padding:13px 15px;border:1px solid var(--border-md);border-radius:var(--r);font-size:15px;font-family:var(--sans);background:var(--white);color:var(--black);transition:border-color .2s}
+.form-input:focus{outline:none;border-color:var(--burgundy);box-shadow:0 0 0 2px rgba(86,0,0,0.08)}
+.form-input::placeholder{color:var(--rose)}
+.form-field{margin-bottom:14px}
+.time-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.5rem}
+@media(max-width:480px){.time-row{grid-template-columns:1fr}}
+
+/* Info / tip */
+.info-box{background:var(--cream);border-left:3px solid var(--rose);border-radius:0 var(--r) var(--r) 0;padding:11px 15px;font-size:13px;color:var(--text-muted);line-height:1.65;margin:.75rem 0 1.25rem}
+.tip-box{background:rgba(253,181,213,0.15);border:1px solid var(--pink);border-radius:var(--r);padding:12px 16px;font-size:13px;color:var(--burgundy);line-height:1.65;margin:1rem 0 1.5rem;display:none}
+.tip-box.visible{display:block;animation:fadeUp .3s ease}
+
+/* All Day */
+.allday-card{border:2px solid var(--rose);border-radius:var(--r);padding:1.25rem 1.5rem;margin-bottom:1.5rem;cursor:pointer;position:relative;transition:all .2s;background:var(--white)}
+.allday-card:hover{border-color:var(--burgundy);background:var(--cream)}
+.allday-card.selected{border:2px solid var(--burgundy);background:var(--cream)}
+.allday-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--burgundy);color:var(--cream);font-size:10px;font-weight:500;padding:3px 14px;border-radius:20px;white-space:nowrap;letter-spacing:.06em}
+.allday-check{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--rose);flex-shrink:0;margin-top:4px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--white);transition:all .2s}
+
+/* Moment tabs */
+.moment-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem}
+.moment-tab{padding:8px 18px;border-radius:20px;border:1px solid var(--border-md);cursor:pointer;font-size:13px;color:var(--text-muted);background:var(--white);transition:all .2s;font-family:var(--sans)}
+.moment-tab:hover{border-color:var(--burgundy);color:var(--burgundy);background:var(--cream)}
+.moment-tab.selected{border:1.5px solid var(--burgundy);color:var(--burgundy);background:var(--cream);font-weight:500}
+
+/* Summary */
+.summary-card{background:var(--cream);border-radius:var(--r);padding:1.5rem 1.75rem;margin-bottom:1.5rem;border:1px solid var(--border)}
+.summary-title{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--rose);margin-bottom:12px;font-weight:500}
+.summary-row{display:flex;justify-content:space-between;align-items:flex-start;font-size:13px;padding:7px 0;color:var(--text-muted);border-bottom:1px solid var(--border);gap:1rem}
+.summary-row:last-of-type{border-bottom:none}
+.summary-val{font-weight:500;color:var(--black);text-align:right;flex-shrink:0;max-width:62%}
+
+/* Success */
+.success-wrap{text-align:center;padding:2rem 1rem}
+.success-mark{width:64px;height:64px;border-radius:50%;background:var(--burgundy);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:26px;color:var(--cream)}
+.success-title{font-family:var(--serif);font-size:36px;font-style:italic;margin-bottom:10px;color:var(--burgundy)}
+.success-body{font-size:14px;color:var(--text-muted);line-height:1.75;max-width:440px;margin:0 auto 1.75rem}
+.pill{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;background:var(--cream);color:var(--burgundy);border:1px solid var(--border);margin:3px;font-weight:500}
+
+/* Buttons */
+.btn-row{display:flex;align-items:center;justify-content:space-between;margin-top:2rem}
+.btn{padding:12px 28px;border-radius:var(--rb);font-size:13px;font-family:var(--sans);font-weight:500;cursor:pointer;transition:all .2s;border:1.5px solid var(--burgundy);background:transparent;color:var(--burgundy);letter-spacing:.04em}
+.btn:hover{background:var(--cream)}
+.btn-primary{background:var(--burgundy);color:var(--cream);border-color:var(--burgundy)}
+.btn-primary:hover{background:var(--burgundy-dk)}
+.btn-primary:disabled{opacity:.3;cursor:not-allowed}
+.btn-ghost{border:none;color:var(--text-muted);font-size:13px;padding:12px 0}
+.btn-ghost:hover{color:var(--burgundy);background:transparent}
+.btn-skip{border:1.5px solid var(--border-md);color:var(--text-muted)}
+.btn-skip:hover{border-color:var(--burgundy);color:var(--burgundy);background:var(--cream)}
+
+/* Steps */
+.step{display:none}
+.step.active{display:block;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.conditional{display:none}
+.conditional.visible{display:block;animation:fadeUp .25s ease}
+.optional-tag{font-size:10px;color:var(--rose);margin-left:8px;font-weight:400;vertical-align:middle}
+
+/* Video modal */
+.vid-modal-bg{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);
+  z-index:9999;align-items:center;justify-content:center;padding:1.5rem;
+}
+.vid-modal-bg.open{display:flex;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.vid-modal{
+  position:relative;width:100%;max-width:700px;
+  background:#000;border-radius:var(--r);overflow:hidden;
+  box-shadow:0 24px 80px rgba(0,0,0,.6);
+}
+.vid-modal-ratio{position:relative;width:100%;padding-top:56.25%}
+.vid-modal-ratio iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid-modal-close{
+  position:absolute;top:-40px;right:0;
+  background:none;border:none;color:#fff;font-size:28px;
+  cursor:pointer;line-height:1;padding:4px 8px;opacity:.8;
+  transition:opacity .2s;
+}
+.vid-modal-close:hover{opacity:1}
+
+/* FX interest tiles (the "gateway" page) */
+.fx-tile-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem}
+@media(max-width:500px){.fx-tile-grid{grid-template-columns:1fr}}
+.fx-tile{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:border-color .2s,transform .15s;position:relative;background:var(--white)}
+.fx-tile:hover{border-color:var(--burgundy);transform:translateY(-2px)}
+.fx-tile.selected{border:2px solid var(--burgundy)}
+.fx-tile.selected::after{content:'✓';position:absolute;top:10px;right:10px;width:22px;height:22px;border-radius:50%;background:var(--burgundy);color:var(--white);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:2}
+.fx-tile img{width:100%;height:160px;object-fit:cover;display:block}
+.fx-tile-body{padding:.85rem 1rem 1rem}
+.fx-tile-name{font-size:14px;font-weight:500;color:var(--black);margin-bottom:2px}
+.fx-tile-desc{font-size:12px;color:var(--text-muted);line-height:1.5}
+.fx-tile-link{display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+</style>
+</head>
+<body>
+
+<div id="qb">
+
+  <!-- Video modal -->
+  <div class="vid-modal-bg" id="vidModal" onclick="closeModal(event)">
+    <div class="vid-modal">
+      <button class="vid-modal-close" onclick="closeModalBtn()">✕</button>
+      <div class="vid-modal-ratio">
+        <iframe id="vidFrame" src="" title="Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ WELCOME SCREEN 1 — Warm editorial ══ -->
+  <div class="welcome-screen active" id="ws1">
+    <div class="w1-eyebrow"><span class="step-dot"></span>Second Song · Wedding Entertainment</div>
+    <div class="w1-headline">Let's find your<br>perfect match.</div>
+    <div class="w1-body">You've already reached out — now help us dial in the details. A few quick questions and we'll match you with the right DJ, MC, and team to make your day unforgettable.</div>
+    <img class="w1-hero"
+      src="https://static.wixstatic.com/media/feee51_6112687b489b4c629252d87d8e8c4c10~mv2.png/v1/fill/w_1116,h_500,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/33.png"
+      alt="Second Song wedding">
+    <div class="w1-proof">
+      <div class="w1-proof-item">
+        <span class="w1-proof-icon">🎶</span>
+        <div class="w1-proof-text"><strong>6,000+</strong>weddings &amp; events</div>
+      </div>
+      <div class="w1-proof-item">
+        <span class="w1-proof-icon">🏆</span>
+        <div class="w1-proof-text"><strong>The Knot Hall of Fame</strong>California Wedding Day · Zola Top Vendor · Best of 2025</div>
+      </div>
+      <div class="w1-proof-item">
+        <span class="w1-proof-icon">📍</span>
+        <div class="w1-proof-text"><strong>LA · SF · Nashville · Miami · Las Vegas · Hawaii</strong>+ destinations worldwide</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:.5rem">
+      <button class="btn btn-primary" style="padding:14px 52px;font-size:14px" onclick="goToWelcome2()">Next →</button>
+    </div>
+  </div>
+
+  <!-- ══ WELCOME SCREEN 2 — Energetic photo grid ══ -->
+  <div class="welcome-screen" id="ws2">
+    <div class="w1-eyebrow"><span class="step-dot"></span>More than just a DJ</div>
+    <div class="w2-headline">DJs. Live Music.<br>Lighting. Moments.</div>
+    <div class="w2-sub">From intimate string trios to full Blitz Fusion ensembles — we do it all, and we do it well.</div>
+    <div class="w2-grid">
+      <!-- Tall left: DJ setup -->
+      <img class="w2-tall"
+        src="https://static.wixstatic.com/media/feee51_f0780ff4eab04c7bab8f52f3df13beef~mv2.jpg/v1/fill/w_400,h_410,al_c,q_80,enc_avif,quality_auto/SANTIGAO_ESTATE_STYLED_SHOOT_AND_GRAND_REOPENING-377.jpg"
+        alt="Second Song DJ">
+      <!-- Top right: Blitz Fusion -->
+      <img
+        src="https://static.wixstatic.com/media/aefb83_aeff0ea266624bb88e4aec28286f4fbb~mv2.png/v1/crop/x_517,y_0,w_885,h_1080/fill/w_400,h_200,q_85,enc_avif,quality_auto/Blitz_Fusion_DJ_HORNS_A007C007_241119_R17M_250520_01_2_00000000_tif.png"
+        alt="Blitz Fusion">
+      <!-- Bottom right: Sax player -->
+      <img
+        src="https://static.wixstatic.com/media/aefb83_5afd96475210428791367e19f97a3fb5~mv2.jpg/v1/crop/x_0,y_64,w_600,h_772/fill/w_400,h_200,q_80,enc_avif,quality_auto/sax%20player1.jpg"
+        alt="Saxophone player">
+    </div>
+    <div class="w2-tags">
+      <span class="w2-tag">✦ Wedding DJs &amp; MCs</span>
+      <span class="w2-tag">✦ Live Musicians</span>
+      <span class="w2-tag">✦ DJ + Live Fusion</span>
+      <span class="w2-tag">✦ Lighting &amp; Effects</span>
+      <span class="w2-tag">✦ Photo &amp; 360 Booths</span>
+    </div>
+    <div class="w2-cta-wrap">
+      <button class="w2-cta-btn" onclick="goToCapture()">Find my match →</button>
+    </div>
+    <button class="w2-back" onclick="goToWelcome1()">← Back</button>
+  </div>
+
+
+  <!-- ══ LEAD CAPTURE SCREEN ══ -->
+  <div class="capture-screen" id="wsCap">
+    <div class="w1-eyebrow"><span class="step-dot"></span>Almost there</div>
+    <div class="capture-title">Before we dive in —<br>let's put a name to this.</div>
+    <div class="capture-sub">This helps us link your preferences directly to your booking and personalise your match.</div>
+    <div class="capture-fields">
+      <div class="form-field" style="margin-bottom:0">
+        <label class="form-label">Your name</label>
+        <input class="form-input" type="text" id="leadName" placeholder="e.g. Sarah & James" oninput="checkCapture()">
+      </div>
+      <div class="form-field" style="margin-bottom:0">
+        <label class="form-label">Email address</label>
+        <input class="form-input" type="email" id="leadEmail" placeholder="e.g. sarah@gmail.com" oninput="checkCapture()">
+      </div>
+    </div>
+    <button class="capture-btn" id="capBtn" onclick="startForm()" disabled>Let's find my match →</button>
+    <div class="capture-note">We'll never share your info or add you to any lists.</div>
+    <button class="w2-back" onclick="goToWelcome2()" style="margin-top:1rem">← Back</button>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-bar" id="progressBar">
+      <div class="progress-step" id="p0"></div><div class="progress-step" id="p1"></div>
+      <div class="progress-step" id="p2"></div><div class="progress-step" id="p3"></div>
+      <div class="progress-step" id="p4"></div><div class="progress-step" id="p5"></div>
+      <div class="progress-step" id="p6"></div><div class="progress-step" id="p7"></div>
+      <div class="progress-step" id="p8"></div><div class="progress-step" id="p9"></div>
+    </div>
+    <div class="progress-label" id="progressLabel">Section 1 of 3 — Your Vibe</div>
+  </div>
+
+  <!-- ═══ SECTION 1: YOUR VIBE ═══ -->
+
+  <!-- S0: Music Vibe -->
+  <div class="step" id="step0">
+    <div class="step-eyebrow"><span class="step-dot"></span>Your Vibe · 1 of 4</div>
+    <div class="step-question">What music vibe are you going for?</div>
+    <div class="step-helper">Choose up to 3.</div>
+    <div class="option-list">
+      <div class="option-card list-card" data-val="Good mix" onclick="togMultiMax(this,'musicVibe','btn0',3)"><div class="card-name">A good mix — something for guests of every age</div></div>
+      <div class="option-card list-card" data-val="No cheese" onclick="togMultiMax(this,'musicVibe','btn0',3)"><div class="card-name">Nothing cheesy. No wedding clichés.</div></div>
+      <div class="option-card list-card" data-val="Hip Hop / R&B / 90s" onclick="togMultiMax(this,'musicVibe','btn0',3)"><div class="card-name">Hip Hop, R&amp;B, 90s Jamz</div></div>
+      <div class="option-card list-card" data-val="Country / Classic Rock" onclick="togMultiMax(this,'musicVibe','btn0',3)"><div class="card-name">Country / Classic Rock — Sing-A-Longs!!!</div></div>
+      <div class="option-card list-card" data-val="EDM / House" onclick="togMultiMax(this,'musicVibe','btn0',3)"><div class="card-name">EDM / House — We want it to feel like a club</div></div>
+      <div class="option-card list-card" data-val="Indie / Alternative" onclick="togMultiMax(this,'musicVibe','btn0',3)"><div class="card-name">Indie / Alternative — Mix in our personal favs</div></div>
+      <div class="option-card list-card" data-val="Top 40 / Pop" onclick="togMultiMax(this,'musicVibe','btn0',3)"><div class="card-name">Top 40 / Pop — All the hits</div></div>
+    </div>
+    <div class="btn-row"><span></span><button class="btn btn-primary" id="btn0" onclick="advance()" disabled>Continue</button></div>
+  </div>
+
+  <!-- S1: MC Style -->
+  <div class="step" id="step1">
+    <div class="step-eyebrow"><span class="step-dot"></span>Your Vibe · 2 of 4</div>
+    <div class="step-question">What kind of MC energy are you looking for?</div>
+    <div class="step-helper">Choose up to 2.</div>
+    <div class="option-list">
+      <div class="option-card list-card" data-val="Elegant & Engaging" onclick="togMultiMax(this,'mcStyle','btn1',2)"><div class="card-name">Elegant &amp; Engaging</div><div class="card-desc">Charming and present — but knows when to step back</div></div>
+      <div class="option-card list-card" data-val="Just Enough" onclick="togMultiMax(this,'mcStyle','btn1',2)"><div class="card-name">Just Enough</div><div class="card-desc">Run the Grand Entrance, manage the flow, keep it minimal</div></div>
+      <div class="option-card list-card" data-val="Fun & Energetic" onclick="togMultiMax(this,'mcStyle','btn1',2)"><div class="card-name">Fun &amp; Energetic</div><div class="card-desc">Lead the party, get people on their feet</div></div>
+      <div class="option-card list-card" data-val="Keep it Simple" onclick="togMultiMax(this,'mcStyle','btn1',2)"><div class="card-name">Keep it Simple</div><div class="card-desc">Only MC when absolutely needed</div></div>
+    </div>
+    <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">← Back</button><button class="btn btn-primary" id="btn1" onclick="advance()" disabled>Continue</button></div>
+  </div>
+
+  <!-- S2: Premium DJ -->
+  <div class="step" id="step2">
+    <div class="step-eyebrow"><span class="step-dot"></span>Your Vibe · 3 of 4</div>
+    <div class="step-question">Would you like to see our premium DJ roster?</div>
+    <div class="step-helper">Our standard DJs are exceptional. But for couples who want the very best — we have a curated roster of elite talent. Emmy Award winners, Coachella stage alumni, DJs who have headlined for A-list celebrities worldwide. A noticeably different level of artistry, energy reading, and presence on the mic.</div>
+    <div class="yn-wrap">
+      <button class="yn-btn" onclick="setYN('premiumDJ',true,this,'btn2')">Yes — show me the best</button>
+      <button class="yn-btn" onclick="setYN('premiumDJ',false,this,'btn2')">No thanks</button>
+    </div>
+    <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">← Back</button><button class="btn btn-primary" id="btn2" onclick="advance()" disabled>Continue</button></div>
+  </div>
+
+  <!-- S3: Genres + Artists (dynamic reveal) -->
+  <div class="step" id="step3">
+    <div class="step-eyebrow"><span class="step-dot"></span>Your Vibe · 4 of 4</div>
+    <div class="step-question">Genres &amp; artists you love. <span class="optional-tag">optional</span></div>
+    <div class="step-helper">Pick your genres — artists will appear as you select. Skip if you'd rather not.</div>
+    <div class="section-label">Genres</div>
+    <div class="tag-grid" id="genreGrid">
+      <div class="tag-card" data-val="EDM" onclick="togGenre(this)">EDM</div>
+      <div class="tag-card" data-val="Hip Hop" onclick="togGenre(this)">Hip Hop</div>
+      <div class="tag-card" data-val="Top 40" onclick="togGenre(this)">Top 40</div>
+      <div class="tag-card" data-val="Disco" onclick="togGenre(this)">Disco</div>
+      <div class="tag-card" data-val="Funk" onclick="togGenre(this)">Funk</div>
+      <div class="tag-card" data-val="Latin" onclick="togGenre(this)">Latin</div>
+      <div class="tag-card" data-val="Classic Rock" onclick="togGenre(this)">Classic Rock</div>
+      <div class="tag-card" data-val="90s R&B" onclick="togGenre(this)">90s R&amp;B</div>
+      <div class="tag-card" data-val="Old Skool Hip Hop" onclick="togGenre(this)">Old Skool Hip Hop</div>
+      <div class="tag-card" data-val="Afrobeats" onclick="togGenre(this)">Afrobeats</div>
+      <div class="tag-card" data-val="House" onclick="togGenre(this)">House</div>
+      <div class="tag-card" data-val="Electro Pop" onclick="togGenre(this)">Electro Pop</div>
+      <div class="tag-card" data-val="Country" onclick="togGenre(this)">Country</div>
+      <div class="tag-card" data-val="Indie / Alt" onclick="togGenre(this)">Indie / Alt</div>
+    </div>
+
+    <!-- Artist panels — revealed per genre -->
+    <div id="artistPanels"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="goBack()">← Back</button>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-skip" onclick="advance()">Skip</button>
+        <button class="btn btn-primary" onclick="advance()">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- S4: Bilingual -->
+  <div class="step" id="step4">
+    <div class="step-eyebrow"><span class="step-dot"></span>Your Vibe · Almost done</div>
+    <div class="step-question">Do you need the DJ/MC to be bilingual?</div>
+    <div class="yn-wrap">
+      <button class="yn-btn" onclick="setYN('bilingual',true,this,'btn4')">Yes</button>
+      <button class="yn-btn" onclick="setYN('bilingual',false,this,'btn4')">No</button>
+    </div>
+    <div class="conditional" id="bilingualLangWrap">
+      <div class="form-field"><label class="form-label">What language — required or preferred?</label><input class="form-input" type="text" id="bilingualLang" placeholder="e.g. Spanish — required"></div>
+    </div>
+    <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">← Back</button><button class="btn btn-primary" id="btn4" onclick="advance()" disabled>Continue</button></div>
+  </div>
+
+  <!-- ═══ SECTION 2: YOUR DAY ═══ -->
+
+  <!-- S5: Ceremony at venue -->
+  <div class="step" id="step5">
+    <div class="step-eyebrow"><span class="step-dot"></span>Your Day · 1 of 2</div>
+    <div class="step-question">Are you holding the Ceremony at the reception venue?</div>
+    <div class="yn-wrap">
+      <button class="yn-btn" onclick="setYN('ceremonyAtVenue',true,this,'')">Yes</button>
+      <button class="yn-btn" onclick="setYN('ceremonyAtVenue',false,this,'btn5')">No</button>
+    </div>
+    <div class="conditional" id="ceremonyHelpWrap">
+      <div class="form-label" style="margin-bottom:.5rem">Would you like the DJ/MC to help with music and/or microphones for the Ceremony?</div>
+      <div class="yn-wrap" style="margin-bottom:0">
+        <button class="yn-btn" onclick="setYN2('ceremonyHelp',true,this,'btn5')">Yes</button>
+        <button class="yn-btn" onclick="setYN2('ceremonyHelp',false,this,'btn5')">No</button>
+      </div>
+    </div>
+    <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">← Back</button><button class="btn btn-primary" id="btn5" onclick="advance()" disabled>Continue</button></div>
+  </div>
+
+  <!-- S6: Timing -->
+  <div class="step" id="step6">
+    <div class="step-eyebrow"><span class="step-dot"></span>Your Day · 2 of 2</div>
+    <div class="step-question">Help us understand the shape of your day.</div>
+    <div class="step-helper">Approximate times are totally fine — these can always be adjusted later and are just to give us a sense of the day's flow.</div>
+    <div class="time-row">
+      <div class="form-field" style="margin-bottom:0">
+        <label class="form-label">Guest arrival time <span style="color:var(--rose);font-size:10px">(approximate)</span></label>
+        <input class="form-input" type="text" id="arrivalTime" placeholder="e.g. 5:00 PM" oninput="checkTimingBtn()">
+      </div>
+      <div class="form-field" style="margin-bottom:0">
+        <label class="form-label">End time / Last song <span style="color:var(--rose);font-size:10px">(approximate)</span></label>
+        <input class="form-input" type="text" id="endTime" placeholder="e.g. 11:00 PM" oninput="checkTimingBtn()">
+      </div>
+    </div>
+    <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">← Back</button><button class="btn btn-primary" id="btn6" onclick="advance()" disabled>Continue</button></div>
+  </div>
+
+  <!-- ═══ SECTION 3: THE EXTRAS ═══ -->
+
+  <!-- S7: Lighting & FX gateway — big tiles, multi-select, then each gets its own page -->
+  <div class="step" id="step7">
+    <div class="step-eyebrow"><span class="step-dot"></span>The Extras · Lighting &amp; Effects</div>
+    <div class="step-question">What are you interested in?</div>
+    <div class="step-helper">Select everything that catches your eye — we'll walk through each one. Skip if none apply.</div>
+    <div class="fx-tile-grid">
+      <div class="fx-tile" data-val="uplights" onclick="togFxTile(this)">
+        <img src="https://static.wixstatic.com/media/feee51_d27257212f9444d0bc626657c66e8331~mv2.png/v1/crop/x_0,y_81,w_1617,h_657/fill/w_460,h_280,al_c,q_85,enc_avif,quality_auto/16.png" alt="LED Up Lights">
+        <div class="fx-tile-body"><div class="fx-tile-name">LED Up Lights</div><div class="fx-tile-desc">Wash venue walls in color</div></div>
+      </div>
+      <div class="fx-tile" data-val="dancelights" onclick="togFxTile(this)">
+        <img src="https://static.wixstatic.com/media/aefb83_3ab0ec56c7314381be18e51ba09df519~mv2.png/v1/fill/w_460,h_280,q_85,enc_avif,quality_auto/aefb83_3ab0ec56c7314381be18e51ba09df519~mv2.png" alt="Dance Floor Lighting">
+        <div class="fx-tile-body"><div class="fx-tile-name">Dance Floor Lighting Package</div><div class="fx-tile-desc">Full production — moving heads, truss, designer on-site</div></div>
+      </div>
+      <div class="fx-tile" data-val="disco" onclick="togFxTile(this)">
+        <img src="https://img.youtube.com/vi/RMIC15UJ4So/hqdefault.jpg" alt="Disco Ball" onerror="this.src='https://static.wixstatic.com/media/feee51_86142789508f432586067f8fed33e4f6~mv2.png/v1/fill/w_460,h_280,q_85,enc_avif,quality_auto/19.png'">
+        <div class="fx-tile-body">
+          <div class="fx-tile-name">Disco Ball</div>
+          <div class="fx-tile-desc">Classic mirror ball — two styles</div>
+          <button onclick="event.stopPropagation();openModal('RMIC15UJ4So')" class="fx-tile-link" style="background:none;border:none;cursor:pointer;font-family:var(--sans)">▶ Watch video</button>
+        </div>
+      </div>
+      <div class="fx-tile" data-val="sparklers" onclick="togFxTile(this)">
+        <img src="https://img.youtube.com/vi/fEBkmFQ_9VA/hqdefault.jpg" alt="Cold Floor Sparklers" onerror="this.src='https://static.wixstatic.com/media/feee51_66c3836f64ce40d08ce3e40f459b5fae~mv2.png/v1/crop/x_0,y_270,w_1084,h_742/fill/w_460,h_280,al_c,q_85,enc_avif,quality_auto/14.png'">
+        <div class="fx-tile-body">
+          <div class="fx-tile-name">Cold Floor Sparklers</div>
+          <div class="fx-tile-desc">Indoor-safe cold sparks — first dance, grand entrance</div>
+          <button onclick="event.stopPropagation();openModal('fEBkmFQ_9VA')" class="fx-tile-link" style="background:none;border:none;cursor:pointer;font-family:var(--sans)">▶ Watch video</button>
+        </div>
+      </div>
+      <div class="fx-tile" data-val="co2" onclick="togFxTile(this)">
+        <img src="https://img.youtube.com/vi/RMIC15UJ4So/hqdefault.jpg" alt="CO2 Cannons" onerror="this.src='https://static.wixstatic.com/media/aefb83_dbded5a43e3e4d70bf1ad5c9f070941d~mv2.png/v1/crop/x_0,y_20,w_1250,h_760/fill/w_460,h_280,al_c,q_85,enc_avif,quality_auto/Untitled%20design%20(68).png'">
+        <div class="fx-tile-body">
+          <div class="fx-tile-name">CO2 Cannons</div>
+          <div class="fx-tile-desc">High-pressure CO2 bursts at peak moments</div>
+          <button onclick="event.stopPropagation();openModal('RMIC15UJ4So')" class="fx-tile-link" style="background:none;border:none;cursor:pointer;font-family:var(--sans)">▶ Watch video</button>
+        </div>
+      </div>
+      <div class="fx-tile" data-val="cloud" onclick="togFxTile(this)">
+        <img src="https://img.youtube.com/vi/RMIC15UJ4So/hqdefault.jpg" alt="Dancing on a Cloud" onerror="this.src='https://static.wixstatic.com/media/feee51_b2d7d2a12a954f49ad7cf597dd605de2~mv2.png/v1/fill/w_460,h_280,al_c,q_85,enc_avif,quality_auto/11.png'">
+        <div class="fx-tile-body">
+          <div class="fx-tile-name">Dancing on a Cloud</div>
+          <div class="fx-tile-desc">Low-lying dry ice — float on a cloud for your first dance</div>
+          <button onclick="event.stopPropagation();openModal('RMIC15UJ4So')" class="fx-tile-link" style="background:none;border:none;cursor:pointer;font-family:var(--sans)">▶ Watch video</button>
+        </div>
+      </div>
+      <div class="fx-tile" data-val="gobo" onclick="togFxTile(this)">
+        <img src="https://static.wixstatic.com/media/feee51_2c29bb25f7ca43e681ff5b9590c55e28~mv2.png/v1/crop/x_291,y_61,w_1041,h_537/fill/w_460,h_280,al_c,q_85,enc_avif,quality_auto/12.png" alt="Gobo Monogram">
+        <div class="fx-tile-body"><div class="fx-tile-name">Gobo / Monogram</div><div class="fx-tile-desc">Your initials projected on wall or dance floor</div></div>
+      </div>
+      <div class="fx-tile" data-val="dmx" onclick="togFxTile(this)">
+        <img src="https://static.wixstatic.com/media/aefb83_854af3f8890c4862b90a21b641cf5434~mv2.png/v1/crop/x_311,y_0,w_1179,h_1440/fill/w_460,h_280,al_c,q_85,enc_avif,quality_auto/Wedding%20lighting%20.png" alt="DMX Upgrade">
+        <div class="fx-tile-body"><div class="fx-tile-name">DMX Upgrade</div><div class="fx-tile-desc">Lighting pulses in sync with the beat</div></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="goBack()">← Back</button>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-skip" onclick="skipFX()">Skip</button>
+        <button class="btn btn-primary" id="btn7" onclick="startFxFlow()" disabled>Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- S7a: Up Lights — how many -->
+  <div class="step" id="step7a">
+    <div class="step-eyebrow"><span class="step-dot"></span>Lighting &amp; Effects · LED Up Lights</div>
+    <div class="step-question">How many up lights?</div>
+    <div class="step-helper">More lights means fuller venue coverage. Your specialist will recommend the right count for your space — this just helps us understand your preference.</div>
+    <img src="https://static.wixstatic.com/media/feee51_d27257212f9444d0bc626657c66e8331~mv2.png/v1/crop/x_0,y_81,w_1617,h_657/fill/w_700,h_340,al_c,q_85,enc_avif,quality_auto/16.png" style="width:100%;border-radius:var(--r);margin-bottom:1.5rem;display:block" alt="LED Up Lights">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:1rem">
+      <div class="qty-btn" data-val="8 Up Lights" onclick="selQty(this,'uplightQty')">8 lights</div>
+      <div class="qty-btn" data-val="12 Up Lights" onclick="selQty(this,'uplightQty')">12 lights</div>
+      <div class="qty-btn" data-val="16 Up Lights" onclick="selQty(this,'uplightQty')">16 lights</div>
+      <div class="qty-btn" data-val="20 Up Lights" onclick="selQty(this,'uplightQty')" style="position:relative">
+        20 lights
+        <span style="position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--burgundy);color:var(--cream);font-size:9px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap;letter-spacing:.04em">Most popular</span>
+      </div>
+      <div class="qty-btn" data-val="24 Up Lights" onclick="selQty(this,'uplightQty')">24 lights</div>
+      <div class="qty-btn" data-val="28 Up Lights" onclick="selQty(this,'uplightQty')">28 lights</div>
+    </div>
+    <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">← Back</button><button class="btn btn-primary" id="btn7a" onclick="nextFxStep()" disabled>Continue</button></div>
+  </div>
+
+  <!-- S7b: Dance Floor Lighting Packages -->
+  <div class="step" id="step7b">
+    <div class="step-eyebrow"><span class="step-dot"></span>Lighting &amp; Effects · Dance Floor Lighting</div>
+    <div class="step-question">Which lighting package?</div>
+    <div class="step-helper">Every package includes DMX control and an on-site lighting designer. Choose the look that fits your vision.</div>
+    <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:1.5rem">
+
+      <div class="big-photo-card" data-val="The Build Up" onclick="selBigCard(this,'lightingPkg','.lpkg')">
+        <img src="https://static.wixstatic.com/media/aefb83_0b7b07ae33e4416cb08fa5b1aca96893~mv2.png/v1/fill/w_700,h_340,q_85,enc_avif,quality_auto/aefb83_0b7b07ae33e4416cb08fa5b1aca96893~mv2.png" alt="The Build Up" style="height:340px">
+        <div class="card-body">
+          <div class="card-name" style="font-family:var(--serif);font-size:22px;font-style:italic;color:var(--burgundy)">The Build Up</div>
+          <div class="card-desc" style="margin-top:4px">Dance floor energy + full LED wash<br>2× truss columns + moving heads · 2× 4-PAR LED dance bars · DMX</div>
+          <button onclick="event.stopPropagation();openModal('RMIC15UJ4So')" style="margin-top:10px;font-size:12px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+        </div>
+      </div>
+
+      <div class="big-photo-card lpkg" data-val="The Hook" onclick="selBigCard(this,'lightingPkg','.lpkg')">
+        <img src="https://static.wixstatic.com/media/aefb83_85e084ee5a394025974b7cb8c6a79853~mv2.png/v1/fill/w_700,h_340,q_85,enc_avif,quality_auto/aefb83_85e084ee5a394025974b7cb8c6a79853~mv2.png" alt="The Hook" style="height:340px">
+        <div class="card-body">
+          <div class="card-name" style="font-family:var(--serif);font-size:22px;font-style:italic;color:var(--burgundy)">The Hook</div>
+          <div class="card-desc" style="margin-top:4px">Expanded coverage + disco ball<br>4× truss + moving heads · 3× 4-PAR bars · Motorised disco ball</div>
+          <button onclick="event.stopPropagation();openModal('RMIC15UJ4So')" style="margin-top:10px;font-size:12px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+        </div>
+      </div>
+
+      <div class="big-photo-card lpkg" data-val="The Drop" onclick="selBigCard(this,'lightingPkg','.lpkg')" style="position:relative">
+        <div style="position:absolute;top:14px;left:14px;background:var(--burgundy);color:var(--cream);font-size:10px;font-weight:500;padding:3px 12px;border-radius:20px;letter-spacing:.06em;z-index:2">Most booked</div>
+        <img src="https://static.wixstatic.com/media/aefb83_3ab0ec56c7314381be18e51ba09df519~mv2.png/v1/fill/w_700,h_340,q_85,enc_avif,quality_auto/aefb83_3ab0ec56c7314381be18e51ba09df519~mv2.png" alt="The Drop" style="height:340px">
+        <div class="card-body">
+          <div class="card-name" style="font-family:var(--serif);font-size:22px;font-style:italic;color:var(--burgundy)">The Drop</div>
+          <div class="card-desc" style="margin-top:4px">Full production + Portman hexagon fixtures<br>4× truss · Portman vertical + circular · Disco ball · Full architectural look</div>
+          <button onclick="event.stopPropagation();openModal('RMIC15UJ4So')" style="margin-top:10px;font-size:12px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+        </div>
+      </div>
+
+    </div>
+    <div class="section-label">Add to your package</div>
+    <div class="option-grid-2">
+      <div class="option-card" data-val="Gobo / Monogram" onclick="togMulti(this,'lightingAddons','')">
+        <img src="https://static.wixstatic.com/media/feee51_2c29bb25f7ca43e681ff5b9590c55e28~mv2.png/v1/crop/x_291,y_61,w_1041,h_537/fill/w_400,h_160,al_c,q_85,enc_avif,quality_auto/12.png" style="width:100%;height:140px;object-fit:cover;border-radius:2px;margin-bottom:10px;display:block" alt="Gobo">
+        <div class="card-name">Gobo / Monogram</div>
+        <div class="card-desc">Your initials projected on wall or dance floor</div>
+      </div>
+      <div class="option-card" data-val="DMX Upgrade" onclick="togMulti(this,'lightingAddons','')">
+        <img src="https://static.wixstatic.com/media/aefb83_854af3f8890c4862b90a21b641cf5434~mv2.png/v1/crop/x_311,y_0,w_1179,h_1440/fill/w_400,h_160,al_c,q_85,enc_avif,quality_auto/Wedding%20lighting%20.png" style="width:100%;height:140px;object-fit:cover;border-radius:2px;margin-bottom:10px;display:block" alt="DMX">
+        <div class="card-name">DMX Upgrade</div>
+        <div class="card-desc">Lighting pulses to the beat</div>
+      </div>
+      <div class="option-card" data-val="Lasers" onclick="togMulti(this,'lightingAddons','')">
+        <img src="https://img.youtube.com/vi/RMIC15UJ4So/hqdefault.jpg" style="width:100%;height:140px;object-fit:cover;border-radius:2px;margin-bottom:10px;display:block" alt="Lasers">
+        <div class="card-name">Lasers</div>
+        <div class="card-desc">High-energy laser beams that cut through fog for a dramatic, concert-level atmosphere</div>
+        <button onclick="event.stopPropagation();openModal('RMIC15UJ4So')" style="margin-top:8px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+      </div>
+      <div class="option-card" data-val="LED Tubes" onclick="togMulti(this,'lightingAddons','')">
+        <img src="https://static.wixstatic.com/media/aefb83_413a8852116c449e846872c42f663eb8~mv2.png/v1/crop/x_143,y_0,w_646,h_356/fill/w_400,h_160,q_85,enc_avif,quality_auto/tube%20lights.png" style="width:100%;height:140px;object-fit:cover;border-radius:2px;margin-bottom:10px;display:block" alt="LED Tubes">
+        <div class="card-name">LED Tubes</div>
+        <div class="card-desc">Sleek vertical LED tube lights — architectural, modern, and striking on any stage</div>
+      </div>
+    </div>
+    <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">← Back</button><button class="btn btn-primary" id="btn7b" onclick="nextFxStep()" disabled>Continue</button></div>
+  </div>
+
+  <!-- S7c: Disco Ball -->
+  <div class="step" id="step7c">
+    <div class="step-eyebrow"><span class="step-dot"></span>Lighting &amp; Effects · Disco Ball</div>
+    <div class="step-question">Which disco ball setup?</div>
+    <div class="option-grid-2">
+      <div class="big-photo-card" data-val="Disco Ball on Truss" onclick="selBigCard(this,'discoBallType','.dball')">
+        <img src="https://static.wixstatic.com/media/feee51_86142789508f432586067f8fed33e4f6~mv2.png/v1/fill/w_400,h_400,q_85,enc_avif,quality_auto/19.png" alt="Disco Ball on Truss" style="height:260px">
+        <div class="card-body">
+          <div class="card-name">Disco Ball on Truss</div>
+          <div class="card-desc">20" ball · Truss pillar · Motor · 4× beam lights</div>
+          <button onclick="event.stopPropagation();openModal('RMIC15UJ4So')" style="margin-top:8px;font-size:12px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+        </div>
+      </div>
+      <div class="big-photo-card dball" data-val="Hanging Disco Ball" onclick="selBigCard(this,'discoBallType','.dball')">
+        <img src="https://static.wixstatic.com/media/aefb83_52d2f85d5cff4fcc95fb5ea4cb98084c~mv2.jpg/v1/crop/x_9,y_0,w_2734,h_1536/fill/w_400,h_400,q_80,enc_avif,quality_auto/disco%20ball%20hanging_edited.jpg" alt="Hanging Disco Ball" style="height:260px">
+        <div class="card-body">
+          <div class="card-name">Hanging Disco Ball</div>
+          <div class="card-desc">24" ball · Truss pillar · Motor · 4× beam lights</div>
+          <button onclick="event.stopPropagation();openModal('RMIC15UJ4So')" style="margin-top:8px;font-size:12px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">← Back</button><button class="btn btn-primary" id="btn7c" onclick="nextFxStep()" disabled>Continue</button></div>
+  </div>
+
+  <!-- S7d: Cold Floor Sparklers -->
+  <div class="step" id="step7d">
+    <div class="step-eyebrow"><span class="step-dot"></span>Lighting &amp; Effects · Cold Floor Sparklers</div>
+    <div class="step-question">How many pairs?</div>
+    <div class="step-helper">Includes all special moments, a minimum of 10–15 blasts during dancing, and 1 move as needed.</div>
+    <img src="https://static.wixstatic.com/media/feee51_66c3836f64ce40d08ce3e40f459b5fae~mv2.png/v1/crop/x_0,y_270,w_1084,h_742/fill/w_700,h_360,al_c,q_85,enc_avif,quality_auto/14.png" style="width:100%;border-radius:var(--r);margin-bottom:1.5rem;display:block" alt="Cold Floor Sparklers">
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:1rem">
+      <div class="qty-btn" data-val="1 Pair (2 sparklers)" onclick="selQty(this,'sparklerQty')" style="width:100%;text-align:center;padding:1rem">1 Pair — 2 sparklers</div>
+      <div class="qty-btn" data-val="2 Pairs (4 sparklers)" onclick="selQty(this,'sparklerQty')" style="width:100%;text-align:center;padding:1rem">2 Pairs — 4 sparklers</div>
+      <div class="qty-btn" data-val="3 Pairs (6 sparklers)" onclick="selQty(this,'sparklerQty')" style="width:100%;text-align:center;padding:1rem">3 Pairs — 6 sparklers</div>
+    </div>
+    <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">← Back</button><button class="btn btn-primary" id="btn7d" onclick="nextFxStep()" disabled>Continue</button></div>
+  </div>
+
+  <!-- S8: Photo Booth -->
+  <div class="step" id="step8">
+    <div class="step-eyebrow"><span class="step-dot"></span>The Extras · Photo &amp; 360 Booth</div>
+    <div class="step-question">Interested in a Photo Booth or 360 Booth?</div>
+    <div class="yn-wrap">
+      <button class="yn-btn" onclick="setYN('booth',true,this,'')">Yes</button>
+      <button class="yn-btn" onclick="setYN('booth',false,this,'btn8')">No</button>
+    </div>
+    <div class="conditional" id="boothCatWrap">
+      <div class="section-label" style="margin-top:.5rem">Open Air or 360?</div>
+      <div class="option-grid-2">
+        <div class="big-photo-card" data-val="Open Air" onclick="selBoothCat(this,'Open Air')">
+          <img src="https://static.wixstatic.com/media/feee51_7810b739849e4528af52c8682cbdb4e2~mv2.jpg/v1/crop/x_389,y_0,w_885,h_1080/fill/w_400,h_400,q_80,enc_avif,quality_auto/photobooth%20thumbnail_edited.jpg" alt="Open Air Photo Booth" style="height:260px">
+          <div class="card-body"><div class="card-name">Open Air Photo Booth</div><div class="card-desc">Photos, prints, digital gallery, social sharing</div></div>
+        </div>
+        <div class="big-photo-card" data-val="360" onclick="selBoothCat(this,'360')">
+          <img src="https://static.wixstatic.com/media/aefb83_6f8ba3da56104d76bddbfb4dbb8abf37~mv2.png/v1/fill/w_400,h_400,q_85,enc_avif,quality_auto/360%20booth%20pic.png" alt="360 Booth" style="height:260px">
+          <div class="card-body"><div class="card-badge">Premium</div><div class="card-name">360 Booth</div><div class="card-desc">4K slow-mo video · Custom branding · Social sharing</div></div>
+        </div>
+      </div>
+
+      <!-- Open Air packages -->
+      <div class="conditional" id="openAirOpts">
+        <div class="section-label">Which package?</div>
+        <div class="option-grid-3" style="margin-bottom:.5rem">
+          <div class="big-photo-card" data-val="Social Booth" onclick="selBoothType(this,'.oabooth')">
+            <img src="https://static.wixstatic.com/media/feee51_84b602b251954047aaca9a3b753a0d5a~mv2_d_3456_5184_s_4_2.png/v1/fill/w_300,h_300,q_85,enc_avif,quality_auto/Venture%20and%20Sidekick%20(White)%20Booth%20Onlly.png" alt="Social Booth" style="height:200px">
+            <div class="card-body"><div class="card-name">Social Booth</div><div class="card-desc">Digital gallery + social sharing · No prints</div></div>
+          </div>
+          <div class="big-photo-card oabooth" data-val="Print Booth" onclick="selBoothType(this,'.oabooth')">
+            <img src="https://static.wixstatic.com/media/feee51_84b602b251954047aaca9a3b753a0d5a~mv2_d_3456_5184_s_4_2.png/v1/fill/w_300,h_300,q_85,enc_avif,quality_auto/Venture%20and%20Sidekick%20(White)%20Booth%20Onlly.png" alt="Print Booth" style="height:200px">
+            <div class="card-body"><div class="card-badge">Most popular</div><div class="card-name">Print Booth</div><div class="card-desc">Unlimited prints + digital gallery + social sharing</div></div>
+          </div>
+          <div class="big-photo-card oabooth" data-val="Display Booth" onclick="selBoothType(this,'.oabooth')">
+            <img src="https://static.wixstatic.com/media/feee51_84b602b251954047aaca9a3b753a0d5a~mv2_d_3456_5184_s_4_2.png/v1/fill/w_300,h_300,q_85,enc_avif,quality_auto/Venture%20and%20Sidekick%20(White)%20Booth%20Onlly.png" alt="Display Booth" style="height:200px">
+            <div class="card-body"><div class="card-name">Display Booth</div><div class="card-desc">Unlimited prints + 50" live feed TV + sharing kiosk</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 360 packages -->
+      <div class="conditional" id="booth360Opts">
+        <div class="section-label">Which package?</div>
+        <div class="option-grid-2" style="margin-bottom:.5rem">
+          <div class="big-photo-card" data-val="360 Essential" onclick="selBoothType(this,'.b360booth')">
+            <img src="https://static.wixstatic.com/media/aefb83_6f8ba3da56104d76bddbfb4dbb8abf37~mv2.png/v1/fill/w_400,h_300,q_85,enc_avif,quality_auto/360%20booth%20pic.png" alt="360 Essential" style="height:220px">
+            <div class="card-body">
+              <div class="card-name">360 — Essential</div>
+              <div class="card-desc">Unlimited 4K videos · Custom branding · 1 photo artist · Digital gallery · Social sharing</div>
+              <button onclick="event.stopPropagation();openModal('LOl102qssZs')" style="margin-top:8px;font-size:12px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+            </div>
+          </div>
+          <div class="big-photo-card b360booth" data-val="360 Premium" onclick="selBoothType(this,'.b360booth')">
+            <img src="https://static.wixstatic.com/media/aefb83_ae443d95127a4d529f89659794629c4a~mv2.jpg/v1/fill/w_400,h_300,q_80,enc_avif,quality_auto/IMG_0369.jpg" alt="360 Premium" style="height:220px">
+            <div class="card-body">
+              <div class="card-badge">Premium</div>
+              <div class="card-name">360 — Premium</div>
+              <div class="card-desc">Everything in Essential + 2 photo artists · LED lighting · Red carpet &amp; stanchions · Live action props</div>
+              <button onclick="event.stopPropagation();openModal('LOl102qssZs')" style="margin-top:8px;font-size:12px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">← Back</button><button class="btn btn-primary" id="btn8" onclick="advance()" disabled>Continue</button></div>
+  </div>
+
+  <!-- S9: Live Music -->
+  <div class="step" id="step9">
+    <div class="step-eyebrow"><span class="step-dot"></span>The Extras · Live Music</div>
+    <div class="step-question">Looking to add Live Music?</div>
+    <div class="yn-wrap">
+      <button class="yn-btn" onclick="setYN('liveMusic',true,this,'btn9')">Yes</button>
+      <button class="yn-btn" onclick="setYN('liveMusic',false,this,'btn9')">No</button>
+    </div>
+    <div class="conditional" id="liveMusicWrap">
+      <div class="allday-card" id="alldayCard" onclick="toggleAllDay()">
+        <div class="allday-badge">Best value · Live Music All Day</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-top:.5rem">
+          <div>
+            <div style="font-family:var(--serif);font-size:20px;font-style:italic;color:var(--burgundy);margin-bottom:6px">All Day Package</div>
+            <div style="font-size:13px;color:var(--text-muted);line-height:1.8">✓ Soloist of your choice — Ceremony<br>✓ Soloist of your choice — Cocktail Hour<br>✓ 3 musicians of your choice — Dancing</div>
+          </div>
+          <div class="allday-check" id="alldayCheck"></div>
+        </div>
+      </div>
+      <div style="text-align:center;font-size:11px;color:var(--text-muted);margin:.5rem 0 1.25rem;letter-spacing:.1em;text-transform:uppercase">— or build your own —</div>
+      <div class="section-label">Which moments?</div>
+      <div class="moment-tabs" id="momentTabs">
+        <button class="moment-tab" data-moment="Ceremony" onclick="toggleMoment(this)">Ceremony</button>
+        <button class="moment-tab" data-moment="Cocktail Hour" onclick="toggleMoment(this)">Cocktail Hour</button>
+        <button class="moment-tab" data-moment="Dancing / After Party" onclick="toggleMoment(this)">Dancing / After Party</button>
+      </div>
+      <div class="tip-box" id="extendTip">💡 <strong>Pro tip:</strong> Choosing live music for both Ceremony and Cocktail Hour? Extending one act across both moments is significantly more cost-effective than booking two separate acts. We'll talk through the best approach on your call.</div>
+      <div id="momentActPanels"></div>
+    </div>
+    <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">← Back</button><button class="btn btn-primary" id="btn9" onclick="advance()" disabled>Continue</button></div>
+  </div>
+
+  <!-- S10: Blitz Elite -->
+  <div class="step" id="step10">
+    <div class="step-eyebrow"><span class="step-dot"></span>The Extras · Premium Musicians</div>
+    <div class="step-question">Interested in our most in-demand musicians?</div>
+    <div class="step-helper">Our Blitz Elite roster is a curated selection of named soloists who have performed alongside Lizzo, top-charting artists, and A-list celebrities at some of the most exclusive events in the world. You choose a specific musician by name — someone you can look up, someone whose work you can watch. A noticeably different level.</div>
+    <div class="yn-wrap">
+      <button class="yn-btn" onclick="setYN('blitzElite',true,this,'btn10')">Yes — show me the roster</button>
+      <button class="yn-btn" onclick="setYN('blitzElite',false,this,'btn10')">No thanks</button>
+    </div>
+    <div class="conditional" id="blitzEliteWrap">
+      <div class="info-box">Blitz Elite pricing is shared on your consultation call.</div>
+      <div class="section-label">Saxophone</div>
+      <div class="artist-grid">
+        <div class="artist-card" data-val="Elite Sax — Miguel" onclick="togArtist(this,'blitzArtists')">
+          <img src="https://img.youtube.com/vi/dJjI6heCinA/hqdefault.jpg" alt="Sax" onerror="this.src='https://static.wixstatic.com/media/aefb83_5afd96475210428791367e19f97a3fb5~mv2.jpg/v1/crop/x_0,y_64,w_600,h_772/fill/w_400,h_300,q_80,enc_avif,quality_auto/sax%20player1.jpg'">
+          <div class="artist-body">
+            <div class="artist-name">Miguel R.</div>
+            <div class="artist-role">Saxophone · Celebrity events</div>
+            <button onclick="event.stopPropagation();openModal('dJjI6heCinA')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2pxbackground:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+          </div>
+        </div>
+        <div class="artist-card" data-val="Elite Sax — Jordan" onclick="togArtist(this,'blitzArtists')">
+          <img src="https://img.youtube.com/vi/dJjI6heCinA/hqdefault.jpg" alt="Sax" onerror="this.src='https://static.wixstatic.com/media/aefb83_5afd96475210428791367e19f97a3fb5~mv2.jpg/v1/crop/x_0,y_64,w_600,h_772/fill/w_400,h_300,q_80,enc_avif,quality_auto/sax%20player1.jpg'">
+          <div class="artist-body">
+            <div class="artist-name">Jordan T.</div>
+            <div class="artist-role">Saxophone · Festival alumni</div>
+            <button onclick="event.stopPropagation();openModal('dJjI6heCinA')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2pxbackground:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+          </div>
+        </div>
+      </div>
+      <div class="section-label">Guitar</div>
+      <div class="artist-grid">
+        <div class="artist-card" data-val="Elite Guitar — Alex" onclick="togArtist(this,'blitzArtists')">
+          <img src="https://img.youtube.com/vi/dJjI6heCinA/hqdefault.jpg" alt="Guitar" onerror="this.src='https://static.wixstatic.com/media/aefb83_8b7ff3ba3b2c48f4b92fd9c1fcf9b9b2~mv2.jpg/v1/crop/x_522,y_0,w_1297,h_2012/fill/w_400,h_300,q_80,enc_avif,quality_auto/Screenshot%202025-06-10%20at%201_06_edited.jpg'">
+          <div class="artist-body">
+            <div class="artist-name">Alex M.</div>
+            <div class="artist-role">Electric Guitar · A-list events</div>
+            <button onclick="event.stopPropagation();openModal('dJjI6heCinA')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2pxbackground:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+          </div>
+        </div>
+        <div class="artist-card" data-val="Elite Guitar — Sofia" onclick="togArtist(this,'blitzArtists')">
+          <img src="https://img.youtube.com/vi/dJjI6heCinA/hqdefault.jpg" alt="Guitar" onerror="this.src='https://static.wixstatic.com/media/aefb83_8b7ff3ba3b2c48f4b92fd9c1fcf9b9b2~mv2.jpg/v1/crop/x_522,y_0,w_1297,h_2012/fill/w_400,h_300,q_80,enc_avif,quality_auto/Screenshot%202025-06-10%20at%201_06_edited.jpg'">
+          <div class="artist-body">
+            <div class="artist-name">Sofia K.</div>
+            <div class="artist-role">Acoustic · Singer-Songwriter</div>
+            <button onclick="event.stopPropagation();openModal('dJjI6heCinA')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2pxbackground:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+          </div>
+        </div>
+      </div>
+      <div class="section-label">Violin</div>
+      <div class="artist-grid">
+        <div class="artist-card" data-val="Elite Violin — Natasha" onclick="togArtist(this,'blitzArtists')">
+          <img src="https://img.youtube.com/vi/Mx6PP9AWXUk/hqdefault.jpg" alt="Violin" onerror="this.src='https://static.wixstatic.com/media/aefb83_2a89882eab714b9d9ecc797d8cc77b18~mv2.png/v1/fill/w_400,h_300,q_85,enc_avif,quality_auto/FORTUNEWEST%20(3Piece)%202.png'">
+          <div class="artist-body">
+            <div class="artist-name">Natasha V.</div>
+            <div class="artist-role">Electric Violin · 300+ events</div>
+            <button onclick="event.stopPropagation();openModal('Mx6PP9AWXUk')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2pxbackground:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+          </div>
+        </div>
+        <div class="artist-card" data-val="Elite Violin — Elena" onclick="togArtist(this,'blitzArtists')">
+          <img src="https://img.youtube.com/vi/Mx6PP9AWXUk/hqdefault.jpg" alt="Violin" onerror="this.src='https://static.wixstatic.com/media/aefb83_2a89882eab714b9d9ecc797d8cc77b18~mv2.png/v1/fill/w_400,h_300,q_85,enc_avif,quality_auto/FORTUNEWEST%20(3Piece)%202.png'">
+          <div class="artist-body">
+            <div class="artist-name">Elena R.</div>
+            <div class="artist-role">Classical &amp; Contemporary</div>
+            <button onclick="event.stopPropagation();openModal('Mx6PP9AWXUk')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2pxbackground:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">← Back</button><button class="btn btn-primary" id="btn10" onclick="advance()" disabled>Continue</button></div>
+  </div>
+
+  <!-- S11: Review -->
+  <div class="step" id="step11">
+    <div class="step-eyebrow"><span class="step-dot"></span>Almost done</div>
+    <div class="step-question">Here's what we're working with.</div>
+    <div class="step-helper">Review your selections — then submit and we'll get to work on your match.</div>
+    <div class="summary-card" id="summaryCard"></div>
+    <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">← Back</button><button class="btn btn-primary" onclick="submitForm()" style="padding:12px 36px">Submit →</button></div>
+  </div>
+
+  <!-- S12: Thank you -->
+  <div class="step" id="step12">
+    <div class="success-wrap">
+      <div class="success-mark">🎶</div>
+      <div class="success-title" id="successTitle">You're all set.</div>
+      <div class="success-body">Thanks for taking the time — this gives us exactly what we need. We'll be in touch shortly with your DJ and MC recommendations tailored just for your day.</div>
+      <div id="successPills" style="margin-bottom:1.75rem"></div>
+      <button class="btn btn-ghost" onclick="resetForm()">Start over</button>
+    </div>
+  </div>
+
+</div><!-- /#qb -->
+
+<script>
+// ── STATE ─────────────────────────────────────────────────────
+const S={
+  leadName:'',leadEmail:'',
+  musicVibe:[],mcStyle:[],premiumDJ:null,genres:[],artists:[],
+  bilingual:null,bilingualLang:'',ceremonyAtVenue:null,ceremonyHelp:null,
+  // FX
+  fxInterested:[],  // tiles selected on S7
+  fxQueue:[],       // ordered list of fx sub-steps to walk through
+  fxQueueIdx:0,
+  uplightQty:null,lightingPkg:null,lightingAddons:[],discoBallType:null,sparklerQty:null,
+  // Booth
+  booth:null,boothCat:null,boothType:null,
+  // Live music
+  liveMusic:null,alldayPackage:false,liveMoments:[],momentActs:{},
+  blitzElite:null,blitzArtists:[],
+};
+
+// FX sub-step map: only items that need their own page
+// co2, cloud, gobo, dmx are tile-only — no dedicated page
+const FX_STEPS={
+  uplights:    {stepId:'step7a', btnId:'btn7a',  needsSel:true},
+  dancelights: {stepId:'step7b', btnId:'btn7b',  needsSel:true},
+  disco:       {stepId:'step7c', btnId:'btn7c',  needsSel:true},
+  sparklers:   {stepId:'step7d', btnId:'btn7d',  needsSel:true},
+};
+
+// Live music act definitions
+function ytThumb(id){return`https://img.youtube.com/vi/${id}/hqdefault.jpg`}
+function ytLink(id){return`https://www.youtube.com/watch?v=${id}`}
+const VID={str:'Mx6PP9AWXUk',strAlt:'fEBkmFQ_9VA',live:'dJjI6heCinA',blitz:'RMIC15UJ4So'};
+const IMG={str:'https://static.wixstatic.com/media/aefb83_2a89882eab714b9d9ecc797d8cc77b18~mv2.png/v1/fill/w_460,h_180,q_85,enc_avif,quality_auto/FORTUNEWEST%20(3Piece)%202.png',harp:'https://static.wixstatic.com/media/feee51_c3c514d11a6742be838039cb8237aac3~mv2.png/v1/fill/w_460,h_180,q_85,enc_avif,quality_auto/37.png',sax:'https://static.wixstatic.com/media/aefb83_5afd96475210428791367e19f97a3fb5~mv2.jpg/v1/fill/w_460,h_180,q_80,enc_avif,quality_auto/sax%20player1.jpg',guitar:'https://static.wixstatic.com/media/aefb83_8b7ff3ba3b2c48f4b92fd9c1fcf9b9b2~mv2.jpg/v1/fill/w_460,h_180,q_80,enc_avif,quality_auto/Screenshot%202025-06-10%20at%201_06_edited.jpg',duo:'https://static.wixstatic.com/media/aefb83_e1c03ba7d45d437ebe8afcfdbd0ec1de~mv2.jpg/v1/fill/w_460,h_180,q_80,enc_avif,quality_auto/Duo%20musicians_edited.jpg',djlive:'https://static.wixstatic.com/media/aefb83_18e7b5ad23de470da28013e5b7831865~mv2.png/v1/fill/w_460,h_180,q_85,enc_avif,quality_auto/DJ%20LIVE%20MUSIC%20SOLO_tif.png',blitzfusion:'https://static.wixstatic.com/media/aefb83_aeff0ea266624bb88e4aec28286f4fbb~mv2.png/v1/fill/w_460,h_180,q_85,enc_avif,quality_auto/Blitz_Fusion_DJ_HORNS_A007C007_241119_R17M_250520_01_2_00000000_tif.png',bigband:'https://static.wixstatic.com/media/aefb83_38c0976ebb5c4ae992e6410c418a3ad9~mv2.jpg/v1/fill/w_460,h_180,q_80,enc_avif,quality_auto/Big%20Band_edited.jpg'};
+
+const MOMENT_ACTS={
+  'Ceremony':[
+    {id:'strings',label:'Strings',acts:[
+      {val:'String Nation',desc:'Our flagship string act — elevated and versatile',ytId:VID.str,fb:IMG.str},
+      {val:'Blitz Quartet',desc:'4-piece ensemble, classical through contemporary',ytId:VID.str,fb:IMG.str},
+      {val:'Bell Trio',desc:'Harp, Violin &amp; Cello — ethereal and intimate',ytId:VID.strAlt,fb:IMG.harp},
+      {val:'Second String Duo',desc:'Elegant string duo — best value for ceremonies',ytId:VID.str,fb:IMG.str},
+    ]},
+    {id:'solo',label:'Solo',acts:[
+      {val:'Solo Acoustic Guitar',desc:'Classical or singer-songwriter',ytId:VID.live,fb:IMG.guitar},
+      {val:'Solo Electric Violin',desc:'Contemporary and striking',ytId:VID.live,fb:IMG.str},
+      {val:'Solo Harp',desc:'Timeless and romantic',ytId:VID.live,fb:IMG.harp},
+    ]},
+    {id:'duo',label:'Duo',acts:[
+      {val:'Jazz Duo',desc:'Sax + guitar or keys',ytId:VID.live,fb:IMG.duo},
+      {val:'Acoustic Duo',desc:'Guitar + vocals or two acoustic instruments',ytId:VID.live,fb:IMG.duo},
+    ]},
+    {id:'trio',label:'Trio',acts:[
+      {val:'Jazz Trio',desc:'Fully acoustic jazz trio',ytId:VID.live,fb:IMG.duo},
+      {val:'Acoustic Trio',desc:'Guitar, violin, and cello',ytId:VID.live,fb:IMG.duo},
+    ]},
+  ],
+  'Cocktail Hour':[
+    {id:'strings',label:'Strings',acts:[
+      {val:'String Nation',desc:'Our flagship string act',ytId:VID.str,fb:IMG.str},
+      {val:'Bell Trio',desc:'Harp, Violin &amp; Cello',ytId:VID.strAlt,fb:IMG.harp},
+      {val:'Second String Duo',desc:'Elegant string duo',ytId:VID.str,fb:IMG.str},
+    ]},
+    {id:'solo',label:'Solo',acts:[
+      {val:'Solo Sax',desc:'Smooth and soulful — a cocktail classic',ytId:VID.live,fb:IMG.sax},
+      {val:'Solo Guitar',desc:'Singer-songwriter or classical',ytId:VID.live,fb:IMG.guitar},
+    ]},
+    {id:'duo',label:'Duo',acts:[
+      {val:'Jazz Duo',desc:'Sax + guitar or piano',ytId:VID.live,fb:IMG.duo},
+    ]},
+    {id:'trio',label:'Trio',acts:[
+      {val:'Jazz Trio',desc:'Fully acoustic jazz trio',ytId:VID.live,fb:IMG.duo},
+    ]},
+  ],
+  'Dancing / After Party':[
+    {id:'djlive',label:'DJ + Live',acts:[
+      {val:'Solo Musician with DJ',desc:'Sax, Violin, Trumpet, or Percussion alongside your DJ',ytId:VID.blitz,fb:IMG.djlive},
+      {val:'Blitz Fusion — Sax, Perc &amp; Violin',desc:'Signature 3-piece with DJ — our most popular dancing add-on',ytId:VID.blitz,fb:IMG.blitzfusion},
+      {val:'Blitz Fusion BIG — 3 Strings + 3 Horns',desc:'Full large ensemble with DJ — maximum impact',ytId:VID.blitz,fb:IMG.bigband},
+    ]},
+  ],
+};
+let momentTypeSel={};
+
+// ── NAV ───────────────────────────────────────────────────────
+let navHistory=[],currentStep=0;
+
+// Step IDs in linear order for progress calculation
+const STEP_ORDER=['step0','step1','step2','step3','step4','step5','step6','step7',
+  'step7a','step7b','step7c','step7d',
+  'step8','step9','step10','step11','step12'];
+const TOTAL_VISIBLE=14; // approximate visible steps for progress
+
+const SECTION_MAP={
+  step0:'Section 1 of 3 — Your Vibe',step1:'Section 1 of 3 — Your Vibe',
+  step2:'Section 1 of 3 — Your Vibe',step3:'Section 1 of 3 — Your Vibe',step4:'Section 1 of 3 — Your Vibe',
+  step5:'Section 2 of 3 — Your Day',step6:'Section 2 of 3 — Your Day',
+  step7:'Section 3 of 3 — The Extras',step7a:'Section 3 of 3 — The Extras',
+  step7b:'Section 3 of 3 — The Extras',step7c:'Section 3 of 3 — The Extras',
+  step7d:'Section 3 of 3 — The Extras',
+  step8:'Section 3 of 3 — The Extras',step9:'Section 3 of 3 — The Extras',
+  step10:'Section 3 of 3 — The Extras',step11:'Review & Submit',step12:'Done',
+};
+
+function showStep(id){
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  const el=document.getElementById(id);if(el)el.classList.add('active');
+  updateProgress(id);
+  if(id==='step9'&&S.liveMusic)renderMomentPanels();
+  if(id==='step11')buildSummary();
+  scrollTop();
+  // GA4 step tracking — fires on every question view
+  if(typeof gtag!=='undefined') gtag('event','step_view',{event_category:'match_form',step_id:id,step_index:STEP_ORDER.indexOf(id)});
+}
+
+function updateProgress(id){
+  const idx=STEP_ORDER.indexOf(id);
+  const total=STEP_ORDER.length-1; // exclude step12 from calculation
+  const filled=Math.max(0,Math.min(idx,total));
+  for(let i=0;i<10;i++){
+    const el=document.getElementById('p'+i);if(!el)continue;
+    el.classList.remove('active','done');
+    // Each segment covers 1/10 of the journey
+    const segStart=i*(total/10);
+    const segEnd=(i+1)*(total/10);
+    if(filled>segEnd) el.classList.add('done');
+    else if(filled>=segStart&&filled<segEnd) el.classList.add('active');
+    // step0: filled=0, all segments inactive — progress bar is empty at start
+  }
+  document.getElementById('progressLabel').textContent=SECTION_MAP[id]||'';
+}
+
+function advance(){
+  const cur=getCurrentStepId();
+  navHistory.push(cur);
+  const next=getNextStepId(cur);
+  currentStep=next;
+  showStep(next);
+}
+
+function goBack(){
+  if(!navHistory.length)return;
+  const prev=navHistory.pop();
+  currentStep=prev;
+  showStep(prev);
+}
+
+function getCurrentStepId(){return currentStep||'step0'}
+
+function getNextStepId(cur){
+  // Simple sequential steps
+  const seq={step0:'step1',step1:'step2',step2:'step3',step3:'step4',step4:'step5',step5:'step6',step6:'step7'};
+  if(seq[cur])return seq[cur];
+  // After lighting gateway
+  if(cur==='step7')return 'step8'; // goes to booth (FX flow handled by startFxFlow)
+  // After FX sub-steps
+  if(['step7a','step7b','step7c','step7d'].includes(cur))return nextFxStepId();
+  if(cur==='step8')return 'step9';
+  if(cur==='step9')return 'step10';
+  if(cur==='step10')return 'step11';
+  return 'step11';
+}
+
+function scrollTop(){window.scrollTo({top:0,behavior:'smooth'})}
+
+// ── FX FLOW ───────────────────────────────────────────────────
+function togFxTile(el){
+  const val=el.dataset.val;
+  el.classList.toggle('selected');
+  S.fxInterested=S.fxInterested.includes(val)?S.fxInterested.filter(v=>v!==val):[...S.fxInterested,val];
+  document.getElementById('btn7').disabled=S.fxInterested.length===0;
+}
+
+function startFxFlow(){
+  // Build queue — only items that have a dedicated sub-page (in FX_STEPS)
+  const order=['uplights','dancelights','disco','sparklers'];
+  S.fxQueue=order.filter(k=>S.fxInterested.includes(k)&&FX_STEPS[k]);
+  S.fxQueueIdx=0;
+  if(!S.fxQueue.length){
+    // Nothing needs a dedicated page — go straight to booth
+    const cur=getCurrentStepId();
+    navHistory.push(cur);currentStep='step8';showStep('step8');return;
+  }
+  const cur=getCurrentStepId();
+  navHistory.push(cur);
+  const firstStep=FX_STEPS[S.fxQueue[0]];
+  currentStep=firstStep.stepId;
+  showStep(firstStep.stepId);
+}
+
+function skipFX(){
+  S.fxInterested=[];S.fxQueue=[];S.fxQueueIdx=0;
+  const cur=getCurrentStepId();
+  navHistory.push(cur);
+  currentStep='step8';
+  showStep('step8');
+}
+
+function nextFxStep(){
+  S.fxQueueIdx++;
+  const cur=getCurrentStepId();
+  navHistory.push(cur);
+  if(S.fxQueueIdx>=S.fxQueue.length){
+    currentStep='step8';
+    showStep('step8');
+    return;
+  }
+  const next=FX_STEPS[S.fxQueue[S.fxQueueIdx]];
+  currentStep=next.stepId;
+  showStep(next.stepId);
+}
+
+function nextFxStepId(){
+  // Used for back navigation calculation
+  const nextIdx=S.fxQueueIdx+1;
+  if(nextIdx>=S.fxQueue.length)return 'step8';
+  return FX_STEPS[S.fxQueue[nextIdx]].stepId;
+}
+
+// ── SELECTION HELPERS ─────────────────────────────────────────
+// ── GENRE → ARTIST MAP ────────────────────────────────────────
+// Replace placeholder artists with your team's final list per genre.
+// Each genre key must exactly match the data-val on the genre tag card.
+const GENRE_ARTISTS = {
+  'EDM':              ['Avicii', 'Calvin Harris', 'Daft Punk', 'Deadmau5', 'Martin Garrix', 'Tiësto', 'Marshmello', 'Illenium'],
+  'Hip Hop':          ['Drake', 'Kendrick Lamar', 'Kanye West', 'J. Cole', 'Cardi B', 'Travis Scott', 'Lil Baby', 'Megan Thee Stallion'],
+  'Top 40':           ['Taylor Swift', 'Dua Lipa', 'Charli XCX', 'Chappell Roan', 'Sabrina Carpenter', 'Olivia Rodrigo', 'The Weeknd', 'Bruno Mars'],
+  'Disco':            ['Donna Summer', 'Chic', 'Gloria Gaynor', 'Sister Sledge', 'Sylvester', 'Village People', 'Earth Wind + Fire', 'Kool & The Gang'],
+  'Funk':             ['James Brown', 'Prince', 'Sly & The Family Stone', 'Parliament-Funkadelic', 'Rick James', 'Bootsy Collins', 'Chaka Khan'],
+  'Latin':            ['Bad Bunny', 'J Balvin', 'Maluma', 'Ozuna', 'Shakira', 'Marc Anthony', 'Daddy Yankee', 'Karol G'],
+  'Classic Rock':     ['Fleetwood Mac', 'The Beatles', 'Queen', 'Led Zeppelin', 'Rolling Stones', 'Eagles', 'Journey', 'Tom Petty'],
+  '90s R&B':          ['Beyoncé', 'Mary J. Blige', 'TLC', 'Destiny\'s Child', 'Usher', 'R. Kelly', 'Boyz II Men', 'Whitney Houston'],
+  'Old Skool Hip Hop':['Dr Dre', 'Snoop Dogg', 'Jay-Z', 'Biggie', 'Tupac', 'Nas', 'Wu-Tang Clan', 'Public Enemy'],
+  'Afrobeats':        ['Burna Boy', 'Wizkid', 'Davido', 'Tems', 'Ayra Starr', 'Rema', 'Ckay', 'Fireboy DML'],
+  'House':            ['Purple Disco Machine', 'Rufus Du Sol', 'Fisher', 'Chris Lake', 'Fred Again', 'John Summit', 'MEDUZA', 'Peggy Gou'],
+  'Electro Pop':      ['Doja Cat', 'Lizzo', 'Dua Lipa', 'Kylie Minogue', 'Robyn', 'Grimes', 'Troye Sivan', 'Years & Years'],
+  'Country':          ['Lainey Wilson', 'Zach Bryan', 'Morgan Wallen', 'Luke Combs', 'Chris Stapleton', 'Kacey Musgraves', 'Dolly Parton', 'Kenny Rogers'],
+  'Indie / Alt':      ['Odesza', 'Tame Impala', 'Arctic Monkeys', 'The 1975', 'Vampire Weekend', 'Phoebe Bridgers', 'Bon Iver', 'Fleet Foxes'],
+};
+
+function togGenre(el){
+  const genre=el.dataset.val;
+  el.classList.toggle('selected');
+  S.genres=S.genres.includes(genre)?S.genres.filter(g=>g!==genre):[...S.genres,genre];
+  renderArtistPanels();
+}
+
+function renderArtistPanels(){
+  const wrap=document.getElementById('artistPanels');
+  if(!S.genres.length){wrap.innerHTML='';return;}
+
+  // Preserve currently selected artists across re-renders
+  const prevSelected=S.artists.slice();
+
+  const html=S.genres.map(genre=>{
+    const list=GENRE_ARTISTS[genre]||[];
+    const chips=list.map(artist=>{
+      const isSelected=S.artists.includes(artist);
+      return`<div class="tag-card${isSelected?' selected':''}" data-val="${artist}" onclick="togArtistChip(this,'${artist}')">${artist}</div>`;
+    }).join('');
+    return`<div class="artist-panel">
+      <div class="artist-panel-label">${genre}</div>
+      <div class="tag-grid">${chips}</div>
+    </div>`;
+  }).join('');
+
+  wrap.innerHTML=html;
+}
+
+function togArtistChip(el,artist){
+  el.classList.toggle('selected');
+  S.artists=S.artists.includes(artist)?S.artists.filter(a=>a!==artist):[...S.artists,artist];
+}
+function togMultiMax(el,key,btnId,max){
+  const val=el.dataset.val;
+  const alreadySelected=S[key].includes(val);
+  if(!alreadySelected&&S[key].length>=max){
+    el.style.outline='2px solid var(--rose)';
+    setTimeout(()=>el.style.outline='',400);
+    return;
+  }
+  el.classList.toggle('selected');
+  S[key]=alreadySelected?S[key].filter(v=>v!==val):[...S[key],val];
+  if(btnId)document.getElementById(btnId).disabled=S[key].length===0;
+}
+function togMulti(el,key,btnId){
+  const val=el.dataset.val;el.classList.toggle('selected');
+  S[key]=S[key].includes(val)?S[key].filter(v=>v!==val):[...S[key],val];
+  if(btnId)document.getElementById(btnId).disabled=S[key].length===0;
+}
+function togTag(el,key){
+  const val=el.dataset.val;el.classList.toggle('selected');
+  S[key]=S[key].includes(val)?S[key].filter(v=>v!==val):[...S[key],val];
+}
+function togArtist(el,key){
+  const val=el.dataset.val;el.classList.toggle('selected');
+  S[key]=S[key].includes(val)?S[key].filter(v=>v!==val):[...S[key],val];
+}
+
+function setYN(key,val,btn,btnId){
+  S[key]=val;
+  btn.parentElement.querySelectorAll('.yn-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  if(key==='bilingual'){document.getElementById('bilingualLangWrap').classList.toggle('visible',val);if(btnId)document.getElementById(btnId).disabled=false}
+  if(key==='ceremonyAtVenue'){document.getElementById('ceremonyHelpWrap').classList.toggle('visible',val);if(!val)document.getElementById('btn5').disabled=false;else document.getElementById('btn5').disabled=true}
+  if(key==='booth'){document.getElementById('boothCatWrap').classList.toggle('visible',val);if(!val&&btnId)document.getElementById(btnId).disabled=false;else if(val)document.getElementById('btn8').disabled=true}
+  if(key==='liveMusic'){document.getElementById('liveMusicWrap').classList.toggle('visible',val);if(btnId)document.getElementById(btnId).disabled=false;if(val)renderMomentPanels()}
+  if(key==='premiumDJ'&&btnId)document.getElementById(btnId).disabled=false;
+  if(key==='blitzElite'){document.getElementById('blitzEliteWrap').classList.toggle('visible',val);if(btnId)document.getElementById(btnId).disabled=false}
+}
+function setYN2(key,val,btn,btnId){
+  S[key]=val;btn.parentElement.querySelectorAll('.yn-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');if(btnId)document.getElementById(btnId).disabled=false;
+}
+function checkTimingBtn(){
+  const a=document.getElementById('arrivalTime').value.trim(),e=document.getElementById('endTime').value.trim();
+  document.getElementById('btn6').disabled=!(a&&e);
+}
+
+function selQty(el,key){
+  // Deselect all qty-btns with the same key (data-key attribute or parent traversal)
+  // Use document-wide search by key to avoid closest() class dependency
+  document.querySelectorAll('.qty-btn').forEach(b=>{
+    if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes("'"+key+"'"))
+      b.classList.remove('selected');
+  });
+  el.classList.add('selected');
+  S[key]=el.dataset.val;
+  const btnMap={uplightQty:'btn7a',sparklerQty:'btn7d'};
+  if(btnMap[key]){const b=document.getElementById(btnMap[key]);if(b)b.disabled=false;}
+}
+
+function selBigCard(el,key,sel){
+  document.querySelectorAll(sel).forEach(c=>c.classList.remove('selected'));
+  el.parentElement.querySelectorAll('.big-photo-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');S[key]=el.dataset.val;
+  const btnMap={lightingPkg:'btn7b',discoBallType:'btn7c'};
+  if(btnMap[key])document.getElementById(btnMap[key]).disabled=false;
+}
+
+// BOOTH
+function selBoothCat(el,cat){
+  el.parentElement.querySelectorAll('.big-photo-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');S.boothCat=cat;S.boothType=null;
+  document.getElementById('openAirOpts').classList.toggle('visible',cat==='Open Air');
+  document.getElementById('booth360Opts').classList.toggle('visible',cat==='360');
+  document.getElementById('btn8').disabled=true;
+}
+function selBoothType(el,sel){
+  document.querySelectorAll(sel).forEach(c=>c.classList.remove('selected'));
+  el.parentElement.querySelectorAll('.big-photo-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');S.boothType=el.dataset.val;
+  document.getElementById('btn8').disabled=false;
+}
+
+// ALL DAY
+function toggleAllDay(){
+  S.alldayPackage=!S.alldayPackage;
+  document.getElementById('alldayCard').classList.toggle('selected',S.alldayPackage);
+  const chk=document.getElementById('alldayCheck');
+  chk.style.background=S.alldayPackage?'var(--burgundy)':'transparent';
+  chk.style.border=S.alldayPackage?'1.5px solid var(--burgundy)':'1.5px solid var(--rose)';
+  chk.textContent=S.alldayPackage?'✓':'';
+  if(S.alldayPackage){S.liveMoments=[];S.momentActs={};document.querySelectorAll('.moment-tab').forEach(t=>t.classList.remove('selected'));document.getElementById('momentActPanels').innerHTML='';document.getElementById('extendTip').classList.remove('visible')}
+  document.getElementById('btn9').disabled=false;
+}
+
+// MOMENTS
+function toggleMoment(btn){
+  if(S.alldayPackage)toggleAllDay();
+  const m=btn.dataset.moment;btn.classList.toggle('selected');
+  S.liveMoments=S.liveMoments.includes(m)?S.liveMoments.filter(x=>x!==m):[...S.liveMoments,m];
+  document.getElementById('extendTip').classList.toggle('visible',S.liveMoments.includes('Ceremony')&&S.liveMoments.includes('Cocktail Hour'));
+  renderMomentPanels();
+  document.getElementById('btn9').disabled=S.liveMoments.length===0&&!S.alldayPackage;
+}
+
+function renderMomentPanels(){
+  const wrap=document.getElementById('momentActPanels');
+  const active=['Ceremony','Cocktail Hour','Dancing / After Party'].filter(m=>S.liveMoments.includes(m));
+  if(!active.length){wrap.innerHTML='';return}
+  wrap.innerHTML=active.map(moment=>{
+    const groups=MOMENT_ACTS[moment]||[];
+    const selType=momentTypeSel[moment]||groups[0]?.id;
+    const typeTabs=groups.map(g=>`<button class="moment-tab${selType===g.id?' selected':''}" style="font-size:12px;padding:6px 14px" onclick="selectActType('${moment}','${g.id}',this)">${g.label}</button>`).join('');
+    const selGroup=groups.find(g=>g.id===selType)||groups[0];
+    const cards=(selGroup?.acts||[]).map(act=>{
+      const isSel=S.momentActs[moment]===act.val;
+      return`<div class="act-card${isSel?' selected':''}" data-val="${act.val}" onclick="selectMomentAct('${moment}','${act.val}',this)">
+        <div class="act-thumb">
+          <img src="${ytThumb(act.ytId)}" alt="${act.val}" onerror="this.src='${act.fb}'" style="width:100%;height:100%;object-fit:cover;display:block">
+        </div>
+        <div class="act-body">
+          <div class="act-name">${act.val}</div>
+          <div class="act-desc">${act.desc}</div>
+          <button onclick="event.stopPropagation();openModal('${act.ytId}')" style="display:inline-block;margin-top:8px;font-size:12px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+        </div>
+      </div>`;
+    }).join('');
+    return`<div style="margin-bottom:2rem">
+      <div class="section-label" style="margin-top:1rem">${moment}</div>
+      <div class="moment-tabs" style="margin-bottom:1rem">${typeTabs}</div>
+      <div class="acts-grid">${cards}</div>
+    </div>`;
+  }).join('');
+}
+
+function selectActType(moment,typeId,btn){
+  momentTypeSel[moment]=typeId;
+  btn.closest('.moment-tabs').querySelectorAll('.moment-tab').forEach(t=>t.classList.remove('selected'));
+  btn.classList.add('selected');renderMomentPanels();
+}
+function selectMomentAct(moment,val,el){
+  S.momentActs[moment]=val;
+  el.closest('.acts-grid').querySelectorAll('.act-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// SUMMARY
+function buildSummary(){
+  const rows=[],row=(l,v)=>{if(v&&!(Array.isArray(v)&&!v.length))rows.push({l,v})};
+  row('Music vibe',S.musicVibe.join(', '));row('MC style',S.mcStyle.join(', '));
+  row('Premium DJ',S.premiumDJ?'Yes — include premium roster':'No thanks');
+  if(S.genres.length)row('Genres',S.genres.join(', '));if(S.artists.length)row('Artists',S.artists.join(', '));
+  row('Bilingual',S.bilingual?`Yes — ${S.bilingualLang||'TBD'}`:'No');
+  row('Ceremony at venue',S.ceremonyAtVenue?`Yes — ceremony support: ${S.ceremonyHelp?'Yes':'No'}`:'No');
+  row('Guest arrival',document.getElementById('arrivalTime').value||'—');
+  row('End time',document.getElementById('endTime').value||'—');
+  if(!S.fxInterested.length)row('Lighting / FX','Not interested');
+  else{
+    const parts=[];
+    if(S.fxInterested.includes('uplights'))parts.push(`Up Lights — ${S.uplightQty||'TBD'}`);
+    if(S.fxInterested.includes('dancelights'))parts.push(`Dance Lights — ${S.lightingPkg||'TBD'}${S.lightingAddons.length?' + '+S.lightingAddons.join(', '):''}`);
+    if(S.fxInterested.includes('disco'))parts.push(`Disco Ball — ${S.discoBallType||'TBD'}`);
+    if(S.fxInterested.includes('sparklers'))parts.push(`Sparklers — ${S.sparklerQty||'TBD'}`);
+    if(S.fxInterested.includes('co2'))parts.push('CO2 Cannons');
+    if(S.fxInterested.includes('cloud'))parts.push('Dancing on a Cloud');
+    if(S.fxInterested.includes('gobo'))parts.push('Gobo / Monogram');
+    if(S.fxInterested.includes('dmx'))parts.push('DMX Upgrade');
+    row('Lighting / FX',parts.join(' · '));
+  }
+  if(S.booth===false)row('Photo / 360 Booth','Not interested');
+  if(S.booth)row('Photo / 360 Booth',`${S.boothCat||''} — ${S.boothType||'TBD'}`);
+  if(S.liveMusic===false)row('Live music','Not interested');
+  if(S.liveMusic){
+    if(S.alldayPackage)row('Live music','All Day Package — Solo Violin (Ceremony) · Solo Sax (Cocktail Hour) · Sax, Perc & Violin (Dancing)');
+    else{row('Live music moments',S.liveMoments.join(', ')||'TBD');const a=Object.entries(S.momentActs).map(([m,v])=>`${m}: ${v}`).join(' · ');if(a)row('Act selections',a)}
+    if(S.blitzElite&&S.blitzArtists.length)row('Blitz Elite',S.blitzArtists.join(', '));
+  }
+  document.getElementById('summaryCard').innerHTML=`<div class="summary-title">Your Selections</div>${rows.map(r=>`<div class="summary-row"><span>${r.l}</span><span class="summary-val">${r.v}</span></div>`).join('')}`;
+}
+
+// SUBMIT
+function submitForm(){
+  const pills=[...S.musicVibe.slice(0,2),S.premiumDJ?'Premium DJ':null,...S.fxInterested.slice(0,2),S.booth?S.boothType:null,S.liveMusic?(S.alldayPackage?'Live Music All Day':'Live Music'):null,S.blitzElite?'Blitz Elite':null].filter(Boolean);
+  document.getElementById('successPills').innerHTML=pills.map(p=>`<span class="pill">${p}</span>`).join('');
+  navHistory.push(getCurrentStepId());currentStep='step12';showStep('step12');
+  const st=document.getElementById('successTitle');if(st&&S.leadName)st.textContent='You\'re all set, '+S.leadName.split(' ')[0]+'.';
+  // EmailJS send
+  const params={
+    client_name: S.leadName||'Not provided',
+    client_email: S.leadEmail||'Not provided',
+    music_vibe: S.musicVibe.join(', ')||'—',
+    mc_style: S.mcStyle.join(', ')||'—',
+    premium_dj: S.premiumDJ===true?'Yes':S.premiumDJ===false?'No':'—',
+    genres: S.genres.join(', ')||'—',
+    artists: S.artists.join(', ')||'—',
+    bilingual: S.bilingual===true?('Yes — '+S.bilingualLang):'No',
+    ceremony_at_venue: S.ceremonyAtVenue===true?('Yes, ceremony help: '+(S.ceremonyHelp?'Yes':'No')):'No',
+    arrival_time: S.arrivalTime||'—',
+    end_time: S.endTime||'—',
+    fx_selections: S.fxInterested.join(', ')||'None',
+    lighting_pkg: S.lightingPkg||'—',
+    lighting_addons: S.lightingAddons.join(', ')||'None',
+    disco_ball: S.discoBallType||'—',
+    sparklers: S.sparklerQty||'—',
+    booth_type: S.booth?(S.boothType||'Selected, no type chosen'):'No',
+    live_music: S.liveMusic?(S.alldayPackage?'All Day Package':Object.entries(S.momentActs).map(([m,a])=>m+': '+a).join(' | ')):'No',
+    blitz_elite: S.blitzElite?(S.blitzArtists.join(', ')||'Yes'):'No',
+  };
+  emailjs.send('service_l3fr6sg','template_94qozag',params).catch(e=>console.warn('EmailJS:',e));
+  // GA4 event
+  if(typeof gtag!=='undefined') gtag('event','form_submit',{event_category:'match_form',client_name:S.leadName});
+}
+
+// RESET
+function resetForm(){
+  Object.assign(S,{musicVibe:[],mcStyle:[],premiumDJ:null,genres:[],artists:[],bilingual:null,bilingualLang:'',ceremonyAtVenue:null,ceremonyHelp:null,fxInterested:[],fxQueue:[],fxQueueIdx:0,uplightQty:null,lightingPkg:null,lightingAddons:[],discoBallType:null,sparklerQty:null,booth:null,boothCat:null,boothType:null,liveMusic:null,alldayPackage:false,liveMoments:[],momentActs:{},blitzElite:null,blitzArtists:[]});
+  momentTypeSel={};
+  document.querySelectorAll('.option-card,.big-photo-card,.act-card,.artist-card,.qty-btn,.tag-card,.fx-tile,.moment-tab').forEach(c=>c.classList.remove('selected'));
+  document.querySelectorAll('.yn-btn').forEach(b=>b.classList.remove('selected'));
+  document.querySelectorAll('.conditional').forEach(c=>c.classList.remove('visible'));
+  const ap=document.getElementById('artistPanels');if(ap)ap.innerHTML='';
+  document.getElementById('momentActPanels').innerHTML='';
+  document.getElementById('extendTip').classList.remove('visible');
+  document.getElementById('alldayCard').classList.remove('selected');
+  const chk=document.getElementById('alldayCheck');chk.style.background='transparent';chk.style.border='1.5px solid var(--rose)';chk.textContent='';
+  ['arrivalTime','endTime','bilingualLang','leadName','leadEmail'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});S.leadName='';S.leadEmail='';const cb=document.getElementById('capBtn');if(cb)cb.disabled=true;;
+  ['btn0','btn1','btn2','btn4','btn5','btn6','btn7','btn7a','btn7b','btn7c','btn7d','btn8','btn9','btn10'].forEach(id=>{const el=document.getElementById(id);if(el)el.disabled=true});
+  navHistory=[];currentStep='step0';
+  // Hide all steps, show welcome screen 1
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('ws1').classList.add('active');
+  const cap=document.getElementById('wsCap');if(cap)cap.classList.remove('active');
+  document.getElementById('ws2').classList.remove('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── WELCOME SCREEN NAV ────────────────────────────────────────
+function goToCapture(){
+  const ws2=document.getElementById('ws2');
+  const cap=document.getElementById('wsCap');
+  if(ws2) ws2.classList.remove('active');
+  if(cap) cap.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function checkCapture(){
+  const name=document.getElementById('leadName').value.trim();
+  const email=document.getElementById('leadEmail').value.trim();
+  const valid=name.length>0&&/^[^@]+@[^@]+\.[^@]+$/.test(email);
+  document.getElementById('capBtn').disabled=!valid;
+}
+function goToWelcome2(){
+  const ws1=document.getElementById('ws1');
+  const ws2=document.getElementById('ws2');
+  if(ws1) ws1.classList.remove('active');
+  if(ws2) ws2.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function goToWelcome1(){
+  const ws1=document.getElementById('ws1');
+  const ws2=document.getElementById('ws2');
+  if(ws2) ws2.classList.remove('active');
+  if(ws1) ws1.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function startForm(){
+  // Save lead data
+  S.leadName=document.getElementById('leadName').value.trim();
+  S.leadEmail=document.getElementById('leadEmail').value.trim();
+  // GA4 lead capture event
+  if(typeof gtag!=='undefined') gtag('event','lead_captured',{event_category:'match_form',client_name:S.leadName});
+  const ws1=document.getElementById('ws1');
+  const ws2=document.getElementById('ws2');
+  const cap=document.getElementById('wsCap');
+  if(ws1) ws1.classList.remove('active');
+  if(ws2) ws2.classList.remove('active');
+  if(cap) cap.classList.remove('active');
+  currentStep='step0';
+  showStep('step0');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── VIDEO MODAL ───────────────────────────────────────────────
+function openModal(ytId){
+  document.getElementById('vidFrame').src=`https://www.youtube.com/embed/${ytId}?autoplay=1`;
+  document.getElementById('vidModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModalBtn(){
+  document.getElementById('vidFrame').src='';
+  document.getElementById('vidModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+function closeModal(e){
+  if(e.target===document.getElementById('vidModal')) closeModalBtn();
+}
+
+currentStep='step0';
+// Don't call showStep on init — welcome screens show by default
+</script>
+</body>
+</html>
