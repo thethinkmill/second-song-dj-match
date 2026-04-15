@@ -968,6 +968,7 @@ const S={
   leadName:'',leadEmail:'',
   musicVibe:[],mcStyle:[],premiumDJ:null,genres:[],artists:[],
   bilingual:null,bilingualLang:'',ceremonyAtVenue:null,ceremonyHelp:null,
+  arrivalTime:'',endTime:'',
   // FX
   fxInterested:[],  // tiles selected on S7
   fxQueue:[],       // ordered list of fx sub-steps to walk through
@@ -1277,6 +1278,8 @@ function setYN2(key,val,btn,btnId){
 function checkTimingBtn(){
   const a=document.getElementById('arrivalTime').value;
   const e=document.getElementById('endTime').value;
+  if(a) S.arrivalTime=a;
+  if(e) S.endTime=e;
   document.getElementById('btn6').disabled=!(a&&e);
 }
 function formatTime(val){
@@ -1437,8 +1440,8 @@ function submitForm(){
     artists: S.artists.join(', ')||'—',
     bilingual: S.bilingual===true?('Yes — '+S.bilingualLang):'No',
     ceremony_at_venue: S.ceremonyAtVenue===true?('Yes, ceremony help: '+(S.ceremonyHelp?'Yes':'No')):'No',
-    arrival_time: formatTime(document.getElementById('arrivalTime').value),
-    end_time: formatTime(document.getElementById('endTime').value),
+    arrival_time: formatTime(S.arrivalTime||document.getElementById('arrivalTime')?.value||''),
+    end_time: formatTime(S.endTime||document.getElementById('endTime')?.value||''),
     fx_selections: S.fxInterested.join(', ')||'None',
     lighting_pkg: S.lightingPkg||'—',
     lighting_addons: S.lightingAddons.join(', ')||'None',
@@ -1455,7 +1458,7 @@ function submitForm(){
 
 // RESET
 function resetForm(){
-  Object.assign(S,{musicVibe:[],mcStyle:[],premiumDJ:null,genres:[],artists:[],bilingual:null,bilingualLang:'',ceremonyAtVenue:null,ceremonyHelp:null,fxInterested:[],fxQueue:[],fxQueueIdx:0,uplightQty:null,lightingPkg:null,lightingAddons:[],discoBallType:null,sparklerQty:null,booth:null,boothCat:null,boothType:null,liveMusic:null,alldayPackage:false,liveMoments:[],momentActs:{},blitzElite:null,blitzArtists:[]});
+  Object.assign(S,{leadName:'',leadEmail:'',arrivalTime:'',endTime:'',musicVibe:[],mcStyle:[],premiumDJ:null,genres:[],artists:[],bilingual:null,bilingualLang:'',ceremonyAtVenue:null,ceremonyHelp:null,fxInterested:[],fxQueue:[],fxQueueIdx:0,uplightQty:null,lightingPkg:null,lightingAddons:[],discoBallType:null,sparklerQty:null,booth:null,boothCat:null,boothType:null,liveMusic:null,alldayPackage:false,liveMoments:[],momentActs:{},blitzElite:null,blitzArtists:[]});
   momentTypeSel={};
   document.querySelectorAll('.option-card,.big-photo-card,.act-card,.artist-card,.qty-btn,.tag-card,.fx-tile,.moment-tab').forEach(c=>c.classList.remove('selected'));
   document.querySelectorAll('.yn-btn').forEach(b=>b.classList.remove('selected'));
