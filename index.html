@@ -570,11 +570,11 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
     <div class="time-row">
       <div class="form-field" style="margin-bottom:0">
         <label class="form-label">Guest arrival time <span style="color:var(--rose);font-size:10px">(approximate)</span></label>
-        <input class="form-input" type="text" id="arrivalTime" placeholder="e.g. 5:00 PM" oninput="checkTimingBtn()">
+        <input class="form-input" type="time" id="arrivalTime" oninput="checkTimingBtn()" style="font-size:15px;padding:14px 15px;cursor:pointer">
       </div>
       <div class="form-field" style="margin-bottom:0">
         <label class="form-label">End time / Last song <span style="color:var(--rose);font-size:10px">(approximate)</span></label>
-        <input class="form-input" type="text" id="endTime" placeholder="e.g. 11:00 PM" oninput="checkTimingBtn()">
+        <input class="form-input" type="time" id="endTime" oninput="checkTimingBtn()" style="font-size:15px;padding:14px 15px;cursor:pointer">
       </div>
     </div>
     <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">← Back</button><button class="btn btn-primary" id="btn6" onclick="advance()" disabled>Continue</button></div>
@@ -1275,8 +1275,16 @@ function setYN2(key,val,btn,btnId){
   btn.classList.add('selected');if(btnId)document.getElementById(btnId).disabled=false;
 }
 function checkTimingBtn(){
-  const a=document.getElementById('arrivalTime').value.trim(),e=document.getElementById('endTime').value.trim();
+  const a=document.getElementById('arrivalTime').value;
+  const e=document.getElementById('endTime').value;
   document.getElementById('btn6').disabled=!(a&&e);
+}
+function formatTime(val){
+  if(!val) return '—';
+  const [h,m]=val.split(':').map(Number);
+  const ampm=h>=12?'PM':'AM';
+  const h12=h%12||12;
+  return `${h12}:${String(m).padStart(2,'0')} ${ampm}`;
 }
 
 function selQty(el,key){
@@ -1429,8 +1437,8 @@ function submitForm(){
     artists: S.artists.join(', ')||'—',
     bilingual: S.bilingual===true?('Yes — '+S.bilingualLang):'No',
     ceremony_at_venue: S.ceremonyAtVenue===true?('Yes, ceremony help: '+(S.ceremonyHelp?'Yes':'No')):'No',
-    arrival_time: S.arrivalTime||'—',
-    end_time: S.endTime||'—',
+    arrival_time: formatTime(document.getElementById('arrivalTime').value),
+    end_time: formatTime(document.getElementById('endTime').value),
     fx_selections: S.fxInterested.join(', ')||'None',
     lighting_pkg: S.lightingPkg||'—',
     lighting_addons: S.lightingAddons.join(', ')||'None',
