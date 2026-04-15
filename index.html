@@ -28,8 +28,8 @@
   --serif:'Cormorant Garamond',Georgia,serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--sans);background:var(--cream);color:var(--black);min-height:100vh;padding:2rem 1rem 5rem}
-#qb{max-width:760px;margin:0 auto;background:var(--white);border-radius:var(--r);padding:3rem 2.5rem 3.5rem;border:.5px solid var(--border);box-shadow:0 4px 60px rgba(86,0,0,0.08)}
+body{font-family:var(--sans);background:var(--cream);color:var(--black);min-height:100vh;padding:3rem 1.5rem 6rem}
+#qb{max-width:760px;margin:0 auto;background:var(--white);border-radius:var(--r);padding:3.5rem 3rem 4.5rem;border:.5px solid var(--border);box-shadow:0 4px 60px rgba(86,0,0,0.08)}
 
 /* Header (inside form) */
 .qb-header{text-align:center;margin-bottom:2.5rem;padding-bottom:1.75rem;border-bottom:1px solid var(--border)}
@@ -140,6 +140,10 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
   content:'';flex:1;height:1px;background:var(--border);
 }
 .artist-panel .tag-grid{margin-bottom:0}
+/* ── Capture screen ── */
+.capture-screen{display:none}
+.capture-screen.active{display:block;animation:fadeUp .4s ease}
+
 .progress-bar{display:flex;gap:2px;margin-bottom:8px}
 .progress-step{flex:1;height:2px;background:var(--cream-dk);transition:background .4s}
 .progress-step.active{background:var(--burgundy)}
@@ -147,26 +151,26 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
 .progress-label{font-size:11px;color:var(--text-muted);letter-spacing:.04em}
 
 /* Step chrome */
-.step-eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
+.step-eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);margin-bottom:1rem;display:flex;align-items:center;gap:8px}
 .step-dot{width:5px;height:5px;border-radius:50%;background:var(--burgundy);flex-shrink:0}
-.step-question{font-family:var(--serif);font-size:30px;font-weight:500;margin-bottom:8px;line-height:1.2;color:var(--burgundy)}
-.step-helper{font-size:13px;color:var(--text-muted);margin-bottom:1.75rem;line-height:1.7;max-width:580px}
-.section-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);margin:1.5rem 0 .75rem;font-weight:500}
+.step-question{font-family:var(--serif);font-size:34px;font-weight:500;margin-bottom:12px;line-height:1.15;color:var(--burgundy)}
+.step-helper{font-size:14px;color:var(--text-muted);margin-bottom:2.25rem;line-height:1.8;max-width:580px}
+.section-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);margin:2rem 0 1rem;font-weight:500}
 
 /* Option cards */
-.option-list{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem}
+.option-list{display:flex;flex-direction:column;gap:10px;margin-bottom:1.5rem}
 .option-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem}
 .option-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:1rem}
 @media(max-width:560px){.option-grid-2,.option-grid-3{grid-template-columns:1fr}}
 
-.option-card{border:1px solid var(--border);border-radius:var(--r);padding:1.1rem 1.15rem;cursor:pointer;transition:border-color .2s,background .2s,transform .15s;background:var(--white);text-align:left;position:relative}
+.option-card{border:1px solid var(--border);border-radius:var(--r);padding:1.35rem 1.4rem;cursor:pointer;transition:border-color .2s,background .2s,transform .15s;background:var(--white);text-align:left;position:relative}
 .option-card:hover{border-color:var(--burgundy);background:var(--cream);transform:translateY(-1px)}
 .option-card.selected{border:2px solid var(--burgundy);background:var(--cream)}
 .option-card.selected::after{content:'✓';position:absolute;top:10px;right:12px;font-size:10px;font-weight:700;color:var(--burgundy)}
-.option-card.list-card{padding:.9rem 1.25rem}
+.option-card.list-card{padding:1.15rem 1.4rem}
 .card-badge{display:inline-block;font-size:10px;font-weight:500;background:var(--pink);color:var(--burgundy);padding:2px 9px;border-radius:20px;margin-bottom:8px;letter-spacing:.04em}
-.card-name{font-size:14px;font-weight:500;margin-bottom:4px;color:var(--black)}
-.card-desc{font-size:12px;color:var(--text-muted);line-height:1.55}
+.card-name{font-size:15px;font-weight:500;margin-bottom:5px;color:var(--black)}
+.card-desc{font-size:13px;color:var(--text-muted);line-height:1.6}
 
 /* Big photo cards (FX pages & booth) */
 .big-photo-card{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:border-color .2s,transform .15s;position:relative;background:var(--white)}
@@ -214,8 +218,8 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
 .tag-card.selected{border:1.5px solid var(--burgundy);color:var(--burgundy);background:var(--cream);font-weight:500}
 
 /* Y/N */
-.yn-wrap{display:flex;gap:10px;margin-bottom:1.5rem}
-.yn-btn{flex:1;padding:1rem;border:1px solid var(--border);border-radius:var(--r);cursor:pointer;background:var(--white);font-family:var(--sans);font-size:14px;font-weight:500;color:var(--text-muted);transition:all .2s;text-align:center}
+.yn-wrap{display:flex;gap:12px;margin-bottom:2.5rem}
+.yn-btn{flex:1;padding:1.3rem;border:1px solid var(--border);border-radius:var(--r);cursor:pointer;background:var(--white);font-family:var(--sans);font-size:15px;font-weight:500;color:var(--text-muted);transition:all .2s;text-align:center}
 .yn-btn:hover{border-color:var(--burgundy);color:var(--burgundy);background:var(--cream)}
 .yn-btn.selected{border:2px solid var(--burgundy);color:var(--burgundy);background:var(--cream);font-weight:600}
 
@@ -261,8 +265,8 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
 .pill{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;background:var(--cream);color:var(--burgundy);border:1px solid var(--border);margin:3px;font-weight:500}
 
 /* Buttons */
-.btn-row{display:flex;align-items:center;justify-content:space-between;margin-top:2rem}
-.btn{padding:12px 28px;border-radius:var(--rb);font-size:13px;font-family:var(--sans);font-weight:500;cursor:pointer;transition:all .2s;border:1.5px solid var(--burgundy);background:transparent;color:var(--burgundy);letter-spacing:.04em}
+.btn-row{display:flex;align-items:center;justify-content:space-between;margin-top:2.75rem}
+.btn{padding:14px 32px;border-radius:var(--rb);font-size:14px;font-family:var(--sans);font-weight:500;cursor:pointer;transition:all .2s;border:1.5px solid var(--burgundy);background:transparent;color:var(--burgundy);letter-spacing:.04em}
 .btn:hover{background:var(--cream)}
 .btn-primary{background:var(--burgundy);color:var(--cream);border-color:var(--burgundy)}
 .btn-primary:hover{background:var(--burgundy-dk)}
@@ -392,25 +396,48 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
 
   <!-- ══ LEAD CAPTURE SCREEN ══ -->
   <div class="capture-screen" id="wsCap">
-    <div class="w1-eyebrow"><span class="step-dot"></span>Almost there</div>
-    <div class="capture-title">Before we dive in —<br>let's put a name to this.</div>
-    <div class="capture-sub">This helps us link your preferences directly to your booking and personalise your match.</div>
-    <div class="capture-fields">
-      <div class="form-field" style="margin-bottom:0">
-        <label class="form-label">Your name</label>
-        <input class="form-input" type="text" id="leadName" placeholder="e.g. Sarah & James" oninput="checkCapture()">
+
+    <!-- Top editorial block -->
+    <div style="margin-bottom:2rem">
+      <div class="w1-eyebrow"><span class="step-dot"></span>One last thing</div>
+      <div style="font-family:var(--serif);font-size:44px;font-weight:500;font-style:italic;line-height:1.05;color:var(--burgundy);margin-bottom:1rem">Who are we<br>matching today?</div>
+      <div style="font-size:15px;color:var(--text-muted);line-height:1.8;max-width:480px">So we can connect your preferences to your booking and greet you by name throughout.</div>
+    </div>
+
+    <!-- Hero divider image -->
+    <img src="https://static.wixstatic.com/media/feee51_6112687b489b4c629252d87d8e8c4c10~mv2.png/v1/fill/w_1116,h_240,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/33.png"
+      style="width:100%;height:200px;object-fit:cover;object-position:center 30%;border-radius:var(--r);display:block;margin-bottom:2rem" alt="Second Song">
+
+    <!-- Fields -->
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:1.75rem">
+      <div>
+        <label style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);font-weight:500;display:block;margin-bottom:8px">Your name</label>
+        <input class="form-input" type="text" id="leadName"
+          placeholder="e.g. Sarah &amp; James"
+          oninput="checkCapture()"
+          style="font-size:16px;padding:16px 18px">
       </div>
-      <div class="form-field" style="margin-bottom:0">
-        <label class="form-label">Email address</label>
-        <input class="form-input" type="email" id="leadEmail" placeholder="e.g. sarah@gmail.com" oninput="checkCapture()">
+      <div>
+        <label style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);font-weight:500;display:block;margin-bottom:8px">Email address</label>
+        <input class="form-input" type="email" id="leadEmail"
+          placeholder="e.g. sarah@gmail.com"
+          oninput="checkCapture()"
+          style="font-size:16px;padding:16px 18px">
       </div>
     </div>
-    <button class="capture-btn" id="capBtn" onclick="startForm()" disabled>Let's find my match →</button>
-    <div class="capture-note">We'll never share your info or add you to any lists.</div>
-    <button class="w2-back" onclick="goToWelcome2()" style="margin-top:1rem">← Back</button>
+
+    <!-- CTA -->
+    <button id="capBtn" onclick="startForm()" disabled
+      style="width:100%;padding:17px;background:var(--burgundy);color:var(--cream);border:none;border-radius:var(--rb);font-size:15px;font-family:var(--sans);font-weight:500;cursor:pointer;transition:all .25s;letter-spacing:.04em;opacity:.35">
+      Let's find my match →
+    </button>
+
+    <button class="w2-back" onclick="goToWelcome2()" style="margin-top:1.25rem">← Back</button>
+
   </div>
 
-  <div class="progress-wrap">
+  <div id="formBody" style="display:none">
+  <div class="progress-wrap" style="margin-bottom:3rem">
     <div class="progress-bar" id="progressBar">
       <div class="progress-step" id="p0"></div><div class="progress-step" id="p1"></div>
       <div class="progress-step" id="p2"></div><div class="progress-step" id="p3"></div>
@@ -932,6 +959,7 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
     </div>
   </div>
 
+  </div><!-- /#formBody -->
 </div><!-- /#qb -->
 
 <script>
@@ -1435,6 +1463,7 @@ function resetForm(){
   // Hide all steps, show welcome screen 1
   document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
   document.getElementById('ws1').classList.add('active');
+  document.getElementById('formBody').style.display='none';
   const cap=document.getElementById('wsCap');if(cap)cap.classList.remove('active');
   document.getElementById('ws2').classList.remove('active');
   window.scrollTo({top:0,behavior:'smooth'});
@@ -1452,7 +1481,9 @@ function checkCapture(){
   const name=document.getElementById('leadName').value.trim();
   const email=document.getElementById('leadEmail').value.trim();
   const valid=name.length>0&&/^[^@]+@[^@]+\.[^@]+$/.test(email);
-  document.getElementById('capBtn').disabled=!valid;
+  const btn=document.getElementById('capBtn');
+  btn.disabled=!valid;
+  btn.style.opacity=valid?'1':'0.35';
 }
 function goToWelcome2(){
   const ws1=document.getElementById('ws1');
@@ -1480,6 +1511,7 @@ function startForm(){
   if(ws1) ws1.classList.remove('active');
   if(ws2) ws2.classList.remove('active');
   if(cap) cap.classList.remove('active');
+  document.getElementById('formBody').style.display='block';
   currentStep='step0';
   showStep('step0');
   window.scrollTo({top:0,behavior:'smooth'});
