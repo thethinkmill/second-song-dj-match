@@ -537,7 +537,7 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
       <button class="yn-btn" onclick="setYN('bilingual',false,this,'btn4')">No</button>
     </div>
     <div class="conditional" id="bilingualLangWrap">
-      <div class="form-field"><label class="form-label">What language — required or preferred?</label><input class="form-input" type="text" id="bilingualLang" placeholder="e.g. Spanish — required" oninput="S.bilingualLang=this.value.trim();checkBilingualBtn()"></div>
+      <div class="form-field"><label class="form-label">What language — required or preferred?</label><input class="form-input" type="text" id="bilingualLang" placeholder="e.g. Spanish — required" oninput="S.bilingualLang=this.value;checkBilingualBtn()"></div>
     </div>
     <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">← Back</button><button class="btn btn-primary" id="btn4" onclick="advance()" disabled>Continue</button></div>
   </div>
@@ -1285,9 +1285,9 @@ function setYN2(key,val,btn,btnId){
   btn.classList.add('selected');if(btnId)document.getElementById(btnId).disabled=false;
 }
 function checkBilingualBtn(){
-  const lang=document.getElementById('bilingualLang').value.trim();
+  const lang=document.getElementById('bilingualLang').value;
   S.bilingualLang=lang;
-  document.getElementById('btn4').disabled=lang.length===0;
+  document.getElementById('btn4').disabled=lang.trim().length===0;
 }
 function checkTimingBtn(){
   const a=document.getElementById('arrivalTime').value;
@@ -1452,7 +1452,7 @@ function submitForm(){
     premium_dj: S.premiumDJ===true?'Yes':S.premiumDJ===false?'No':'—',
     genres: S.genres.join(', ')||'—',
     artists: S.artists.join(', ')||'—',
-    bilingual: S.bilingual===true?('Yes — '+S.bilingualLang):'No',
+    bilingual: S.bilingual===true?('Yes — '+(S.bilingualLang||document.getElementById('bilingualLang')?.value||'—')):'No',
     ceremony_at_venue: S.ceremonyAtVenue===true?('Yes, ceremony help: '+(S.ceremonyHelp?'Yes':'No')):'No',
     arrival_time: formatTime(S.arrivalTime||document.getElementById('arrivalTime')?.value||''),
     end_time: formatTime(S.endTime||document.getElementById('endTime')?.value||''),
