@@ -537,7 +537,7 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
       <button class="yn-btn" onclick="setYN('bilingual',false,this,'btn4')">No</button>
     </div>
     <div class="conditional" id="bilingualLangWrap">
-      <div class="form-field"><label class="form-label">What language — required or preferred?</label><input class="form-input" type="text" id="bilingualLang" placeholder="e.g. Spanish — required"></div>
+      <div class="form-field"><label class="form-label">What language — required or preferred?</label><input class="form-input" type="text" id="bilingualLang" placeholder="e.g. Spanish — required" oninput="S.bilingualLang=this.value.trim();checkBilingualBtn()"></div>
     </div>
     <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">← Back</button><button class="btn btn-primary" id="btn4" onclick="advance()" disabled>Continue</button></div>
   </div>
@@ -1264,7 +1264,16 @@ function setYN(key,val,btn,btnId){
   S[key]=val;
   btn.parentElement.querySelectorAll('.yn-btn').forEach(b=>b.classList.remove('selected'));
   btn.classList.add('selected');
-  if(key==='bilingual'){document.getElementById('bilingualLangWrap').classList.toggle('visible',val);if(btnId)document.getElementById(btnId).disabled=false}
+  if(key==='bilingual'){
+    document.getElementById('bilingualLangWrap').classList.toggle('visible',val);
+    if(!val){
+      // No — enable immediately
+      if(btnId)document.getElementById(btnId).disabled=false;
+    } else {
+      // Yes — keep disabled until language is typed
+      if(btnId)document.getElementById(btnId).disabled=true;
+    }
+  }
   if(key==='ceremonyAtVenue'){document.getElementById('ceremonyHelpWrap').classList.toggle('visible',val);if(!val)document.getElementById('btn5').disabled=false;else document.getElementById('btn5').disabled=true}
   if(key==='booth'){document.getElementById('boothCatWrap').classList.toggle('visible',val);if(!val&&btnId)document.getElementById(btnId).disabled=false;else if(val)document.getElementById('btn8').disabled=true}
   if(key==='liveMusic'){document.getElementById('liveMusicWrap').classList.toggle('visible',val);if(btnId)document.getElementById(btnId).disabled=false;if(val)renderMomentPanels()}
@@ -1274,6 +1283,11 @@ function setYN(key,val,btn,btnId){
 function setYN2(key,val,btn,btnId){
   S[key]=val;btn.parentElement.querySelectorAll('.yn-btn').forEach(b=>b.classList.remove('selected'));
   btn.classList.add('selected');if(btnId)document.getElementById(btnId).disabled=false;
+}
+function checkBilingualBtn(){
+  const lang=document.getElementById('bilingualLang').value.trim();
+  S.bilingualLang=lang;
+  document.getElementById('btn4').disabled=lang.length===0;
 }
 function checkTimingBtn(){
   const a=document.getElementById('arrivalTime').value;
