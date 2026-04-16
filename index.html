@@ -501,19 +501,20 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
     <div class="section-label">Genres</div>
     <div class="tag-grid" id="genreGrid">
       <div class="tag-card" data-val="EDM" onclick="togGenre(this)">EDM</div>
-      <div class="tag-card" data-val="Hip Hop" onclick="togGenre(this)">Hip Hop</div>
-      <div class="tag-card" data-val="Top 40" onclick="togGenre(this)">Top 40</div>
-      <div class="tag-card" data-val="Disco" onclick="togGenre(this)">Disco</div>
-      <div class="tag-card" data-val="Funk" onclick="togGenre(this)">Funk</div>
-      <div class="tag-card" data-val="Latin" onclick="togGenre(this)">Latin</div>
-      <div class="tag-card" data-val="Classic Rock" onclick="togGenre(this)">Classic Rock</div>
-      <div class="tag-card" data-val="90s R&B" onclick="togGenre(this)">90s R&amp;B</div>
-      <div class="tag-card" data-val="Old Skool Hip Hop" onclick="togGenre(this)">Old Skool Hip Hop</div>
-      <div class="tag-card" data-val="Afrobeats" onclick="togGenre(this)">Afrobeats</div>
+      <div class="tag-card" data-val="High School Anthems" onclick="togGenre(this)">High School Anthems</div>
+      <div class="tag-card" data-val="90s Hip Hop + R&B" onclick="togGenre(this)">90s Hip Hop + R&amp;B</div>
       <div class="tag-card" data-val="House" onclick="togGenre(this)">House</div>
-      <div class="tag-card" data-val="Electro Pop" onclick="togGenre(this)">Electro Pop</div>
+      <div class="tag-card" data-val="Pop / Top 40" onclick="togGenre(this)">Pop / Top 40</div>
+      <div class="tag-card" data-val="Hip Hop / R&B" onclick="togGenre(this)">Hip Hop / R&amp;B</div>
+      <div class="tag-card" data-val="Classic Rock" onclick="togGenre(this)">Classic Rock</div>
+      <div class="tag-card" data-val="Indie / Alternative" onclick="togGenre(this)">Indie / Alternative</div>
       <div class="tag-card" data-val="Country" onclick="togGenre(this)">Country</div>
-      <div class="tag-card" data-val="Indie / Alt" onclick="togGenre(this)">Indie / Alt</div>
+      <div class="tag-card" data-val="Latin / Reggaeton" onclick="togGenre(this)">Latin / Reggaeton</div>
+      <div class="tag-card" data-val="Soul / Motown / Disco" onclick="togGenre(this)">Soul / Motown / Disco</div>
+      <div class="tag-card" data-val="Pop Punk / Emo" onclick="togGenre(this)">Pop Punk / Emo</div>
+      <div class="tag-card" data-val="Afrobeats" onclick="togGenre(this)">Afrobeats</div>
+      <div class="tag-card" data-val="Cultural Music" onclick="togGenre(this)">Cultural Music</div>
+      <div class="tag-card" data-val="Throwbacks / Classics" onclick="togGenre(this)">Throwbacks / Classics</div>
     </div>
 
     <!-- Artist panels — revealed per genre -->
@@ -1185,20 +1186,21 @@ function nextFxStepId(){
 // Replace placeholder artists with your team's final list per genre.
 // Each genre key must exactly match the data-val on the genre tag card.
 const GENRE_ARTISTS = {
-  'EDM':              ['Avicii', 'Calvin Harris', 'Daft Punk', 'Deadmau5', 'Martin Garrix', 'Tiësto', 'Marshmello', 'Illenium'],
-  'Hip Hop':          ['Drake', 'Kendrick Lamar', 'Kanye West', 'J. Cole', 'Cardi B', 'Travis Scott', 'Lil Baby', 'Megan Thee Stallion'],
-  'Top 40':           ['Taylor Swift', 'Dua Lipa', 'Charli XCX', 'Chappell Roan', 'Sabrina Carpenter', 'Olivia Rodrigo', 'The Weeknd', 'Bruno Mars'],
-  'Disco':            ['Donna Summer', 'Chic', 'Gloria Gaynor', 'Sister Sledge', 'Sylvester', 'Village People', 'Earth Wind + Fire', 'Kool & The Gang'],
-  'Funk':             ['James Brown', 'Prince', 'Sly & The Family Stone', 'Parliament-Funkadelic', 'Rick James', 'Bootsy Collins', 'Chaka Khan'],
-  'Latin':            ['Bad Bunny', 'J Balvin', 'Maluma', 'Ozuna', 'Shakira', 'Marc Anthony', 'Daddy Yankee', 'Karol G'],
-  'Classic Rock':     ['Fleetwood Mac', 'The Beatles', 'Queen', 'Led Zeppelin', 'Rolling Stones', 'Eagles', 'Journey', 'Tom Petty'],
-  '90s R&B':          ['Beyoncé', 'Mary J. Blige', 'TLC', 'Destiny\'s Child', 'Usher', 'R. Kelly', 'Boyz II Men', 'Whitney Houston'],
-  'Old Skool Hip Hop':['Dr Dre', 'Snoop Dogg', 'Jay-Z', 'Biggie', 'Tupac', 'Nas', 'Wu-Tang Clan', 'Public Enemy'],
-  'Afrobeats':        ['Burna Boy', 'Wizkid', 'Davido', 'Tems', 'Ayra Starr', 'Rema', 'Ckay', 'Fireboy DML'],
-  'House':            ['Purple Disco Machine', 'Rufus Du Sol', 'Fisher', 'Chris Lake', 'Fred Again', 'John Summit', 'MEDUZA', 'Peggy Gou'],
-  'Electro Pop':      ['Doja Cat', 'Lizzo', 'Dua Lipa', 'Kylie Minogue', 'Robyn', 'Grimes', 'Troye Sivan', 'Years & Years'],
-  'Country':          ['Lainey Wilson', 'Zach Bryan', 'Morgan Wallen', 'Luke Combs', 'Chris Stapleton', 'Kacey Musgraves', 'Dolly Parton', 'Kenny Rogers'],
-  'Indie / Alt':      ['Odesza', 'Tame Impala', 'Arctic Monkeys', 'The 1975', 'Vampire Weekend', 'Phoebe Bridgers', 'Bon Iver', 'Fleet Foxes'],
+  'EDM': ['Calvin Harris','Avicii','Dom Dolla','John Summit','Skrillex','Chris Lake','Tiësto','Disco Lines','Illenium','Zedd','Swedish House Mafia'],
+  'High School Anthems': ['Pitbull','Outkast','Nelly','T-Pain','Lil Jon','Usher','Sean Paul','Missy Elliott'],
+  '90s Hip Hop + R&B': ['Dr. Dre','K-Ci & JoJo','Eminem','E-40','Notorious B.I.G.','Snoop Dogg','Mary J. Blige','Mariah Carey'],
+  'House': ['Fred Again','Rufus Du Sol','Lane 8','Loud Luxury','Purple Disco Machine','Odesza','Fisher','Klingande','ZHU','Kygo','Kaytranada','Jamie XX'],
+  'Pop / Top 40': ['Harry Styles','Taylor Swift','Sabrina Carpenter','Charli XCX','Chappell Roan','Dua Lipa','The Weeknd','Daft Punk','Beyoncé','Rihanna','Lizzo'],
+  'Hip Hop / R&B': ['Kendrick Lamar','Drake','Travis Scott','Lil Jon','Kanye West','Waka Flocka Flame','Lil Wayne','Tyga','Frank Ocean','Beyoncé','Nelly','E-40','Missy Elliott'],
+  'Classic Rock': ['Queen','Tom Petty','Fleetwood Mac','Bruce Springsteen','The Beatles','The Killers','Elton John'],
+  'Indie / Alternative': ['LCD Soundsystem','The 1975','Parcels','Jungle','Poolside','Robyn','Khruangbin','Tame Impala','Arctic Monkeys'],
+  'Country': ['Post Malone','Morgan Wallen','Luke Bryan','Zach Bryan','Kacey Musgraves','Lainey Wilson'],
+  'Latin / Reggaeton': ['Bad Bunny','Karol G','Maná','Pitbull','J Balvin','Daddy Yankee','Cumbia','Salsa','Merengue'],
+  'Soul / Motown / Disco': ['Earth, Wind & Fire','The Supremes','Aretha Franklin','Marvin Gaye','Leon Bridges','James Brown','ABBA'],
+  'Pop Punk / Emo': ['Blink-182','Fall Out Boy','My Chemical Romance','Sum 41','Paramore','Third Eye Blind'],
+  'Afrobeats': ['Tems','Burna Boy','Rema','Fireboy DML'],
+  'Cultural Music': ['Indian / Bollywood','Persian','Arabic','Other'],
+  'Throwbacks / Classics': ['Prince','Whitney Houston','ABBA','Michael Jackson','Queen','The Beatles','Marvin Gaye','Elton John'],
 };
 
 function togGenre(el){
