@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Second Song — Find Your DJ & MC</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
 <!-- GA4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VQ1LP5Q8Y"></script>
 <script>
@@ -199,6 +200,8 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
 .act-body{padding:.8rem 1rem .9rem}
 .act-name{font-size:14px;font-weight:500;margin-bottom:3px;color:var(--black)}
 .act-desc{font-size:12px;color:var(--text-muted);line-height:1.5}
+/* Price badge on act cards */
+.act-price{display:inline-block;font-size:10px;font-weight:600;color:var(--burgundy);background:rgba(86,0,0,0.07);border-radius:20px;padding:2px 8px;margin-bottom:5px;letter-spacing:.04em}
 
 /* Artist cards */
 .artist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;margin-bottom:1rem}
@@ -875,60 +878,95 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
     </div>
     <div class="conditional" id="blitzEliteWrap">
       <div class="info-box">Blitz Elite pricing is shared on your consultation call.</div>
+
       <div class="section-label">Saxophone</div>
       <div class="artist-grid">
-        <div class="artist-card" data-val="Elite Sax — Miguel" onclick="togArtist(this,'blitzArtists')">
-          <img src="https://img.youtube.com/vi/dJjI6heCinA/hqdefault.jpg" alt="Sax" onerror="this.src='https://static.wixstatic.com/media/aefb83_5afd96475210428791367e19f97a3fb5~mv2.jpg/v1/crop/x_0,y_64,w_600,h_772/fill/w_400,h_300,q_80,enc_avif,quality_auto/sax%20player1.jpg'">
+        <div class="artist-card" data-val="Elite Sax — Alex Y" onclick="togArtist(this,'blitzArtists')">
+          <img src="https://img.youtube.com/vi/TgjIGatrvj8/hqdefault.jpg" alt="Alex Y — Saxophone">
           <div class="artist-body">
-            <div class="artist-name">Miguel R.</div>
-            <div class="artist-role">Saxophone · Celebrity events</div>
-            <button onclick="event.stopPropagation();openModal('dJjI6heCinA')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2pxbackground:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+            <div class="artist-name">Alex Y.</div>
+            <div class="artist-role">Saxophone</div>
+            <button onclick="event.stopPropagation();openModal('TgjIGatrvj8')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
           </div>
         </div>
-        <div class="artist-card" data-val="Elite Sax — Jordan" onclick="togArtist(this,'blitzArtists')">
-          <img src="https://img.youtube.com/vi/dJjI6heCinA/hqdefault.jpg" alt="Sax" onerror="this.src='https://static.wixstatic.com/media/aefb83_5afd96475210428791367e19f97a3fb5~mv2.jpg/v1/crop/x_0,y_64,w_600,h_772/fill/w_400,h_300,q_80,enc_avif,quality_auto/sax%20player1.jpg'">
+        <div class="artist-card" data-val="Elite Sax — Austin G" onclick="togArtist(this,'blitzArtists')">
+          <img src="https://img.youtube.com/vi/myD2g8M3yjE/hqdefault.jpg" alt="Austin G — Saxophone">
+          <div class="artist-body">
+            <div class="artist-name">Austin G.</div>
+            <div class="artist-role">Saxophone</div>
+            <button onclick="event.stopPropagation();openModal('myD2g8M3yjE')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+          </div>
+        </div>
+        <div class="artist-card" data-val="Elite Sax — Jordan T" onclick="togArtist(this,'blitzArtists')">
+          <img src="https://img.youtube.com/vi/mNmHggODzvA/hqdefault.jpg" alt="Jordan T — Saxophone">
           <div class="artist-body">
             <div class="artist-name">Jordan T.</div>
-            <div class="artist-role">Saxophone · Festival alumni</div>
-            <button onclick="event.stopPropagation();openModal('dJjI6heCinA')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2pxbackground:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+            <div class="artist-role">Saxophone</div>
+            <button onclick="event.stopPropagation();openModal('mNmHggODzvA')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
           </div>
         </div>
       </div>
-      <div class="section-label">Guitar</div>
+
+      <div class="section-label">Guitar + Vocal</div>
       <div class="artist-grid">
-        <div class="artist-card" data-val="Elite Guitar — Alex" onclick="togArtist(this,'blitzArtists')">
-          <img src="https://img.youtube.com/vi/dJjI6heCinA/hqdefault.jpg" alt="Guitar" onerror="this.src='https://static.wixstatic.com/media/aefb83_8b7ff3ba3b2c48f4b92fd9c1fcf9b9b2~mv2.jpg/v1/crop/x_522,y_0,w_1297,h_2012/fill/w_400,h_300,q_80,enc_avif,quality_auto/Screenshot%202025-06-10%20at%201_06_edited.jpg'">
+        <div class="artist-card" data-val="Elite Guitar/Vocal — Chris W" onclick="togArtist(this,'blitzArtists')">
+          <img src="https://img.youtube.com/vi/HjdT3_fnz80/hqdefault.jpg" alt="Chris W — Guitar + Vocal">
           <div class="artist-body">
-            <div class="artist-name">Alex M.</div>
-            <div class="artist-role">Electric Guitar · A-list events</div>
-            <button onclick="event.stopPropagation();openModal('dJjI6heCinA')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2pxbackground:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+            <div class="artist-name">Chris W.</div>
+            <div class="artist-role">Guitar + Vocal</div>
+            <button onclick="event.stopPropagation();openModal('HjdT3_fnz80')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
           </div>
         </div>
-        <div class="artist-card" data-val="Elite Guitar — Sofia" onclick="togArtist(this,'blitzArtists')">
-          <img src="https://img.youtube.com/vi/dJjI6heCinA/hqdefault.jpg" alt="Guitar" onerror="this.src='https://static.wixstatic.com/media/aefb83_8b7ff3ba3b2c48f4b92fd9c1fcf9b9b2~mv2.jpg/v1/crop/x_522,y_0,w_1297,h_2012/fill/w_400,h_300,q_80,enc_avif,quality_auto/Screenshot%202025-06-10%20at%201_06_edited.jpg'">
+        <div class="artist-card" data-val="Elite Guitar/Vocal — Danny V" onclick="togArtist(this,'blitzArtists')">
+          <img src="https://img.youtube.com/vi/NCAtlUsWAEY/hqdefault.jpg" alt="Danny V — Guitar + Vocal">
           <div class="artist-body">
-            <div class="artist-name">Sofia K.</div>
-            <div class="artist-role">Acoustic · Singer-Songwriter</div>
-            <button onclick="event.stopPropagation();openModal('dJjI6heCinA')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2pxbackground:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+            <div class="artist-name">Danny V.</div>
+            <div class="artist-role">Guitar + Vocal</div>
+            <button onclick="event.stopPropagation();openModal('NCAtlUsWAEY')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+          </div>
+        </div>
+        <div class="artist-card" data-val="Elite Guitar/Vocal — Jessie P" onclick="togArtist(this,'blitzArtists')">
+          <img src="https://img.youtube.com/vi/4ii_-Nex8IU/hqdefault.jpg" alt="Jessie P — Guitar + Vocal">
+          <div class="artist-body">
+            <div class="artist-name">Jessie P.</div>
+            <div class="artist-role">Guitar + Vocal</div>
+            <button onclick="event.stopPropagation();openModal('4ii_-Nex8IU')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+          </div>
+        </div>
+        <div class="artist-card" data-val="Elite Guitar/Vocal — Sam S" onclick="togArtist(this,'blitzArtists')">
+          <img src="https://img.youtube.com/vi/uDCTlhfifs4/hqdefault.jpg" alt="Sam S — Guitar + Vocal">
+          <div class="artist-body">
+            <div class="artist-name">Sam S.</div>
+            <div class="artist-role">Guitar + Vocal</div>
+            <button onclick="event.stopPropagation();openModal('uDCTlhfifs4')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
           </div>
         </div>
       </div>
+
       <div class="section-label">Violin</div>
       <div class="artist-grid">
-        <div class="artist-card" data-val="Elite Violin — Natasha" onclick="togArtist(this,'blitzArtists')">
-          <img src="https://img.youtube.com/vi/Mx6PP9AWXUk/hqdefault.jpg" alt="Violin" onerror="this.src='https://static.wixstatic.com/media/aefb83_2a89882eab714b9d9ecc797d8cc77b18~mv2.png/v1/fill/w_400,h_300,q_85,enc_avif,quality_auto/FORTUNEWEST%20(3Piece)%202.png'">
+        <div class="artist-card" data-val="Elite Violin — Jeremy J" onclick="togArtist(this,'blitzArtists')">
+          <img src="https://img.youtube.com/vi/wc8IrSsj0H0/hqdefault.jpg" alt="Jeremy J — Violin">
           <div class="artist-body">
-            <div class="artist-name">Natasha V.</div>
-            <div class="artist-role">Electric Violin · 300+ events</div>
-            <button onclick="event.stopPropagation();openModal('Mx6PP9AWXUk')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2pxbackground:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+            <div class="artist-name">Jeremy J.</div>
+            <div class="artist-role">Violin</div>
+            <button onclick="event.stopPropagation();openModal('wc8IrSsj0H0')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
           </div>
         </div>
-        <div class="artist-card" data-val="Elite Violin — Elena" onclick="togArtist(this,'blitzArtists')">
-          <img src="https://img.youtube.com/vi/Mx6PP9AWXUk/hqdefault.jpg" alt="Violin" onerror="this.src='https://static.wixstatic.com/media/aefb83_2a89882eab714b9d9ecc797d8cc77b18~mv2.png/v1/fill/w_400,h_300,q_85,enc_avif,quality_auto/FORTUNEWEST%20(3Piece)%202.png'">
+        <div class="artist-card" data-val="Elite Violin — Lilia V" onclick="togArtist(this,'blitzArtists')">
+          <img src="https://img.youtube.com/vi/Em7SkFjc62Y/hqdefault.jpg" alt="Lilia V — Violin">
           <div class="artist-body">
-            <div class="artist-name">Elena R.</div>
-            <div class="artist-role">Classical &amp; Contemporary</div>
-            <button onclick="event.stopPropagation();openModal('Mx6PP9AWXUk')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2pxbackground:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+            <div class="artist-name">Lilia V.</div>
+            <div class="artist-role">Violin</div>
+            <button onclick="event.stopPropagation();openModal('Em7SkFjc62Y')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+          </div>
+        </div>
+        <div class="artist-card" data-val="Elite Violin — Nick K" onclick="togArtist(this,'blitzArtists')">
+          <img src="https://img.youtube.com/vi/iNXPHrAgmyg/hqdefault.jpg" alt="Nick K — Violin">
+          <div class="artist-body">
+            <div class="artist-name">Nick K.</div>
+            <div class="artist-role">Violin</div>
+            <button onclick="event.stopPropagation();openModal('iNXPHrAgmyg')" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
           </div>
         </div>
       </div>
@@ -979,7 +1017,6 @@ const S={
 };
 
 // FX sub-step map: only items that need their own page
-// co2, cloud, gobo, dmx are tile-only — no dedicated page
 const FX_STEPS={
   uplights:    {stepId:'step7a', btnId:'btn7a',  needsSel:true},
   dancelights: {stepId:'step7b', btnId:'btn7b',  needsSel:true},
@@ -987,56 +1024,150 @@ const FX_STEPS={
   sparklers:   {stepId:'step7d', btnId:'btn7d',  needsSel:true},
 };
 
-// Live music act definitions
+// Helpers
 function ytThumb(id){return`https://img.youtube.com/vi/${id}/hqdefault.jpg`}
 function ytLink(id){return`https://www.youtube.com/watch?v=${id}`}
-const VID={str:'Mx6PP9AWXUk',strAlt:'fEBkmFQ_9VA',live:'dJjI6heCinA',blitz:'RMIC15UJ4So'};
-const IMG={str:'https://static.wixstatic.com/media/aefb83_2a89882eab714b9d9ecc797d8cc77b18~mv2.png/v1/fill/w_460,h_180,q_85,enc_avif,quality_auto/FORTUNEWEST%20(3Piece)%202.png',harp:'https://static.wixstatic.com/media/feee51_c3c514d11a6742be838039cb8237aac3~mv2.png/v1/fill/w_460,h_180,q_85,enc_avif,quality_auto/37.png',sax:'https://static.wixstatic.com/media/aefb83_5afd96475210428791367e19f97a3fb5~mv2.jpg/v1/fill/w_460,h_180,q_80,enc_avif,quality_auto/sax%20player1.jpg',guitar:'https://static.wixstatic.com/media/aefb83_8b7ff3ba3b2c48f4b92fd9c1fcf9b9b2~mv2.jpg/v1/fill/w_460,h_180,q_80,enc_avif,quality_auto/Screenshot%202025-06-10%20at%201_06_edited.jpg',duo:'https://static.wixstatic.com/media/aefb83_e1c03ba7d45d437ebe8afcfdbd0ec1de~mv2.jpg/v1/fill/w_460,h_180,q_80,enc_avif,quality_auto/Duo%20musicians_edited.jpg',djlive:'https://static.wixstatic.com/media/aefb83_18e7b5ad23de470da28013e5b7831865~mv2.png/v1/fill/w_460,h_180,q_85,enc_avif,quality_auto/DJ%20LIVE%20MUSIC%20SOLO_tif.png',blitzfusion:'https://static.wixstatic.com/media/aefb83_aeff0ea266624bb88e4aec28286f4fbb~mv2.png/v1/fill/w_460,h_180,q_85,enc_avif,quality_auto/Blitz_Fusion_DJ_HORNS_A007C007_241119_R17M_250520_01_2_00000000_tif.png',bigband:'https://static.wixstatic.com/media/aefb83_38c0976ebb5c4ae992e6410c418a3ad9~mv2.jpg/v1/fill/w_460,h_180,q_80,enc_avif,quality_auto/Big%20Band_edited.jpg'};
 
+// ── UPDATED IMAGE / VIDEO REFERENCES ─────────────────────────
+// Correct YouTube IDs per act
+const VID={
+  secondStrings: 'lVK-mRA71rk',   // Second Strings
+  stringNation:  'DbqZ-VDcxQE',   // String Nation
+  blitzQuartet:  'Y4H2lZozg2E',   // Blitz Quartet
+  belleTrio:     'Mx6PP9AWXUk',   // Belle Trio
+  custom5piece:  'A82KRsszliM',   // Custom 5-Piece
+  live:          'dJjI6heCinA',   // generic live
+  blitz:         'RMIC15UJ4So',   // Blitz Fusion
+};
+
+const IMG={
+  sax:'https://static.wixstatic.com/media/aefb83_5afd96475210428791367e19f97a3fb5~mv2.jpg/v1/fill/w_460,h_180,q_80,enc_avif,quality_auto/sax%20player1.jpg',
+  guitar:'https://static.wixstatic.com/media/aefb83_8b7ff3ba3b2c48f4b92fd9c1fcf9b9b2~mv2.jpg/v1/fill/w_460,h_180,q_80,enc_avif,quality_auto/Screenshot%202025-06-10%20at%201_06_edited.jpg',
+  duo:'https://static.wixstatic.com/media/aefb83_e1c03ba7d45d437ebe8afcfdbd0ec1de~mv2.jpg/v1/fill/w_460,h_180,q_80,enc_avif,quality_auto/Duo%20musicians_edited.jpg',
+  djlive:'https://static.wixstatic.com/media/aefb83_18e7b5ad23de470da28013e5b7831865~mv2.png/v1/fill/w_460,h_180,q_85,enc_avif,quality_auto/DJ%20LIVE%20MUSIC%20SOLO_tif.png',
+  blitzfusion:'https://static.wixstatic.com/media/aefb83_aeff0ea266624bb88e4aec28286f4fbb~mv2.png/v1/fill/w_460,h_180,q_85,enc_avif,quality_auto/Blitz_Fusion_DJ_HORNS_A007C007_241119_R17M_250520_01_2_00000000_tif.png',
+  bigband:'https://static.wixstatic.com/media/aefb83_38c0976ebb5c4ae992e6410c418a3ad9~mv2.jpg/v1/fill/w_460,h_180,q_80,enc_avif,quality_auto/Big%20Band_edited.jpg',
+};
+
+// ── STRING ACTS — shared across Ceremony & Cocktail Hour ──────
+// Thumbnails come from YouTube (ytThumb(id)) matching each act's video.
+// Price shown as a badge: $$ / $$$ / $$$$
+const STRING_ACTS = [
+  {
+    val: 'Second Strings',
+    price: '$$',
+    desc: 'Available as Duo, Trio, or Quartet — our best-value string option',
+    ytId: VID.secondStrings,
+  },
+  {
+    val: 'String Nation',
+    price: '$$$',
+    desc: 'Available as Trio or Quartet — our flagship string act',
+    ytId: VID.stringNation,
+  },
+  {
+    val: 'Blitz Quartet',
+    price: '$$$',
+    desc: 'Available as Trio or Quartet — elevated contemporary strings',
+    ytId: VID.blitzQuartet,
+  },
+  {
+    val: 'Belle Trio',
+    price: '$$$$',
+    desc: 'Harp, Violin &amp; Cello — ethereal and intimate',
+    ytId: VID.belleTrio,
+  },
+  {
+    val: 'Custom — 5 Piece Strings with Percussion + Sax',
+    price: '$$$$',
+    desc: 'Full large ensemble — maximum impact and drama',
+    ytId: VID.custom5piece,
+  },
+];
+
+// ── SHARED ACT LISTS ──────────────────────────────────────────
+const SOLO_VOCALS = [
+  {val:'Piano Songbird',       desc:'Piano &amp; Vocals — female',           ytId:'GezwqYHkcHo', price:''},
+  {val:'The Piano Man',        desc:'Piano &amp; Vocals — male',             ytId:'YDgyPCtC2Vc', price:''},
+  {val:'Groove Strummer',      desc:'Guitar &amp; Vocals — male',            ytId:'jKXYlOY8mgc', price:''},
+  {val:'Melody Road',          desc:'Guitar &amp; Vocals — female',          ytId:'QKOsXbo0HOw', price:''},
+];
+const SOLO_INSTRUMENTAL = [
+  {val:'Solo Piano',           desc:'Solo piano — elegant and versatile',    ytId:'RBQn2_yrSSA', price:''},
+  {val:'Spanish Guitar',       desc:'Classical Spanish guitar',              ytId:'uTtM8txFxmY', price:''},
+  {val:'Solo Harp',            desc:'Timeless and romantic',                 ytId:'zYfnSTbN-Ng', price:''},
+  {val:'Sunset Violin',        desc:'Acoustic violin — warm and intimate',   ytId:'5_sapmX3GfY', price:''},
+  {val:'Electric Violin',      desc:'Contemporary electric violin',          ytId:'Q_A7iyCihPg', price:''},
+];
+
+const DUO_VOCALS = [
+  {val:'Bossa Groove Duo',           desc:'Vocal + Guitar — bossa &amp; groove',       ytId:'vKlONlN7DXs', price:''},
+  {val:'Château Jazz',               desc:'Vocal + Electric Guitar — jazz vibes',       ytId:'ivBURWyGHMw', price:''},
+  {val:'Havana Duo',                 desc:'Vocal + Guitar — latin &amp; tropical',      ytId:'GuxOJgThk_g', price:''},
+  {val:'The Roams Duo (Guitar/Sax)', desc:'Guitar &amp; Saxophone',                     ytId:'BuIi4VdL4lA', price:''},
+  {val:'The Roams Duo (Guitar/Bass)',desc:'Guitar &amp; Bass',                           ytId:'8S1NuUbKxRo', price:''},
+  {val:'Riviera Duo',                desc:'Harp Vocalist + Percussion',                 ytId:'l9gs_6jLiNA', price:''},
+];
+const DUO_INSTRUMENTAL = [
+  {val:'Velvet Jazz Duo',      desc:'Bass + Guitar',                         ytId:'ASJKXct3b6g', price:''},
+  {val:'Cocktail Duo',         desc:'Piano + Saxophone',                     ytId:'Eg29RBkIP5Y', price:''},
+  {val:'Elegant Harmony',      desc:'Saxophone &amp; Cello',                 ytId:'Md2E_dq7Xbk', price:''},
+  {val:'Sunset Strings',       desc:'Violin &amp; Guitar',                   ytId:'mbOUHLBAa84', price:''},
+  {val:'Guitar + Sax',         desc:'Guitar &amp; Saxophone',                ytId:'VhqJU2cTMZc', price:''},
+];
+
+const TRIO_VOCALS = [
+  {val:'Ritmo Del Sol',        desc:'Bass, Guitar &amp; Vocal + Percussion', ytId:'B8hxp9bzSyA', price:''},
+  {val:'Dusty Roads',          desc:'Bass, Guitar &amp; Vocal + Percussion', ytId:'4wV7O-Nlgpk', price:''},
+  {val:'Island Pulse',         desc:'Bass, Guitar &amp; Vocal + Cajón',      ytId:'Bc51CE5xRKs', price:''},
+  {val:'Route 66 Trio',        desc:'Bass, Guitar &amp; Vocal + Drums',      ytId:'2NRTkoW2YoY', price:''},
+  {val:'Wave Riders',          desc:'Bass, Guitar &amp; Vocal + Percussion', ytId:'JGTmudXINyo', price:''},
+];
+const TRIO_INSTRUMENTAL = [
+  {val:'Velvet Jazz (Trio)',    desc:'Bass, Guitar + Saxophone',              ytId:'JJbmTlNSE2A', price:''},
+  {val:'Latin Cuban Trio',     desc:'Bass + Guitar + Guitar',                ytId:'-9fASC3u8tc', price:''},
+  {val:'Italian Jazz Trio',    desc:'Bass + Guitar + Guitar',                ytId:'Ihivl8u9x68', price:''},
+];
+
+const QUARTET_ACTS = [
+  {val:'Italian Quartet',      desc:'Bass, Guitar, Guitar + Vocal',               ytId:'ikbLgV32uUM', price:''},
+  {val:'Southern Comfort',     desc:'Bass, Drums, Guitar + Vocal',                ytId:'PtEJbBSkfWk', price:''},
+  {val:'De-La-Jazz',           desc:'Drums, Keyboard, Bass + Vocal',              ytId:'APdVYsOPEqE', price:''},
+  {val:'The Roams',            desc:'Bass, Guitar &amp; Vocal, Sax + Percussion', ytId:'DFbqFbzFyLA', price:''},
+  {val:'Velvet Jazz',          desc:'Bass, Guitar, Saxophone + Keyboard',         ytId:'3D_tnBtYiQ0', price:''},
+];
+
+// Acts with vocal/instrumental split — used in renderMomentPanels
+const SPLIT_ACTS = {
+  solo:  { vocals: SOLO_VOCALS,  instrumental: SOLO_INSTRUMENTAL },
+  duo:   { vocals: DUO_VOCALS,   instrumental: DUO_INSTRUMENTAL },
+  trio:  { vocals: TRIO_VOCALS,  instrumental: TRIO_INSTRUMENTAL },
+};
+
+// ── MOMENT ACTS ───────────────────────────────────────────────
 const MOMENT_ACTS={
   'Ceremony':[
-    {id:'strings',label:'Strings',acts:[
-      {val:'String Nation',desc:'Our flagship string act — elevated and versatile',ytId:VID.str,fb:IMG.str},
-      {val:'Blitz Quartet',desc:'4-piece ensemble, classical through contemporary',ytId:VID.str,fb:IMG.str},
-      {val:'Bell Trio',desc:'Harp, Violin &amp; Cello — ethereal and intimate',ytId:VID.strAlt,fb:IMG.harp},
-      {val:'Second String Duo',desc:'Elegant string duo — best value for ceremonies',ytId:VID.str,fb:IMG.str},
-    ]},
-    {id:'solo',label:'Solo',acts:[
-      {val:'Solo Acoustic Guitar',desc:'Classical or singer-songwriter',ytId:VID.live,fb:IMG.guitar},
-      {val:'Solo Electric Violin',desc:'Contemporary and striking',ytId:VID.live,fb:IMG.str},
-      {val:'Solo Harp',desc:'Timeless and romantic',ytId:VID.live,fb:IMG.harp},
-    ]},
-    {id:'duo',label:'Duo',acts:[
-      {val:'Jazz Duo',desc:'Sax + guitar or keys',ytId:VID.live,fb:IMG.duo},
-      {val:'Acoustic Duo',desc:'Guitar + vocals or two acoustic instruments',ytId:VID.live,fb:IMG.duo},
-    ]},
-    {id:'trio',label:'Trio',acts:[
-      {val:'Jazz Trio',desc:'Fully acoustic jazz trio',ytId:VID.live,fb:IMG.duo},
-      {val:'Acoustic Trio',desc:'Guitar, violin, and cello',ytId:VID.live,fb:IMG.duo},
-    ]},
+    {id:'strings',  label:'Strings',               acts: STRING_ACTS, split: false},
+    {id:'solo',     label:'Solo',                   acts: null,        split: true},
+    {id:'duo',      label:'Duo',                    acts: null,        split: true},
+    {id:'trio',     label:'Trio',                   acts: null,        split: true},
+    {id:'quartet',  label:'Quartet', acts: QUARTET_ACTS,split: false},
   ],
   'Cocktail Hour':[
-    {id:'strings',label:'Strings',acts:[
-      {val:'String Nation',desc:'Our flagship string act',ytId:VID.str,fb:IMG.str},
-      {val:'Bell Trio',desc:'Harp, Violin &amp; Cello',ytId:VID.strAlt,fb:IMG.harp},
-      {val:'Second String Duo',desc:'Elegant string duo',ytId:VID.str,fb:IMG.str},
-    ]},
-    {id:'solo',label:'Solo',acts:[
-      {val:'Solo Sax',desc:'Smooth and soulful — a cocktail classic',ytId:VID.live,fb:IMG.sax},
-      {val:'Solo Guitar',desc:'Singer-songwriter or classical',ytId:VID.live,fb:IMG.guitar},
-    ]},
-    {id:'duo',label:'Duo',acts:[
-      {val:'Jazz Duo',desc:'Sax + guitar or piano',ytId:VID.live,fb:IMG.duo},
-    ]},
-    {id:'trio',label:'Trio',acts:[
-      {val:'Jazz Trio',desc:'Fully acoustic jazz trio',ytId:VID.live,fb:IMG.duo},
-    ]},
+    {id:'strings',  label:'Strings',               acts: STRING_ACTS, split: false},
+    {id:'solo',     label:'Solo',                   acts: null,        split: true},
+    {id:'duo',      label:'Duo',                    acts: null,        split: true},
+    {id:'trio',     label:'Trio',                   acts: null,        split: true},
+    {id:'quartet',  label:'Quartet', acts: QUARTET_ACTS,split: false},
   ],
   'Dancing / After Party':[
-    {id:'djlive',label:'DJ + Live',acts:[
-      {val:'Solo Musician with DJ',desc:'Sax, Violin, Trumpet, or Percussion alongside your DJ',ytId:VID.blitz,fb:IMG.djlive},
-      {val:'Blitz Fusion — Sax, Perc &amp; Violin',desc:'Signature 3-piece with DJ — our most popular dancing add-on',ytId:VID.blitz,fb:IMG.blitzfusion},
-      {val:'Blitz Fusion BIG — 3 Strings + 3 Horns',desc:'Full large ensemble with DJ — maximum impact',ytId:VID.blitz,fb:IMG.bigband},
+    {id:'djlive',label:'DJ + Live',split:false,acts:[
+      {val:'Solo Violinist',desc:'Electric violin performing live alongside your DJ',ytId:'Q_A7iyCihPg',price:''},
+      {val:'DJ + Live Saxophone',desc:'Smooth, soulful sax over your DJ set — crowd favourite',ytId:'z5tOQMKAOiY',price:''},
+      {val:'Blitz Fusion Small — Percussion, Sax &amp; Violin',desc:'Our signature 3-piece live act with DJ — most popular dancing add-on',ytId:'ueKNsHkR54g',price:''},
+      {val:'DJ + Live 3 Piece Horn',desc:'Full horn section bringing brass energy to your dance floor',ytId:'nNZ3Ae8wUfI',price:''},
+      {val:'DJ + Live Latin 3 Piece',desc:'Latin rhythm section — percussion, brass, and feel-good energy',ytId:'OurkRK4UnG4',price:''},
+      {val:'Blitz Fusion Large — Percussion, 3 Horns &amp; 3 Violins',desc:'Maximum impact — full large ensemble with DJ for an unforgettable party',ytId:'H7DWR8fz9Kk',price:''},
     ]},
   ],
 };
@@ -1045,11 +1176,9 @@ let momentTypeSel={};
 // ── NAV ───────────────────────────────────────────────────────
 let navHistory=[],currentStep=0;
 
-// Step IDs in linear order for progress calculation
 const STEP_ORDER=['step0','step1','step2','step3','step4','step5','step6','step7',
   'step7a','step7b','step7c','step7d',
   'step8','step9','step10','step11','step12'];
-const TOTAL_VISIBLE=14; // approximate visible steps for progress
 
 const SECTION_MAP={
   step0:'Section 1 of 3 — Your Vibe',step1:'Section 1 of 3 — Your Vibe',
@@ -1069,23 +1198,20 @@ function showStep(id){
   if(id==='step9'&&S.liveMusic)renderMomentPanels();
   if(id==='step11')buildSummary();
   scrollTop();
-  // GA4 step tracking — fires on every question view
   if(typeof gtag!=='undefined') gtag('event','step_view',{event_category:'match_form',step_id:id,step_index:STEP_ORDER.indexOf(id)});
 }
 
 function updateProgress(id){
   const idx=STEP_ORDER.indexOf(id);
-  const total=STEP_ORDER.length-1; // exclude step12 from calculation
+  const total=STEP_ORDER.length-1;
   const filled=Math.max(0,Math.min(idx,total));
   for(let i=0;i<10;i++){
     const el=document.getElementById('p'+i);if(!el)continue;
     el.classList.remove('active','done');
-    // Each segment covers 1/10 of the journey
     const segStart=i*(total/10);
     const segEnd=(i+1)*(total/10);
     if(filled>segEnd) el.classList.add('done');
     else if(filled>=segStart&&filled<segEnd) el.classList.add('active');
-    // step0: filled=0, all segments inactive — progress bar is empty at start
   }
   document.getElementById('progressLabel').textContent=SECTION_MAP[id]||'';
 }
@@ -1108,12 +1234,9 @@ function goBack(){
 function getCurrentStepId(){return currentStep||'step0'}
 
 function getNextStepId(cur){
-  // Simple sequential steps
   const seq={step0:'step1',step1:'step2',step2:'step3',step3:'step4',step4:'step5',step5:'step6',step6:'step7'};
   if(seq[cur])return seq[cur];
-  // After lighting gateway
-  if(cur==='step7')return 'step8'; // goes to booth (FX flow handled by startFxFlow)
-  // After FX sub-steps
+  if(cur==='step7')return 'step8';
   if(['step7a','step7b','step7c','step7d'].includes(cur))return nextFxStepId();
   if(cur==='step8')return 'step9';
   if(cur==='step9')return 'step10';
@@ -1132,12 +1255,10 @@ function togFxTile(el){
 }
 
 function startFxFlow(){
-  // Build queue — only items that have a dedicated sub-page (in FX_STEPS)
   const order=['uplights','dancelights','disco','sparklers'];
   S.fxQueue=order.filter(k=>S.fxInterested.includes(k)&&FX_STEPS[k]);
   S.fxQueueIdx=0;
   if(!S.fxQueue.length){
-    // Nothing needs a dedicated page — go straight to booth
     const cur=getCurrentStepId();
     navHistory.push(cur);currentStep='step8';showStep('step8');return;
   }
@@ -1171,16 +1292,12 @@ function nextFxStep(){
 }
 
 function nextFxStepId(){
-  // Used for back navigation calculation
   const nextIdx=S.fxQueueIdx+1;
   if(nextIdx>=S.fxQueue.length)return 'step8';
   return FX_STEPS[S.fxQueue[nextIdx]].stepId;
 }
 
 // ── SELECTION HELPERS ─────────────────────────────────────────
-// ── GENRE → ARTIST MAP ────────────────────────────────────────
-// Replace placeholder artists with your team's final list per genre.
-// Each genre key must exactly match the data-val on the genre tag card.
 const GENRE_ARTISTS = {
   'EDM': ['Calvin Harris','Avicii','Dom Dolla','John Summit','Skrillex','Chris Lake','Tiësto','Disco Lines','Illenium','Zedd','Swedish House Mafia'],
   'High School Anthems': ['Pitbull','Outkast','Nelly','T-Pain','Lil Jon','Usher','Sean Paul','Missy Elliott'],
@@ -1209,10 +1326,6 @@ function togGenre(el){
 function renderArtistPanels(){
   const wrap=document.getElementById('artistPanels');
   if(!S.genres.length){wrap.innerHTML='';return;}
-
-  // Preserve currently selected artists across re-renders
-  const prevSelected=S.artists.slice();
-
   const html=S.genres.map(genre=>{
     const list=GENRE_ARTISTS[genre]||[];
     const chips=list.map(artist=>{
@@ -1224,7 +1337,6 @@ function renderArtistPanels(){
       <div class="tag-grid">${chips}</div>
     </div>`;
   }).join('');
-
   wrap.innerHTML=html;
 }
 
@@ -1264,13 +1376,8 @@ function setYN(key,val,btn,btnId){
   btn.classList.add('selected');
   if(key==='bilingual'){
     document.getElementById('bilingualLangWrap').classList.toggle('visible',val);
-    if(!val){
-      // No — enable immediately
-      if(btnId)document.getElementById(btnId).disabled=false;
-    } else {
-      // Yes — keep disabled until language is typed
-      if(btnId)document.getElementById(btnId).disabled=true;
-    }
+    if(!val){if(btnId)document.getElementById(btnId).disabled=false;}
+    else{if(btnId)document.getElementById(btnId).disabled=true;}
   }
   if(key==='ceremonyAtVenue'){document.getElementById('ceremonyHelpWrap').classList.toggle('visible',val);if(!val)document.getElementById('btn5').disabled=false;else document.getElementById('btn5').disabled=true}
   if(key==='booth'){document.getElementById('boothCatWrap').classList.toggle('visible',val);if(!val&&btnId)document.getElementById(btnId).disabled=false;else if(val)document.getElementById('btn8').disabled=true}
@@ -1303,8 +1410,6 @@ function formatTime(val){
 }
 
 function selQty(el,key){
-  // Deselect all qty-btns with the same key (data-key attribute or parent traversal)
-  // Use document-wide search by key to avoid closest() class dependency
   document.querySelectorAll('.qty-btn').forEach(b=>{
     if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes("'"+key+"'"))
       b.classList.remove('selected');
@@ -1369,25 +1474,45 @@ function renderMomentPanels(){
     const selType=momentTypeSel[moment]||groups[0]?.id;
     const typeTabs=groups.map(g=>`<button class="moment-tab${selType===g.id?' selected':''}" style="font-size:12px;padding:6px 14px" onclick="selectActType('${moment}','${g.id}',this)">${g.label}</button>`).join('');
     const selGroup=groups.find(g=>g.id===selType)||groups[0];
-    const cards=(selGroup?.acts||[]).map(act=>{
-      const isSel=S.momentActs[moment]===act.val;
-      return`<div class="act-card${isSel?' selected':''}" data-val="${act.val}" onclick="selectMomentAct('${moment}','${act.val}',this)">
-        <div class="act-thumb">
-          <img src="${ytThumb(act.ytId)}" alt="${act.val}" onerror="this.src='${act.fb}'" style="width:100%;height:100%;object-fit:cover;display:block">
-        </div>
-        <div class="act-body">
-          <div class="act-name">${act.val}</div>
-          <div class="act-desc">${act.desc}</div>
-          <button onclick="event.stopPropagation();openModal('${act.ytId}')" style="display:inline-block;margin-top:8px;font-size:12px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
-        </div>
-      </div>`;
-    }).join('');
+
+    let cardsHtml='';
+    if(selGroup?.split && SPLIT_ACTS[selGroup.id]){
+      // Render With Vocals section
+      const vocalCards=SPLIT_ACTS[selGroup.id].vocals.map(act=>actCardHtml(moment,act)).join('');
+      // Render Instrumental section
+      const instrCards=SPLIT_ACTS[selGroup.id].instrumental.map(act=>actCardHtml(moment,act)).join('');
+      cardsHtml=`
+        <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);font-weight:500;margin:1rem 0 .75rem;display:flex;align-items:center;gap:8px">With Vocals <span style="flex:1;height:1px;background:var(--border);display:block"></span></div>
+        <div class="acts-grid">${vocalCards}</div>
+        <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);font-weight:500;margin:1.5rem 0 .75rem;display:flex;align-items:center;gap:8px">Instrumental <span style="flex:1;height:1px;background:var(--border);display:block"></span></div>
+        <div class="acts-grid">${instrCards}</div>`;
+    } else {
+      const acts=selGroup?.acts||[];
+      cardsHtml=`<div class="acts-grid">${acts.map(act=>actCardHtml(moment,act)).join('')}</div>`;
+    }
+
     return`<div style="margin-bottom:2rem">
       <div class="section-label" style="margin-top:1rem">${moment}</div>
       <div class="moment-tabs" style="margin-bottom:1rem">${typeTabs}</div>
-      <div class="acts-grid">${cards}</div>
+      ${cardsHtml}
     </div>`;
   }).join('');
+}
+
+function actCardHtml(moment,act){
+  const isSel=S.momentActs[moment]===act.val;
+  const priceBadge=act.price?`<div class="act-price">${act.price}</div>`:'';
+  return`<div class="act-card${isSel?' selected':''}" data-val="${act.val}" onclick="selectMomentAct('${moment}','${act.val}',this)">
+    <div class="act-thumb">
+      <img src="${ytThumb(act.ytId)}" alt="${act.val}" style="width:100%;height:100%;object-fit:cover;display:block">
+    </div>
+    <div class="act-body">
+      ${priceBadge}
+      <div class="act-name">${act.val}</div>
+      <div class="act-desc">${act.desc}</div>
+      <button onclick="event.stopPropagation();openModal('${act.ytId}')" style="display:inline-block;margin-top:8px;font-size:12px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+    </div>
+  </div>`;
 }
 
 function selectActType(moment,typeId,btn){
@@ -1441,7 +1566,6 @@ function submitForm(){
   document.getElementById('successPills').innerHTML=pills.map(p=>`<span class="pill">${p}</span>`).join('');
   navHistory.push(getCurrentStepId());currentStep='step12';showStep('step12');
   const st=document.getElementById('successTitle');if(st&&S.leadName)st.textContent='You\'re all set, '+S.leadName.split(' ')[0]+'.';
-  // EmailJS send
   const params={
     client_name: S.leadName||'Not provided',
     client_email: S.leadEmail||'Not provided',
@@ -1464,7 +1588,6 @@ function submitForm(){
     blitz_elite: S.blitzElite?(S.blitzArtists.join(', ')||'Yes'):'No',
   };
   emailjs.send('service_l3fr6sg','template_94qozag',params).catch(e=>console.warn('EmailJS:',e));
-  // GA4 event
   if(typeof gtag!=='undefined') gtag('event','form_submit',{event_category:'match_form',client_name:S.leadName});
 }
 
@@ -1480,10 +1603,11 @@ function resetForm(){
   document.getElementById('extendTip').classList.remove('visible');
   document.getElementById('alldayCard').classList.remove('selected');
   const chk=document.getElementById('alldayCheck');chk.style.background='transparent';chk.style.border='1.5px solid var(--rose)';chk.textContent='';
-  ['arrivalTime','endTime','bilingualLang','leadName','leadEmail'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});S.leadName='';S.leadEmail='';const cb=document.getElementById('capBtn');if(cb)cb.disabled=true;;
+  ['arrivalTime','endTime','bilingualLang','leadName','leadEmail'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+  S.leadName='';S.leadEmail='';
+  const cb=document.getElementById('capBtn');if(cb)cb.disabled=true;
   ['btn0','btn1','btn2','btn4','btn5','btn6','btn7','btn7a','btn7b','btn7c','btn7d','btn8','btn9','btn10'].forEach(id=>{const el=document.getElementById(id);if(el)el.disabled=true});
   navHistory=[];currentStep='step0';
-  // Hide all steps, show welcome screen 1
   document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
   document.getElementById('ws1').classList.add('active');
   document.getElementById('formBody').style.display='none';
@@ -1523,10 +1647,8 @@ function goToWelcome1(){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function startForm(){
-  // Save lead data
   S.leadName=document.getElementById('leadName').value.trim();
   S.leadEmail=document.getElementById('leadEmail').value.trim();
-  // GA4 lead capture event
   if(typeof gtag!=='undefined') gtag('event','lead_captured',{event_category:'match_form',client_name:S.leadName});
   const ws1=document.getElementById('ws1');
   const ws2=document.getElementById('ws2');
@@ -1556,7 +1678,6 @@ function closeModal(e){
 }
 
 currentStep='step0';
-// Don't call showStep on init — welcome screens show by default
 </script>
 </body>
 </html>
