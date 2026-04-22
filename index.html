@@ -343,7 +343,7 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
     <div class="w1-headline">Let's find your<br>perfect match.</div>
     <div class="w1-body">You've already reached out — now help us dial in the details. A few quick questions and we'll match you with the right DJ, MC, and team to make your day unforgettable.</div>
     <img class="w1-hero"
-      src="https://static.wixstatic.com/media/feee51_6112687b489b4c629252d87d8e8c4c10~mv2.png/v1/fill/w_1116,h_500,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/33.png"
+      src="https://static.wixstatic.com/media/feee51_ee779087e17a4191ad5e0466a69835ca~mv2.jpg"
       alt="Second Song wedding">
     <div class="w1-proof">
       <div class="w1-proof-item">
@@ -408,7 +408,7 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
     </div>
 
     <!-- Hero divider image -->
-    <img src="https://static.wixstatic.com/media/feee51_6112687b489b4c629252d87d8e8c4c10~mv2.png/v1/fill/w_1116,h_240,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/33.png"
+    <img src="https://static.wixstatic.com/media/feee51_5fd53579a82944c7af867ffd4b816a9e~mv2.jpg"
       style="width:100%;height:200px;object-fit:cover;object-position:center 30%;border-radius:var(--r);display:block;margin-bottom:2rem" alt="Second Song">
 
     <!-- Fields -->
@@ -574,11 +574,35 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
     <div class="time-row">
       <div class="form-field" style="margin-bottom:0">
         <label class="form-label">Guest arrival time <span style="color:var(--rose);font-size:10px">(approximate)</span></label>
-        <input class="form-input" type="time" id="arrivalTime" oninput="checkTimingBtn()" style="font-size:15px;padding:14px 15px;cursor:pointer">
+        <div style="display:flex;gap:6px;align-items:center">
+          <select class="form-input" id="arrivalHour" onchange="assembleTime('arrival')" style="flex:1;padding:13px 10px;cursor:pointer;appearance:auto">
+            <option value="">Hour</option>
+          </select>
+          <select class="form-input" id="arrivalMin" onchange="assembleTime('arrival')" style="width:74px;padding:13px 8px;cursor:pointer;appearance:auto">
+            <option value="00">:00</option>
+            <option value="30">:30</option>
+          </select>
+          <select class="form-input" id="arrivalAmpm" onchange="assembleTime('arrival')" style="width:74px;padding:13px 8px;cursor:pointer;appearance:auto">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
       </div>
       <div class="form-field" style="margin-bottom:0">
         <label class="form-label">End time / Last song <span style="color:var(--rose);font-size:10px">(approximate)</span></label>
-        <input class="form-input" type="time" id="endTime" oninput="checkTimingBtn()" style="font-size:15px;padding:14px 15px;cursor:pointer">
+        <div style="display:flex;gap:6px;align-items:center">
+          <select class="form-input" id="endHour" onchange="assembleTime('end')" style="flex:1;padding:13px 10px;cursor:pointer;appearance:auto">
+            <option value="">Hour</option>
+          </select>
+          <select class="form-input" id="endMin" onchange="assembleTime('end')" style="width:74px;padding:13px 8px;cursor:pointer;appearance:auto">
+            <option value="00">:00</option>
+            <option value="30">:30</option>
+          </select>
+          <select class="form-input" id="endAmpm" onchange="assembleTime('end')" style="width:74px;padding:13px 8px;cursor:pointer;appearance:auto">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
       </div>
     </div>
     <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">← Back</button><button class="btn btn-primary" id="btn6" onclick="advance()" disabled>Continue</button></div>
@@ -845,6 +869,19 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
     </div>
     <div class="conditional" id="liveMusicWrap">
 
+      <!-- All Day Package — always visible as top upsell -->
+      <div class="allday-card" id="alldayCard" onclick="toggleAllDay()" style="margin-bottom:1.5rem">
+        <div class="allday-badge">Best value · Live Music All Day</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-top:.5rem">
+          <div>
+            <div style="font-family:var(--serif);font-size:20px;font-style:italic;color:var(--burgundy);margin-bottom:6px">All Day Package</div>
+            <div style="font-size:13px;color:var(--text-muted);line-height:1.8">✓ Soloist of your choice — Ceremony<br>✓ Soloist of your choice — Cocktail Hour<br>✓ 3 musicians of your choice — Dancing</div>
+          </div>
+          <div class="allday-check" id="alldayCheck"></div>
+        </div>
+      </div>
+      <div style="text-align:center;font-size:11px;color:var(--text-muted);margin:.25rem 0 1.5rem;letter-spacing:.1em;text-transform:uppercase">— or build your own —</div>
+
       <!-- Where do you want live music? -->
       <div class="section-label" style="margin-top:.25rem">Where are you picturing live music?</div>
       <div class="option-list" style="margin-bottom:1.5rem">
@@ -864,17 +901,7 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
 
       <!-- Ceremony / Cocktail Hour section -->
       <div class="conditional" id="cchSection">
-        <div class="allday-card" id="alldayCard" onclick="toggleAllDay()">
-          <div class="allday-badge">Best value · Live Music All Day</div>
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-top:.5rem">
-            <div>
-              <div style="font-family:var(--serif);font-size:20px;font-style:italic;color:var(--burgundy);margin-bottom:6px">All Day Package</div>
-              <div style="font-size:13px;color:var(--text-muted);line-height:1.8">✓ Soloist of your choice — Ceremony<br>✓ Soloist of your choice — Cocktail Hour<br>✓ 3 musicians of your choice — Dancing</div>
-            </div>
-            <div class="allday-check" id="alldayCheck"></div>
-          </div>
-        </div>
-        <div style="text-align:center;font-size:11px;color:var(--text-muted);margin:.5rem 0 1.25rem;letter-spacing:.1em;text-transform:uppercase">— or build your own —</div>
+        <div style="text-align:center;font-size:11px;color:var(--text-muted);margin:.25rem 0 1.25rem;letter-spacing:.1em;text-transform:uppercase">— or build your own —</div>
         <div class="section-label">Which moments?</div>
         <div class="moment-tabs" id="momentTabs">
           <button class="moment-tab" data-moment="Ceremony" onclick="toggleMoment(this)">Ceremony</button>
@@ -1436,19 +1463,42 @@ function checkBilingualBtn(){
   S.bilingualLang=lang;
   document.getElementById('btn4').disabled=lang.trim().length===0;
 }
+function populateTimeDropdowns(){
+  const hours=[12,1,2,3,4,5,6,7,8,9,10,11];
+  ['arrivalHour','endHour'].forEach(id=>{
+    const sel=document.getElementById(id);
+    if(!sel)return;
+    hours.forEach(h=>{
+      const opt=document.createElement('option');
+      opt.value=String(h);opt.textContent=String(h);
+      sel.appendChild(opt);
+    });
+  });
+}
+populateTimeDropdowns();
+
+function assembleTime(which){
+  const h=document.getElementById(which+'Hour').value;
+  const m=document.getElementById(which+'Min').value;
+  const ap=document.getElementById(which+'Ampm').value;
+  if(!h){S[which+'Time']='';checkTimingBtn();return;}
+  // Convert to 24hr for storage
+  let h24=parseInt(h,10);
+  if(ap==='AM'&&h24===12) h24=0;
+  if(ap==='PM'&&h24!==12) h24+=12;
+  const display=`${h}:${m} ${ap}`;
+  S[which+'Time']=display;
+  checkTimingBtn();
+}
+
 function checkTimingBtn(){
-  const a=document.getElementById('arrivalTime').value;
-  const e=document.getElementById('endTime').value;
-  if(a) S.arrivalTime=a;
-  if(e) S.endTime=e;
+  const a=S.arrivalTime;
+  const e=S.endTime;
   document.getElementById('btn6').disabled=!(a&&e);
 }
 function formatTime(val){
   if(!val) return '—';
-  const [h,m]=val.split(':').map(Number);
-  const ampm=h>=12?'PM':'AM';
-  const h12=h%12||12;
-  return `${h12}:${String(m).padStart(2,'0')} ${ampm}`;
+  return val; // already stored as "4:30 PM"
 }
 
 function selQty(el,key){
@@ -1617,43 +1667,49 @@ function toggleMomentAct(moment,val,el){
 
 // SUMMARY
 function buildSummary(){
-  const rows=[],row=(l,v)=>{if(v&&!(Array.isArray(v)&&!v.length))rows.push({l,v})};
-  row('Music vibe',S.musicVibe.join(', '));row('MC style',S.mcStyle.join(', '));
-  row('Premium DJ',S.premiumDJ?'Yes — include premium roster':'No thanks');
-  if(S.genres.length)row('Genres',S.genres.join(', '));if(S.artists.length)row('Artists',S.artists.join(', '));
-  row('Bilingual',S.bilingual?`Yes — ${S.bilingualLang||'TBD'}`:'No');
-  row('Ceremony at venue',S.ceremonyAtVenue?`Yes — ceremony support: ${S.ceremonyHelp?'Yes':'No'}`:'No');
-  row('Guest arrival',document.getElementById('arrivalTime').value||'—');
-  row('End time',document.getElementById('endTime').value||'—');
-  if(!S.fxInterested.length)row('Lighting / FX','Not interested');
+  const rows=[],row=(l,v)=>{
+    if(v===null||v===undefined||v==='')return;
+    if(Array.isArray(v)&&!v.length)return;
+    rows.push({l,v:String(v)});
+  };
+  row('Music vibe', S.musicVibe.join(', '));
+  row('MC style', S.mcStyle.join(', '));
+  if(S.premiumDJ!==null) row('Premium DJ', S.premiumDJ?'Yes — include premium roster':'No thanks');
+  if(S.genres.length)  row('Genres',  S.genres.join(', '));
+  if(S.artists.length) row('Artists', S.artists.join(', '));
+  if(S.bilingual!==null) row('Bilingual', S.bilingual?`Yes — ${S.bilingualLang||'TBD'}`:'No');
+  if(S.ceremonyAtVenue!==null) row('Ceremony at venue', S.ceremonyAtVenue?`Yes — ceremony support: ${S.ceremonyHelp?'Yes':'No'}`:'No');
+  if(S.arrivalTime) row('Guest arrival', S.arrivalTime);
+  if(S.endTime)     row('End time', S.endTime);
+  if(!S.fxInterested.length) row('Lighting / FX','Not interested');
   else{
     const parts=[];
-    if(S.fxInterested.includes('uplights'))parts.push(`Up Lights — ${S.uplightQty||'TBD'}`);
+    if(S.fxInterested.includes('uplights'))   parts.push(`Up Lights — ${S.uplightQty||'TBD'}`);
     if(S.fxInterested.includes('dancelights'))parts.push(`Dance Lights — ${S.lightingPkg||'TBD'}${S.lightingAddons.length?' + '+S.lightingAddons.join(', '):''}`);
-    if(S.fxInterested.includes('disco'))parts.push(`Disco Ball — ${S.discoBallType||'TBD'}`);
-    if(S.fxInterested.includes('sparklers'))parts.push(`Sparklers — ${S.sparklerQty||'TBD'}`);
-    if(S.fxInterested.includes('co2'))parts.push('CO2 Cannons');
-    if(S.fxInterested.includes('cloud'))parts.push('Dancing on a Cloud');
-    if(S.fxInterested.includes('gobo'))parts.push('Gobo / Monogram');
-    if(S.fxInterested.includes('dmx'))parts.push('DMX Upgrade');
-    row('Lighting / FX',parts.join(' · '));
+    if(S.fxInterested.includes('disco'))      parts.push(`Disco Ball — ${S.discoBallType||'TBD'}`);
+    if(S.fxInterested.includes('sparklers'))  parts.push(`Sparklers — ${S.sparklerQty||'TBD'}`);
+    if(S.fxInterested.includes('co2'))        parts.push('CO2 Cannons');
+    if(S.fxInterested.includes('cloud'))      parts.push('Dancing on a Cloud');
+    if(S.fxInterested.includes('gobo'))       parts.push('Gobo / Monogram');
+    if(S.fxInterested.includes('dmx'))        parts.push('DMX Upgrade');
+    row('Lighting / FX', parts.join(' · '));
   }
-  if(S.booth===false)row('Photo / 360 Booth','Not interested');
-  if(S.booth)row('Photo / 360 Booth',`${S.boothCat||''} — ${S.boothType||'TBD'}`);
-  if(S.liveMusic===false)row('Live music','Not interested');
-  if(S.liveMusic){
-    if(S.liveMusicWhere==='ceremony-cocktail'||S.liveMusicWhere==='both'){
-      if(S.alldayPackage)row('Live music','All Day Package');
-      else{
-        row('Live music moments',S.liveMoments.join(', ')||'TBD');
+  if(S.booth===false) row('Photo / 360 Booth','Not interested');
+  if(S.booth===true)  row('Photo / 360 Booth',`${S.boothCat||''} — ${S.boothType||'TBD'}`);
+  if(S.liveMusic===false) row('Live music','Not interested');
+  if(S.liveMusic===true){
+    if(S.alldayPackage) row('Live music','All Day Package');
+    else{
+      if(S.liveMusicWhere==='ceremony-cocktail'||S.liveMusicWhere==='both'){
+        row('Live music moments', S.liveMoments.join(', ')||'TBD');
         const a=Object.entries(S.momentActs).map(([m,v])=>`${m}: ${Array.isArray(v)?v.join(', '):v}`).join(' · ');
-        if(a)row('Act selections',a);
+        if(a) row('Act selections', a);
+      }
+      if(S.liveMusicWhere==='djlive'||S.liveMusicWhere==='both'){
+        row('DJ + Live', S.djliveActs.join(', ')||'TBD');
       }
     }
-    if(S.liveMusicWhere==='djlive'||S.liveMusicWhere==='both'){
-      row('DJ + Live',S.djliveActs.join(', ')||'TBD');
-    }
-    if(S.blitzElite&&S.blitzArtists.length)row('Blitz Elite',S.blitzArtists.join(', '));
+    if(S.blitzElite&&S.blitzArtists.length) row('Blitz Elite', S.blitzArtists.join(', '));
   }
   document.getElementById('summaryCard').innerHTML=`<div class="summary-title">Your Selections</div>${rows.map(r=>`<div class="summary-row"><span>${r.l}</span><span class="summary-val">${r.v}</span></div>`).join('')}`;
 }
@@ -1674,8 +1730,8 @@ function submitForm(){
     artists: S.artists.join(', ')||'—',
     bilingual: S.bilingual===true?('Yes — '+(S.bilingualLang||document.getElementById('bilingualLang')?.value||'—')):'No',
     ceremony_at_venue: S.ceremonyAtVenue===true?('Yes, ceremony help: '+(S.ceremonyHelp?'Yes':'No')):'No',
-    arrival_time: formatTime(S.arrivalTime||document.getElementById('arrivalTime')?.value||''),
-    end_time: formatTime(S.endTime||document.getElementById('endTime')?.value||''),
+    arrival_time: formatTime(S.arrivalTime||''),
+    end_time: formatTime(S.endTime||''),
     fx_selections: S.fxInterested.join(', ')||'None',
     lighting_pkg: S.lightingPkg||'—',
     lighting_addons: S.lightingAddons.join(', ')||'None',
@@ -1702,7 +1758,8 @@ function resetForm(){
   document.getElementById('extendTip').classList.remove('visible');
   document.getElementById('alldayCard').classList.remove('selected');
   const chk=document.getElementById('alldayCheck');chk.style.background='transparent';chk.style.border='1.5px solid var(--rose)';chk.textContent='';
-  ['arrivalTime','endTime','bilingualLang','leadName','leadEmail'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+  ['arrivalHour','arrivalMin','arrivalAmpm','endHour','endMin','endAmpm'].forEach(id=>{const el=document.getElementById(id);if(el)el.selectedIndex=0;});
+  ['bilingualLang','leadName','leadEmail'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
   S.leadName='';S.leadEmail='';
   const cb=document.getElementById('capBtn');if(cb)cb.disabled=true;
   ['btn0','btn1','btn2','btn4','btn5','btn6','btn7','btn7a','btn7b','btn7c','btn7d','btn8','btn9','btn10'].forEach(id=>{const el=document.getElementById(id);if(el)el.disabled=true});
