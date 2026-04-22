@@ -844,25 +844,54 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
       <button class="yn-btn" onclick="setYN('liveMusic',false,this,'btn9')">No</button>
     </div>
     <div class="conditional" id="liveMusicWrap">
-      <div class="allday-card" id="alldayCard" onclick="toggleAllDay()">
-        <div class="allday-badge">Best value · Live Music All Day</div>
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-top:.5rem">
-          <div>
-            <div style="font-family:var(--serif);font-size:20px;font-style:italic;color:var(--burgundy);margin-bottom:6px">All Day Package</div>
-            <div style="font-size:13px;color:var(--text-muted);line-height:1.8">✓ Soloist of your choice — Ceremony<br>✓ Soloist of your choice — Cocktail Hour<br>✓ 3 musicians of your choice — Dancing</div>
-          </div>
-          <div class="allday-check" id="alldayCheck"></div>
+
+      <!-- Where do you want live music? -->
+      <div class="section-label" style="margin-top:.25rem">Where are you picturing live music?</div>
+      <div class="option-list" style="margin-bottom:1.5rem">
+        <div class="option-card list-card" data-val="ceremony-cocktail" onclick="selectLiveMusicWhere(this,'ceremony-cocktail')">
+          <div class="card-name">Ceremony &amp; Cocktail Hour</div>
+          <div class="card-desc">Acoustic sets, strings, soloists, duos, trios &amp; quartets</div>
+        </div>
+        <div class="option-card list-card" data-val="djlive" onclick="selectLiveMusicWhere(this,'djlive')">
+          <div class="card-name">DJ + Live for the Dance Floor</div>
+          <div class="card-desc">Live musicians performing alongside your DJ — sax, violin, horns, full fusion acts</div>
+        </div>
+        <div class="option-card list-card" data-val="both" onclick="selectLiveMusicWhere(this,'both')">
+          <div class="card-name">Both</div>
+          <div class="card-desc">Live music throughout the whole day</div>
         </div>
       </div>
-      <div style="text-align:center;font-size:11px;color:var(--text-muted);margin:.5rem 0 1.25rem;letter-spacing:.1em;text-transform:uppercase">— or build your own —</div>
-      <div class="section-label">Which moments?</div>
-      <div class="moment-tabs" id="momentTabs">
-        <button class="moment-tab" data-moment="Ceremony" onclick="toggleMoment(this)">Ceremony</button>
-        <button class="moment-tab" data-moment="Cocktail Hour" onclick="toggleMoment(this)">Cocktail Hour</button>
-        <button class="moment-tab" data-moment="Dancing / After Party" onclick="toggleMoment(this)">Dancing / After Party</button>
+
+      <!-- Ceremony / Cocktail Hour section -->
+      <div class="conditional" id="cchSection">
+        <div class="allday-card" id="alldayCard" onclick="toggleAllDay()">
+          <div class="allday-badge">Best value · Live Music All Day</div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-top:.5rem">
+            <div>
+              <div style="font-family:var(--serif);font-size:20px;font-style:italic;color:var(--burgundy);margin-bottom:6px">All Day Package</div>
+              <div style="font-size:13px;color:var(--text-muted);line-height:1.8">✓ Soloist of your choice — Ceremony<br>✓ Soloist of your choice — Cocktail Hour<br>✓ 3 musicians of your choice — Dancing</div>
+            </div>
+            <div class="allday-check" id="alldayCheck"></div>
+          </div>
+        </div>
+        <div style="text-align:center;font-size:11px;color:var(--text-muted);margin:.5rem 0 1.25rem;letter-spacing:.1em;text-transform:uppercase">— or build your own —</div>
+        <div class="section-label">Which moments?</div>
+        <div class="moment-tabs" id="momentTabs">
+          <button class="moment-tab" data-moment="Ceremony" onclick="toggleMoment(this)">Ceremony</button>
+          <button class="moment-tab" data-moment="Cocktail Hour" onclick="toggleMoment(this)">Cocktail Hour</button>
+        </div>
+        <div class="tip-box" id="extendTip">💡 <strong>Pro tip:</strong> Choosing live music for both Ceremony and Cocktail Hour? Extending one act across both moments is significantly more cost-effective than booking two separate acts. We'll talk through the best approach on your call.</div>
+        <div class="info-box" style="margin-bottom:1.5rem">Browse styles and vibes below — let us know what resonates and we'll match you with the perfect act for your day. You can pick something specific or just give us a direction.</div>
+        <div id="momentActPanels"></div>
       </div>
-      <div class="tip-box" id="extendTip">💡 <strong>Pro tip:</strong> Choosing live music for both Ceremony and Cocktail Hour? Extending one act across both moments is significantly more cost-effective than booking two separate acts. We'll talk through the best approach on your call.</div>
-      <div id="momentActPanels"></div>
+
+      <!-- DJ + Live section -->
+      <div class="conditional" id="djliveSection">
+        <div class="section-label">DJ + Live for the Dance Floor</div>
+        <div class="step-helper" style="margin-bottom:1.5rem">Our biggest seller — live musicians performing alongside your DJ at peak moments. Select everything that catches your eye.</div>
+        <div class="acts-grid" id="djliveGrid"></div>
+      </div>
+
     </div>
     <div class="btn-row"><button class="btn btn-ghost" onclick="goBack()">← Back</button><button class="btn btn-primary" id="btn9" onclick="advance()" disabled>Continue</button></div>
   </div>
@@ -1005,14 +1034,14 @@ const S={
   bilingual:null,bilingualLang:'',ceremonyAtVenue:null,ceremonyHelp:null,
   arrivalTime:'',endTime:'',
   // FX
-  fxInterested:[],  // tiles selected on S7
-  fxQueue:[],       // ordered list of fx sub-steps to walk through
-  fxQueueIdx:0,
+  fxInterested:[],fxQueue:[],fxQueueIdx:0,
   uplightQty:null,lightingPkg:null,lightingAddons:[],discoBallType:null,sparklerQty:null,
   // Booth
   booth:null,boothCat:null,boothType:null,
   // Live music
-  liveMusic:null,alldayPackage:false,liveMoments:[],momentActs:{},
+  liveMusic:null,liveMusicWhere:null,
+  alldayPackage:false,liveMoments:[],momentActs:{},
+  djliveActs:[],
   blitzElite:null,blitzArtists:[],
 };
 
@@ -1086,89 +1115,102 @@ const STRING_ACTS = [
 ];
 
 // ── SHARED ACT LISTS ──────────────────────────────────────────
-const SOLO_VOCALS = [
-  {val:'Piano Songbird',       desc:'Piano &amp; Vocals — female',           ytId:'GezwqYHkcHo', price:''},
-  {val:'The Piano Man',        desc:'Piano &amp; Vocals — male',             ytId:'YDgyPCtC2Vc', price:''},
-  {val:'Groove Strummer',      desc:'Guitar &amp; Vocals — male',            ytId:'jKXYlOY8mgc', price:''},
-  {val:'Melody Road',          desc:'Guitar &amp; Vocals — female',          ytId:'QKOsXbo0HOw', price:''},
+
+// SOLO — grouped by instrument; descriptions carry vocal/instrumental context
+const SOLO_KEYS = [
+  {val:'Piano Songbird', desc:'Piano &amp; Vocals — female vocalist',                     ytId:'GezwqYHkcHo', price:''},
+  {val:'The Piano Man',  desc:'Piano &amp; Vocals — male vocalist',                       ytId:'YDgyPCtC2Vc', price:''},
+  {val:'Solo Piano',     desc:'Solo piano — instrumental, elegant &amp; versatile',       ytId:'RBQn2_yrSSA', price:''},
 ];
-const SOLO_INSTRUMENTAL = [
-  {val:'Solo Piano',           desc:'Solo piano — elegant and versatile',    ytId:'RBQn2_yrSSA', price:''},
-  {val:'Spanish Guitar',       desc:'Classical Spanish guitar',              ytId:'uTtM8txFxmY', price:''},
-  {val:'Solo Harp',            desc:'Timeless and romantic',                 ytId:'zYfnSTbN-Ng', price:''},
-  {val:'Sunset Violin',        desc:'Acoustic violin — warm and intimate',   ytId:'5_sapmX3GfY', price:''},
-  {val:'Electric Violin',      desc:'Contemporary electric violin',          ytId:'Q_A7iyCihPg', price:''},
+const SOLO_GUITAR = [
+  {val:'Groove Strummer',desc:'Guitar &amp; Vocals — male vocalist',                      ytId:'jKXYlOY8mgc', price:''},
+  {val:'Melody Road',    desc:'Guitar &amp; Vocals — female vocalist',                    ytId:'QKOsXbo0HOw', price:''},
+  {val:'Spanish Guitar', desc:'Classical Spanish guitar — instrumental',                  ytId:'uTtM8txFxmY', price:''},
+];
+const SOLO_STRINGS_HARP = [
+  {val:'Sunset Violin',  desc:'Acoustic violin — instrumental, warm &amp; intimate',      ytId:'5_sapmX3GfY', price:''},
+  {val:'Electric Violin',desc:'Electric violin — instrumental, contemporary &amp; bold',  ytId:'Q_A7iyCihPg', price:''},
+  {val:'Solo Harp',      desc:'Solo harp — instrumental, timeless &amp; romantic',        ytId:'zYfnSTbN-Ng', price:''},
 ];
 
 const DUO_VOCALS = [
-  {val:'Bossa Groove Duo',           desc:'Vocal + Guitar — bossa &amp; groove',       ytId:'vKlONlN7DXs', price:''},
-  {val:'Château Jazz',               desc:'Vocal + Electric Guitar — jazz vibes',       ytId:'ivBURWyGHMw', price:''},
-  {val:'Havana Duo',                 desc:'Vocal + Guitar — latin &amp; tropical',      ytId:'GuxOJgThk_g', price:''},
-  {val:'The Roams Duo — Guitar & Sax',  desc:'Guitar &amp; Saxophone',                     ytId:'BuIi4VdL4lA', price:''},
-  {val:'The Roams Duo — Guitar & Bass', desc:'Guitar &amp; Bass',                           ytId:'8S1NuUbKxRo', price:''},
-  {val:'Riviera Duo',                desc:'Harp Vocalist + Percussion',                 ytId:'l9gs_6jLiNA', price:''},
+  {val:'Bossa Groove Duo',              desc:'Vocal + Guitar — bossa &amp; groove',   ytId:'vKlONlN7DXs', price:''},
+  {val:'Château Jazz',                  desc:'Vocal + Electric Guitar — jazz vibes',  ytId:'ivBURWyGHMw', price:''},
+  {val:'Havana Duo',                    desc:'Vocal + Guitar — latin &amp; tropical', ytId:'GuxOJgThk_g', price:''},
+  {val:'The Roams Duo — Guitar & Sax',  desc:'Guitar &amp; Saxophone',                ytId:'BuIi4VdL4lA', price:''},
+  {val:'The Roams Duo — Guitar & Bass', desc:'Guitar &amp; Bass',                     ytId:'8S1NuUbKxRo', price:''},
+  {val:'Riviera Duo',                   desc:'Harp Vocalist + Percussion',             ytId:'l9gs_6jLiNA', price:''},
 ];
 const DUO_INSTRUMENTAL = [
-  {val:'Velvet Jazz Duo',      desc:'Bass + Guitar',                         ytId:'ASJKXct3b6g', price:''},
-  {val:'Cocktail Duo',         desc:'Piano + Saxophone',                     ytId:'Eg29RBkIP5Y', price:''},
-  {val:'Elegant Harmony',      desc:'Saxophone &amp; Cello',                 ytId:'Md2E_dq7Xbk', price:''},
-  {val:'Sunset Strings',       desc:'Violin &amp; Guitar',                   ytId:'mbOUHLBAa84', price:''},
-  {val:'Guitar + Sax',         desc:'Guitar &amp; Saxophone',                ytId:'VhqJU2cTMZc', price:''},
+  {val:'Velvet Jazz Duo', desc:'Bass + Guitar',              ytId:'ASJKXct3b6g', price:''},
+  {val:'Cocktail Duo',    desc:'Piano + Saxophone',          ytId:'Eg29RBkIP5Y', price:''},
+  {val:'Elegant Harmony', desc:'Saxophone &amp; Cello',      ytId:'Md2E_dq7Xbk', price:''},
+  {val:'Sunset Strings',  desc:'Violin &amp; Guitar',        ytId:'mbOUHLBAa84', price:''},
+  {val:'Guitar + Sax',    desc:'Guitar &amp; Saxophone',     ytId:'VhqJU2cTMZc', price:''},
 ];
 
 const TRIO_VOCALS = [
-  {val:'Ritmo Del Sol',        desc:'Bass, Guitar &amp; Vocal + Percussion', ytId:'B8hxp9bzSyA', price:''},
-  {val:'Dusty Roads',          desc:'Bass, Guitar &amp; Vocal + Percussion', ytId:'4wV7O-Nlgpk', price:''},
-  {val:'Island Pulse',         desc:'Bass, Guitar &amp; Vocal + Cajón',      ytId:'Bc51CE5xRKs', price:''},
-  {val:'Route 66 Trio',        desc:'Bass, Guitar &amp; Vocal + Drums',      ytId:'2NRTkoW2YoY', price:''},
-  {val:'Wave Riders',          desc:'Bass, Guitar &amp; Vocal + Percussion', ytId:'JGTmudXINyo', price:''},
+  {val:'Ritmo Del Sol',  desc:'Bass, Guitar &amp; Vocal + Percussion', ytId:'B8hxp9bzSyA', price:''},
+  {val:'Dusty Roads',    desc:'Bass, Guitar &amp; Vocal + Percussion', ytId:'4wV7O-Nlgpk', price:''},
+  {val:'Island Pulse',   desc:'Bass, Guitar &amp; Vocal + Cajón',      ytId:'Bc51CE5xRKs', price:''},
+  {val:'Route 66 Trio',  desc:'Bass, Guitar &amp; Vocal + Drums',      ytId:'2NRTkoW2YoY', price:''},
+  {val:'Wave Riders',    desc:'Bass, Guitar &amp; Vocal + Percussion', ytId:'JGTmudXINyo', price:''},
 ];
 const TRIO_INSTRUMENTAL = [
-  {val:'Velvet Jazz (Trio)',    desc:'Bass, Guitar + Saxophone',              ytId:'JJbmTlNSE2A', price:''},
-  {val:'Latin Cuban Trio',     desc:'Bass + Guitar + Guitar',                ytId:'-9fASC3u8tc', price:''},
-  {val:'Italian Jazz Trio',    desc:'Bass + Guitar + Guitar',                ytId:'Ihivl8u9x68', price:''},
+  {val:'Velvet Jazz (Trio)', desc:'Bass, Guitar + Saxophone', ytId:'JJbmTlNSE2A', price:''},
+  {val:'Latin Cuban Trio',   desc:'Bass + Guitar + Guitar',   ytId:'-9fASC3u8tc', price:''},
+  {val:'Italian Jazz Trio',  desc:'Bass + Guitar + Guitar',   ytId:'Ihivl8u9x68', price:''},
 ];
 
 const QUARTET_ACTS = [
-  {val:'Italian Quartet',      desc:'Bass, Guitar, Guitar + Vocal',               ytId:'ikbLgV32uUM', price:''},
-  {val:'Southern Comfort',     desc:'Bass, Drums, Guitar + Vocal',                ytId:'PtEJbBSkfWk', price:''},
-  {val:'De-La-Jazz',           desc:'Drums, Keyboard, Bass + Vocal',              ytId:'APdVYsOPEqE', price:''},
-  {val:'The Roams',            desc:'Bass, Guitar &amp; Vocal, Sax + Percussion', ytId:'DFbqFbzFyLA', price:''},
-  {val:'Velvet Jazz',          desc:'Bass, Guitar, Saxophone + Keyboard',         ytId:'3D_tnBtYiQ0', price:''},
+  {val:'Italian Quartet',  desc:'Bass, Guitar, Guitar + Vocal',               ytId:'ikbLgV32uUM', price:''},
+  {val:'Southern Comfort', desc:'Bass, Drums, Guitar + Vocal',                ytId:'PtEJbBSkfWk', price:''},
+  {val:'De-La-Jazz',       desc:'Drums, Keyboard, Bass + Vocal',              ytId:'APdVYsOPEqE', price:''},
+  {val:'The Roams',        desc:'Bass, Guitar &amp; Vocal, Sax + Percussion', ytId:'DFbqFbzFyLA', price:''},
+  {val:'Velvet Jazz',      desc:'Bass, Guitar, Saxophone + Keyboard',         ytId:'3D_tnBtYiQ0', price:''},
 ];
 
-// Acts with vocal/instrumental split — used in renderMomentPanels
+const DJLIVE_ACTS = [
+  {val:'Solo Violinist',                                    desc:'Electric violin live alongside your DJ',                                        ytId:'Q_A7iyCihPg', price:''},
+  {val:'DJ + Live Saxophone',                               desc:'Smooth, soulful sax over your DJ set — crowd favourite',                        ytId:'z5tOQMKAOiY', price:''},
+  {val:'Blitz Fusion Small — Percussion, Sax &amp; Violin', desc:'Our signature 3-piece live act with DJ — most popular dancing add-on',          ytId:'ueKNsHkR54g', price:''},
+  {val:'DJ + Live 3 Piece Horn',                            desc:'Full horn section bringing brass energy to your dance floor',                   ytId:'nNZ3Ae8wUfI', price:''},
+  {val:'DJ + Live Latin 3 Piece',                           desc:'Latin rhythm section — percussion, brass, and feel-good energy',               ytId:'OurkRK4UnG4', price:''},
+  {val:'Blitz Fusion Large — Percussion, 3 Horns &amp; 3 Violins', desc:'Maximum impact — full large ensemble with DJ for an unforgettable party',ytId:'H7DWR8fz9Kk', price:''},
+];
+
+// Split acts structure — solo uses instrument groups, duo/trio use vocal/instrumental
 const SPLIT_ACTS = {
-  solo:  { vocals: SOLO_VOCALS,  instrumental: SOLO_INSTRUMENTAL },
-  duo:   { vocals: DUO_VOCALS,   instrumental: DUO_INSTRUMENTAL },
-  trio:  { vocals: TRIO_VOCALS,  instrumental: TRIO_INSTRUMENTAL },
+  solo: {
+    type: 'instrument',
+    groups: [
+      {label:'Keys',             acts: SOLO_KEYS},
+      {label:'Guitar',           acts: SOLO_GUITAR},
+      {label:'Strings &amp; Harp', acts: SOLO_STRINGS_HARP},
+    ]
+  },
+  duo:  {type:'vocal', vocals: DUO_VOCALS,  instrumental: DUO_INSTRUMENTAL},
+  trio: {type:'vocal', vocals: TRIO_VOCALS, instrumental: TRIO_INSTRUMENTAL},
 };
 
 // ── MOMENT ACTS ───────────────────────────────────────────────
 const MOMENT_ACTS={
   'Ceremony':[
-    {id:'strings',  label:'Strings',               acts: STRING_ACTS, split: false},
-    {id:'solo',     label:'Solo',                   acts: null,        split: true},
-    {id:'duo',      label:'Duo',                    acts: null,        split: true},
-    {id:'trio',     label:'Trio',                   acts: null,        split: true},
-    {id:'quartet',  label:'Quartet', acts: QUARTET_ACTS,split: false},
+    {id:'strings', label:'Strings', acts: STRING_ACTS,  split: false},
+    {id:'solo',    label:'Solo',    acts: null,          split: true},
+    {id:'duo',     label:'Duo',     acts: null,          split: true},
+    {id:'trio',    label:'Trio',    acts: null,          split: true},
+    {id:'quartet', label:'Quartet', acts: QUARTET_ACTS,  split: false},
   ],
   'Cocktail Hour':[
-    {id:'strings',  label:'Strings',               acts: STRING_ACTS, split: false},
-    {id:'solo',     label:'Solo',                   acts: null,        split: true},
-    {id:'duo',      label:'Duo',                    acts: null,        split: true},
-    {id:'trio',     label:'Trio',                   acts: null,        split: true},
-    {id:'quartet',  label:'Quartet', acts: QUARTET_ACTS,split: false},
+    {id:'strings', label:'Strings', acts: STRING_ACTS,  split: false},
+    {id:'solo',    label:'Solo',    acts: null,          split: true},
+    {id:'duo',     label:'Duo',     acts: null,          split: true},
+    {id:'trio',    label:'Trio',    acts: null,          split: true},
+    {id:'quartet', label:'Quartet', acts: QUARTET_ACTS,  split: false},
   ],
-  'Dancing / After Party':[
-    {id:'djlive',label:'DJ + Live',split:false,acts:[
-      {val:'Solo Violinist',desc:'Electric violin performing live alongside your DJ',ytId:'Q_A7iyCihPg',price:''},
-      {val:'DJ + Live Saxophone',desc:'Smooth, soulful sax over your DJ set — crowd favourite',ytId:'z5tOQMKAOiY',price:''},
-      {val:'Blitz Fusion Small — Percussion, Sax &amp; Violin',desc:'Our signature 3-piece live act with DJ — most popular dancing add-on',ytId:'ueKNsHkR54g',price:''},
-      {val:'DJ + Live 3 Piece Horn',desc:'Full horn section bringing brass energy to your dance floor',ytId:'nNZ3Ae8wUfI',price:''},
-      {val:'DJ + Live Latin 3 Piece',desc:'Latin rhythm section — percussion, brass, and feel-good energy',ytId:'OurkRK4UnG4',price:''},
-      {val:'Blitz Fusion Large — Percussion, 3 Horns &amp; 3 Violins',desc:'Maximum impact — full large ensemble with DJ for an unforgettable party',ytId:'H7DWR8fz9Kk',price:''},
-    ]},
+  'DJ + Live':[
+    {id:'djlive',  label:'DJ + Live', split: false, acts: DJLIVE_ACTS},
   ],
 };
 let momentTypeSel={};
@@ -1443,6 +1485,42 @@ function selBoothType(el,sel){
   document.getElementById('btn8').disabled=false;
 }
 
+// LIVE MUSIC WHERE ROUTING
+function selectLiveMusicWhere(el,val){
+  document.querySelectorAll('#liveMusicWrap .option-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  S.liveMusicWhere=val;
+  const showCCH = val==='ceremony-cocktail'||val==='both';
+  const showDJ  = val==='djlive'||val==='both';
+  document.getElementById('cchSection').classList.toggle('visible', showCCH);
+  document.getElementById('djliveSection').classList.toggle('visible', showDJ);
+  if(showDJ) renderDJLiveGrid();
+  document.getElementById('btn9').disabled=false;
+}
+
+function renderDJLiveGrid(){
+  const grid=document.getElementById('djliveGrid');
+  if(!grid)return;
+  grid.innerHTML=DJLIVE_ACTS.map(act=>{
+    const isSel=S.djliveActs.includes(act.val);
+    return`<div class="act-card${isSel?' selected':''}" data-val="${act.val}" onclick="toggleDJLiveAct(this,'${act.val.replace(/'/g,"\\'")}')">
+      <div class="act-thumb">
+        <img src="${ytThumb(act.ytId)}" alt="${act.val}" style="width:100%;height:100%;object-fit:cover;display:block">
+      </div>
+      <div class="act-body">
+        <div class="act-name">${act.val}</div>
+        <div class="act-desc">${act.desc}</div>
+        <button onclick="event.stopPropagation();openModal('${act.ytId}')" style="display:inline-block;margin-top:8px;font-size:12px;color:var(--burgundy);font-weight:500;text-decoration:underline;text-underline-offset:2px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)">▶ Watch video</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleDJLiveAct(el,val){
+  el.classList.toggle('selected');
+  S.djliveActs=S.djliveActs.includes(val)?S.djliveActs.filter(v=>v!==val):[...S.djliveActs,val];
+}
+
 // ALL DAY
 function toggleAllDay(){
   S.alldayPackage=!S.alldayPackage;
@@ -1462,12 +1540,12 @@ function toggleMoment(btn){
   S.liveMoments=S.liveMoments.includes(m)?S.liveMoments.filter(x=>x!==m):[...S.liveMoments,m];
   document.getElementById('extendTip').classList.toggle('visible',S.liveMoments.includes('Ceremony')&&S.liveMoments.includes('Cocktail Hour'));
   renderMomentPanels();
-  document.getElementById('btn9').disabled=S.liveMoments.length===0&&!S.alldayPackage;
+  document.getElementById('btn9').disabled=S.liveMoments.length===0&&!S.alldayPackage&&!S.liveMusicWhere;
 }
 
 function renderMomentPanels(){
   const wrap=document.getElementById('momentActPanels');
-  const active=['Ceremony','Cocktail Hour','Dancing / After Party'].filter(m=>S.liveMoments.includes(m));
+  const active=['Ceremony','Cocktail Hour'].filter(m=>S.liveMoments.includes(m));
   if(!active.length){wrap.innerHTML='';return}
   wrap.innerHTML=active.map(moment=>{
     const groups=MOMENT_ACTS[moment]||[];
@@ -1477,18 +1555,25 @@ function renderMomentPanels(){
 
     let cardsHtml='';
     if(selGroup?.split && SPLIT_ACTS[selGroup.id]){
-      // Render With Vocals section
-      const vocalCards=SPLIT_ACTS[selGroup.id].vocals.map(act=>actCardHtml(moment,act)).join('');
-      // Render Instrumental section
-      const instrCards=SPLIT_ACTS[selGroup.id].instrumental.map(act=>actCardHtml(moment,act)).join('');
-      cardsHtml=`
-        <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);font-weight:500;margin:1rem 0 .75rem;display:flex;align-items:center;gap:8px">With Vocals <span style="flex:1;height:1px;background:var(--border);display:block"></span></div>
-        <div class="acts-grid">${vocalCards}</div>
-        <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);font-weight:500;margin:1.5rem 0 .75rem;display:flex;align-items:center;gap:8px">Instrumental <span style="flex:1;height:1px;background:var(--border);display:block"></span></div>
-        <div class="acts-grid">${instrCards}</div>`;
+      const splitData=SPLIT_ACTS[selGroup.id];
+      if(splitData.type==='instrument'){
+        // Solo — three instrument sub-groups
+        cardsHtml=splitData.groups.map(g=>`
+          <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);font-weight:500;margin:1rem 0 .75rem;display:flex;align-items:center;gap:8px">${g.label}<span style="flex:1;height:1px;background:var(--border);display:block"></span></div>
+          <div class="acts-grid">${g.acts.map(act=>actCardHtml(moment,act)).join('')}</div>
+        `).join('');
+      } else {
+        // Duo/Trio — With Vocals / Instrumental
+        const vocalCards=splitData.vocals.map(act=>actCardHtml(moment,act)).join('');
+        const instrCards=splitData.instrumental.map(act=>actCardHtml(moment,act)).join('');
+        cardsHtml=`
+          <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);font-weight:500;margin:1rem 0 .75rem;display:flex;align-items:center;gap:8px">With Vocals<span style="flex:1;height:1px;background:var(--border);display:block"></span></div>
+          <div class="acts-grid">${vocalCards}</div>
+          <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);font-weight:500;margin:1.5rem 0 .75rem;display:flex;align-items:center;gap:8px">Instrumental<span style="flex:1;height:1px;background:var(--border);display:block"></span></div>
+          <div class="acts-grid">${instrCards}</div>`;
+      }
     } else {
-      const acts=selGroup?.acts||[];
-      cardsHtml=`<div class="acts-grid">${acts.map(act=>actCardHtml(moment,act)).join('')}</div>`;
+      cardsHtml=`<div class="acts-grid">${(selGroup?.acts||[]).map(act=>actCardHtml(moment,act)).join('')}</div>`;
     }
 
     return`<div style="margin-bottom:2rem">
@@ -1499,10 +1584,12 @@ function renderMomentPanels(){
   }).join('');
 }
 
+// Multi-select act card — toggling, not single-pick
 function actCardHtml(moment,act){
-  const isSel=S.momentActs[moment]===act.val;
+  const selList=S.momentActs[moment]||[];
+  const isSel=Array.isArray(selList)?selList.includes(act.val):selList===act.val;
   const priceBadge=act.price?`<div class="act-price">${act.price}</div>`:'';
-  return`<div class="act-card${isSel?' selected':''}" data-val="${act.val}" onclick="selectMomentAct('${moment}','${act.val}',this)">
+  return`<div class="act-card${isSel?' selected':''}" data-val="${act.val}" onclick="toggleMomentAct('${moment}','${act.val.replace(/'/g,"\\'")}',this)">
     <div class="act-thumb">
       <img src="${ytThumb(act.ytId)}" alt="${act.val}" style="width:100%;height:100%;object-fit:cover;display:block">
     </div>
@@ -1520,10 +1607,12 @@ function selectActType(moment,typeId,btn){
   btn.closest('.moment-tabs').querySelectorAll('.moment-tab').forEach(t=>t.classList.remove('selected'));
   btn.classList.add('selected');renderMomentPanels();
 }
-function selectMomentAct(moment,val,el){
-  S.momentActs[moment]=val;
-  el.closest('.acts-grid').querySelectorAll('.act-card').forEach(c=>c.classList.remove('selected'));
-  el.classList.add('selected');
+function toggleMomentAct(moment,val,el){
+  if(!S.momentActs[moment]) S.momentActs[moment]=[];
+  if(!Array.isArray(S.momentActs[moment])) S.momentActs[moment]=[S.momentActs[moment]];
+  const idx=S.momentActs[moment].indexOf(val);
+  if(idx>-1){S.momentActs[moment].splice(idx,1);el.classList.remove('selected');}
+  else{S.momentActs[moment].push(val);el.classList.add('selected');}
 }
 
 // SUMMARY
@@ -1553,8 +1642,17 @@ function buildSummary(){
   if(S.booth)row('Photo / 360 Booth',`${S.boothCat||''} — ${S.boothType||'TBD'}`);
   if(S.liveMusic===false)row('Live music','Not interested');
   if(S.liveMusic){
-    if(S.alldayPackage)row('Live music','All Day Package — Solo Violin (Ceremony) · Solo Sax (Cocktail Hour) · Sax, Perc & Violin (Dancing)');
-    else{row('Live music moments',S.liveMoments.join(', ')||'TBD');const a=Object.entries(S.momentActs).map(([m,v])=>`${m}: ${v}`).join(' · ');if(a)row('Act selections',a)}
+    if(S.liveMusicWhere==='ceremony-cocktail'||S.liveMusicWhere==='both'){
+      if(S.alldayPackage)row('Live music','All Day Package');
+      else{
+        row('Live music moments',S.liveMoments.join(', ')||'TBD');
+        const a=Object.entries(S.momentActs).map(([m,v])=>`${m}: ${Array.isArray(v)?v.join(', '):v}`).join(' · ');
+        if(a)row('Act selections',a);
+      }
+    }
+    if(S.liveMusicWhere==='djlive'||S.liveMusicWhere==='both'){
+      row('DJ + Live',S.djliveActs.join(', ')||'TBD');
+    }
     if(S.blitzElite&&S.blitzArtists.length)row('Blitz Elite',S.blitzArtists.join(', '));
   }
   document.getElementById('summaryCard').innerHTML=`<div class="summary-title">Your Selections</div>${rows.map(r=>`<div class="summary-row"><span>${r.l}</span><span class="summary-val">${r.v}</span></div>`).join('')}`;
@@ -1584,7 +1682,8 @@ function submitForm(){
     disco_ball: S.discoBallType||'—',
     sparklers: S.sparklerQty||'—',
     booth_type: S.booth?(S.boothType||'Selected, no type chosen'):'No',
-    live_music: S.liveMusic?(S.alldayPackage?'All Day Package':Object.entries(S.momentActs).map(([m,a])=>m+': '+a).join(' | ')):'No',
+    live_music: S.liveMusic?(S.alldayPackage?'All Day Package':Object.entries(S.momentActs).map(([m,a])=>m+': '+(Array.isArray(a)?a.join(', '):a)).join(' | ')):'No',
+    djlive_acts: S.djliveActs.join(', ')||'None',
     blitz_elite: S.blitzElite?(S.blitzArtists.join(', ')||'Yes'):'No',
   };
   emailjs.send('service_l3fr6sg','template_94qozag',params).catch(e=>console.warn('EmailJS:',e));
@@ -1593,7 +1692,7 @@ function submitForm(){
 
 // RESET
 function resetForm(){
-  Object.assign(S,{leadName:'',leadEmail:'',arrivalTime:'',endTime:'',musicVibe:[],mcStyle:[],premiumDJ:null,genres:[],artists:[],bilingual:null,bilingualLang:'',ceremonyAtVenue:null,ceremonyHelp:null,fxInterested:[],fxQueue:[],fxQueueIdx:0,uplightQty:null,lightingPkg:null,lightingAddons:[],discoBallType:null,sparklerQty:null,booth:null,boothCat:null,boothType:null,liveMusic:null,alldayPackage:false,liveMoments:[],momentActs:{},blitzElite:null,blitzArtists:[]});
+  Object.assign(S,{leadName:'',leadEmail:'',arrivalTime:'',endTime:'',musicVibe:[],mcStyle:[],premiumDJ:null,genres:[],artists:[],bilingual:null,bilingualLang:'',ceremonyAtVenue:null,ceremonyHelp:null,fxInterested:[],fxQueue:[],fxQueueIdx:0,uplightQty:null,lightingPkg:null,lightingAddons:[],discoBallType:null,sparklerQty:null,booth:null,boothCat:null,boothType:null,liveMusic:null,liveMusicWhere:null,alldayPackage:false,liveMoments:[],momentActs:{},djliveActs:[],blitzElite:null,blitzArtists:[]});
   momentTypeSel={};
   document.querySelectorAll('.option-card,.big-photo-card,.act-card,.artist-card,.qty-btn,.tag-card,.fx-tile,.moment-tab').forEach(c=>c.classList.remove('selected'));
   document.querySelectorAll('.yn-btn').forEach(b=>b.classList.remove('selected'));
