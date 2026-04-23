@@ -1743,12 +1743,15 @@ function submitForm(){
     blitz_elite: S.blitzElite?(S.blitzArtists.join(', ')||'Yes'):'No',
   };
   emailjs.send('service_l3fr6sg','template_94qozag',params).catch(e=>console.warn('EmailJS:',e));
-  if(typeof gtag!=='undefined') gtag('event','form_submit',{event_category:'match_form',client_name:S.leadName});
+  if(typeof gtag!=='undefined'){
+    const seconds=S._startTime?Math.round((Date.now()-S._startTime)/1000):null;
+    gtag('event','form_submit',{event_category:'match_form',client_name:S.leadName,time_to_complete_seconds:seconds});
+  }
 }
 
 // RESET
 function resetForm(){
-  Object.assign(S,{leadName:'',leadEmail:'',arrivalTime:'',endTime:'',musicVibe:[],mcStyle:[],premiumDJ:null,genres:[],artists:[],bilingual:null,bilingualLang:'',ceremonyAtVenue:null,ceremonyHelp:null,fxInterested:[],fxQueue:[],fxQueueIdx:0,uplightQty:null,lightingPkg:null,lightingAddons:[],discoBallType:null,sparklerQty:null,booth:null,boothCat:null,boothType:null,liveMusic:null,liveMusicWhere:null,alldayPackage:false,liveMoments:[],momentActs:{},djliveActs:[],blitzElite:null,blitzArtists:[]});
+  Object.assign(S,{leadName:'',leadEmail:'',arrivalTime:'',endTime:'',_startTime:null,musicVibe:[],mcStyle:[],premiumDJ:null,genres:[],artists:[],bilingual:null,bilingualLang:'',ceremonyAtVenue:null,ceremonyHelp:null,fxInterested:[],fxQueue:[],fxQueueIdx:0,uplightQty:null,lightingPkg:null,lightingAddons:[],discoBallType:null,sparklerQty:null,booth:null,boothCat:null,boothType:null,liveMusic:null,liveMusicWhere:null,alldayPackage:false,liveMoments:[],momentActs:{},djliveActs:[],blitzElite:null,blitzArtists:[]});
   momentTypeSel={};
   document.querySelectorAll('.option-card,.big-photo-card,.act-card,.artist-card,.qty-btn,.tag-card,.fx-tile,.moment-tab').forEach(c=>c.classList.remove('selected'));
   document.querySelectorAll('.yn-btn').forEach(b=>b.classList.remove('selected'));
@@ -1778,6 +1781,9 @@ function goToCapture(){
   const cap=document.getElementById('wsCap');
   if(ws2) ws2.classList.remove('active');
   if(cap) cap.classList.add('active');
+  // form_start = clicked "Find my match" — expressed genuine intent
+  if(typeof gtag!=='undefined') gtag('event','form_start',{event_category:'match_form'});
+  if(!S._startTime) S._startTime=Date.now();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function checkCapture(){
@@ -1793,6 +1799,8 @@ function goToWelcome2(){
   const ws2=document.getElementById('ws2');
   if(ws1) ws1.classList.remove('active');
   if(ws2) ws2.classList.add('active');
+  // form_view = clicked "Next" on page 1 — saw the form intent page
+  if(typeof gtag!=='undefined') gtag('event','form_view',{event_category:'match_form'});
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function goToWelcome1(){
