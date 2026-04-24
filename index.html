@@ -412,13 +412,20 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
       style="width:100%;height:200px;object-fit:cover;object-position:center 30%;border-radius:var(--r);display:block;margin-bottom:2rem" alt="Second Song">
 
     <!-- Fields -->
-    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:1.75rem">
+    <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:1.75rem">
       <div>
-        <label style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);font-weight:500;display:block;margin-bottom:8px">Your name</label>
-        <input class="form-input" type="text" id="leadName"
-          placeholder="e.g. Sarah &amp; James"
-          oninput="checkCapture()"
-          style="font-size:16px;padding:16px 18px">
+        <label style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);font-weight:500;display:block;margin-bottom:8px">Partner 1</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <input class="form-input" type="text" id="p1First" placeholder="First name" oninput="checkCapture()" style="font-size:16px;padding:16px 18px">
+          <input class="form-input" type="text" id="p1Last"  placeholder="Last name"  oninput="checkCapture()" style="font-size:16px;padding:16px 18px">
+        </div>
+      </div>
+      <div>
+        <label style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);font-weight:500;display:block;margin-bottom:8px">Partner 2</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <input class="form-input" type="text" id="p2First" placeholder="First name" oninput="checkCapture()" style="font-size:16px;padding:16px 18px">
+          <input class="form-input" type="text" id="p2Last"  placeholder="Last name"  oninput="checkCapture()" style="font-size:16px;padding:16px 18px">
+        </div>
       </div>
       <div>
         <label style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);font-weight:500;display:block;margin-bottom:8px">Email address</label>
@@ -617,7 +624,7 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
     <div class="step-helper">Select everything that catches your eye — we'll walk through each one. Skip if none apply.</div>
     <div class="fx-tile-grid">
       <div class="fx-tile" data-val="uplights" onclick="togFxTile(this)">
-        <img src="https://static.wixstatic.com/media/feee51_cc54abf1211741ed8216b8eb01fd7c77~mv2_d_2000_1333_s_2.jpg" alt="LED Up Lights">
+        <img src="https://static.wixstatic.com/media/aefb83_7218ad6505bb4934be9e802a21469faa~mv2.png" alt="LED Up Lights">
         <div class="fx-tile-body"><div class="fx-tile-name">LED Up Lights</div><div class="fx-tile-desc">Wash venue walls in color</div></div>
       </div>
       <div class="fx-tile" data-val="dancelights" onclick="togFxTile(this)">
@@ -1762,7 +1769,7 @@ function resetForm(){
   document.getElementById('alldayCard').classList.remove('selected');
   const chk=document.getElementById('alldayCheck');chk.style.background='transparent';chk.style.border='1.5px solid var(--rose)';chk.textContent='';
   ['arrivalHour','arrivalMin','arrivalAmpm','endHour','endMin','endAmpm'].forEach(id=>{const el=document.getElementById(id);if(el)el.selectedIndex=0;});
-  ['bilingualLang','leadName','leadEmail'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+  ['p1First','p1Last','p2First','p2Last','bilingualLang','leadEmail'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
   S.leadName='';S.leadEmail='';
   const cb=document.getElementById('capBtn');if(cb)cb.disabled=true;
   ['btn0','btn1','btn2','btn4','btn5','btn6','btn7','btn7a','btn7b','btn7c','btn7d','btn8','btn9','btn10'].forEach(id=>{const el=document.getElementById(id);if(el)el.disabled=true});
@@ -1787,9 +1794,12 @@ function goToCapture(){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function checkCapture(){
-  const name=document.getElementById('leadName').value.trim();
+  const p1f=document.getElementById('p1First').value.trim();
+  const p1l=document.getElementById('p1Last').value.trim();
+  const p2f=document.getElementById('p2First').value.trim();
+  const p2l=document.getElementById('p2Last').value.trim();
   const email=document.getElementById('leadEmail').value.trim();
-  const valid=name.length>0&&/^[^@]+@[^@]+\.[^@]+$/.test(email);
+  const valid=p1f&&p1l&&p2f&&p2l&&/^[^@]+@[^@]+\.[^@]+$/.test(email);
   const btn=document.getElementById('capBtn');
   btn.disabled=!valid;
   btn.style.opacity=valid?'1':'0.35';
@@ -1811,7 +1821,11 @@ function goToWelcome1(){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function startForm(){
-  S.leadName=document.getElementById('leadName').value.trim();
+  const p1f=document.getElementById('p1First').value.trim();
+  const p1l=document.getElementById('p1Last').value.trim();
+  const p2f=document.getElementById('p2First').value.trim();
+  const p2l=document.getElementById('p2Last').value.trim();
+  S.leadName=`${p1f} ${p1l} & ${p2f} ${p2l}`;
   S.leadEmail=document.getElementById('leadEmail').value.trim();
   if(typeof gtag!=='undefined') gtag('event','lead_captured',{event_category:'match_form',client_name:S.leadName});
   const ws1=document.getElementById('ws1');
