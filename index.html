@@ -1315,7 +1315,7 @@ function getNextStepId(cur){
   if(cur==='step7')return 'step8';
   if(['step7a','step7b','step7c','step7d'].includes(cur))return nextFxStepId();
   if(cur==='step8')return 'step9';
-  if(cur==='step9')return 'step10';
+  if(cur==='step9')return S.liveMusic===false?'step11':'step10';
   if(cur==='step10')return 'step11';
   return 'step11';
 }
