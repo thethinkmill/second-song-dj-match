@@ -892,18 +892,25 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
       <!-- Where do you want live music? -->
       <div class="section-label" style="margin-top:.25rem">Where are you picturing live music?</div>
       <div class="option-list" style="margin-bottom:1.5rem">
-        <div class="option-card list-card" data-val="ceremony-cocktail" onclick="selectLiveMusicWhere(this,'ceremony-cocktail')">
-          <div class="card-name">Ceremony &amp; Cocktail Hour</div>
-          <div class="card-desc">Acoustic sets, strings, soloists, duos, trios &amp; quartets</div>
-        </div>
         <div class="option-card list-card" data-val="djlive" onclick="selectLiveMusicWhere(this,'djlive')">
           <div class="card-name">DJ + Live for the Dance Floor</div>
           <div class="card-desc">Live musicians performing alongside your DJ — sax, violin, horns, full fusion acts</div>
+        </div>
+        <div class="option-card list-card" data-val="ceremony-cocktail" onclick="selectLiveMusicWhere(this,'ceremony-cocktail')">
+          <div class="card-name">Ceremony &amp; Cocktail Hour</div>
+          <div class="card-desc">Acoustic sets, strings, soloists, duos, trios &amp; quartets</div>
         </div>
         <div class="option-card list-card" data-val="both" onclick="selectLiveMusicWhere(this,'both')">
           <div class="card-name">Both</div>
           <div class="card-desc">Live music throughout the whole day</div>
         </div>
+      </div>
+
+      <!-- DJ + Live section -->
+      <div class="conditional" id="djliveSection">
+        <div class="section-label">DJ + Live for the Dance Floor</div>
+        <div class="step-helper" style="margin-bottom:1.5rem">Our biggest seller — live musicians performing alongside your DJ at peak moments. Select everything that catches your eye.</div>
+        <div class="acts-grid" id="djliveGrid"></div>
       </div>
 
       <!-- Ceremony / Cocktail Hour section -->
@@ -917,13 +924,6 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
         <div class="tip-box" id="extendTip">💡 <strong>Pro tip:</strong> Choosing live music for both Ceremony and Cocktail Hour? Extending one act across both moments is significantly more cost-effective than booking two separate acts. We'll talk through the best approach on your call.</div>
         <div class="info-box" style="margin-bottom:1.5rem">Browse styles and vibes below — let us know what resonates and we'll match you with the perfect act for your day. You can pick something specific or just give us a direction.</div>
         <div id="momentActPanels"></div>
-      </div>
-
-      <!-- DJ + Live section -->
-      <div class="conditional" id="djliveSection">
-        <div class="section-label">DJ + Live for the Dance Floor</div>
-        <div class="step-helper" style="margin-bottom:1.5rem">Our biggest seller — live musicians performing alongside your DJ at peak moments. Select everything that catches your eye.</div>
-        <div class="acts-grid" id="djliveGrid"></div>
       </div>
 
     </div>
@@ -1457,7 +1457,10 @@ function setYN(key,val,btn,btnId){
   }
   if(key==='ceremonyAtVenue'){document.getElementById('ceremonyHelpWrap').classList.toggle('visible',val);if(!val)document.getElementById('btn5').disabled=false;else document.getElementById('btn5').disabled=true}
   if(key==='booth'){document.getElementById('boothCatWrap').classList.toggle('visible',val);if(!val&&btnId)document.getElementById(btnId).disabled=false;else if(val)document.getElementById('btn8').disabled=true}
-  if(key==='liveMusic'){document.getElementById('liveMusicWrap').classList.toggle('visible',val);if(btnId)document.getElementById(btnId).disabled=false;if(val)renderMomentPanels()}
+  if(key==='liveMusic'){document.getElementById('liveMusicWrap').classList.toggle('visible',val);
+    if(btnId)document.getElementById(btnId).disabled=val?!(S.alldayPackage||S.liveMusicWhere||S.liveMoments.length):false;
+    if(val)renderMomentPanels();
+    else{S.blitzElite=null;S.blitzArtists=[];}}
   if(key==='premiumDJ'&&btnId)document.getElementById(btnId).disabled=false;
   if(key==='blitzElite'){document.getElementById('blitzEliteWrap').classList.toggle('visible',val);if(btnId)document.getElementById(btnId).disabled=false}
 }
@@ -1722,8 +1725,21 @@ function buildSummary(){
 }
 
 // SUBMIT
+function liveMusicEmail(){
+  if(S.liveMusic!==true)return 'No';
+  if(S.alldayPackage)return 'Yes — All Day Package';
+  const w=S.liveMusicWhere;
+  const parts=[];
+  if(w==='ceremony-cocktail'||w==='both'){
+    const acts=Object.entries(S.momentActs).map(([m,a])=>m+': '+(Array.isArray(a)?a.join(', '):a)).join(' | ');
+    parts.push('Ceremony/Cocktail — '+(S.liveMoments.join(', ')||'moments TBD')+(acts?' ('+acts+')':''));
+  }
+  if(w==='djlive'||w==='both')parts.push('DJ + Live for the Dance Floor'+(S.djliveActs.length?' ('+S.djliveActs.join(', ')+')':''));
+  return 'Yes — '+(parts.join(' | ')||'no details selected');
+}
+
 function submitForm(){
-  const pills=[...S.musicVibe.slice(0,2),S.premiumDJ?'Premium DJ':null,...S.fxInterested.slice(0,2),S.booth?S.boothType:null,S.liveMusic?(S.alldayPackage?'Live Music All Day':'Live Music'):null,S.blitzElite?'Blitz Elite':null].filter(Boolean);
+  const pills=[...S.musicVibe.slice(0,2),S.premiumDJ?'Premium DJ':null,...S.fxInterested.slice(0,2),S.booth?S.boothType:null,S.liveMusic?(S.alldayPackage?'Live Music All Day':'Live Music'):null,(S.liveMusic&&S.blitzElite)?'Blitz Elite':null].filter(Boolean);
   document.getElementById('successPills').innerHTML=pills.map(p=>`<span class="pill">${p}</span>`).join('');
   navHistory.push(getCurrentStepId());currentStep='step12';showStep('step12');
   const st=document.getElementById('successTitle');if(st&&S.leadName)st.textContent='You\'re all set, '+S.leadName.split(' ')[0]+'.';
@@ -1745,9 +1761,9 @@ function submitForm(){
     disco_ball: S.discoBallType||'—',
     sparklers: S.sparklerQty||'—',
     booth_type: S.booth?(S.boothType||'Selected, no type chosen'):'No',
-    live_music: S.liveMusic?(S.alldayPackage?'All Day Package':Object.entries(S.momentActs).map(([m,a])=>m+': '+(Array.isArray(a)?a.join(', '):a)).join(' | ')):'No',
+    live_music: liveMusicEmail(),
     djlive_acts: S.djliveActs.join(', ')||'None',
-    blitz_elite: S.blitzElite?(S.blitzArtists.join(', ')||'Yes'):'No',
+    blitz_elite: (S.liveMusic&&S.blitzElite)?(S.blitzArtists.join(', ')||'Yes'):'No',
   };
   emailjs.send('service_l3fr6sg','template_94qozag',params).catch(e=>console.warn('EmailJS:',e));
   if(typeof gtag!=='undefined'){
