@@ -868,7 +868,7 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
 
   <!-- S9: Live Music -->
   <div class="step" id="step9">
-    <div class="step-eyebrow"><span class="step-dot"></span>The Extras · Live Music</div>
+    <div class="step-eyebrow"><span class="step-dot"></span>Your Vibe · Live Music</div>
     <div class="step-question">Looking to add Live Music?</div>
     <div class="yn-wrap">
       <button class="yn-btn" onclick="setYN('liveMusic',true,this,'btn9')">Yes</button>
@@ -932,7 +932,7 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
 
   <!-- S10: Blitz Elite -->
   <div class="step" id="step10">
-    <div class="step-eyebrow"><span class="step-dot"></span>The Extras · Premium Musicians</div>
+    <div class="step-eyebrow"><span class="step-dot"></span>Your Vibe · Premium Musicians</div>
     <div class="step-question">Interested in our most in-demand musicians?</div>
     <div class="step-helper">Our Blitz Elite roster is a curated selection of named soloists who have performed alongside Lizzo, top-charting artists, and A-list celebrities at some of the most exclusive events in the world. You choose a specific musician by name — someone you can look up, someone whose work you can watch. A noticeably different level.</div>
     <div class="yn-wrap">
@@ -1252,19 +1252,19 @@ let momentTypeSel={};
 // ── NAV ───────────────────────────────────────────────────────
 let navHistory=[],currentStep=0;
 
-const STEP_ORDER=['step0','step1','step2','step3','step4','step5','step6','step7',
+const STEP_ORDER=['step0','step1','step2','step9','step10','step3','step4','step5','step6','step7',
   'step7a','step7b','step7c','step7d',
-  'step8','step9','step10','step11','step12'];
+  'step8','step11','step12'];
 
 const SECTION_MAP={
   step0:'Section 1 of 3 — Your Vibe',step1:'Section 1 of 3 — Your Vibe',
-  step2:'Section 1 of 3 — Your Vibe',step3:'Section 1 of 3 — Your Vibe',step4:'Section 1 of 3 — Your Vibe',
+  step2:'Section 1 of 3 — Your Vibe',step9:'Section 1 of 3 — Your Vibe',step10:'Section 1 of 3 — Your Vibe',step3:'Section 1 of 3 — Your Vibe',step4:'Section 1 of 3 — Your Vibe',
   step5:'Section 2 of 3 — Your Day',step6:'Section 2 of 3 — Your Day',
   step7:'Section 3 of 3 — The Extras',step7a:'Section 3 of 3 — The Extras',
   step7b:'Section 3 of 3 — The Extras',step7c:'Section 3 of 3 — The Extras',
   step7d:'Section 3 of 3 — The Extras',
-  step8:'Section 3 of 3 — The Extras',step9:'Section 3 of 3 — The Extras',
-  step10:'Section 3 of 3 — The Extras',step11:'Review & Submit',step12:'Done',
+  step8:'Section 3 of 3 — The Extras',
+  step11:'Review & Submit',step12:'Done',
 };
 
 function showStep(id){
@@ -1310,13 +1310,13 @@ function goBack(){
 function getCurrentStepId(){return currentStep||'step0'}
 
 function getNextStepId(cur){
-  const seq={step0:'step1',step1:'step2',step2:'step3',step3:'step4',step4:'step5',step5:'step6',step6:'step7'};
+  const seq={step0:'step1',step1:'step2',step2:'step9',step3:'step4',step4:'step5',step5:'step6',step6:'step7'};
   if(seq[cur])return seq[cur];
   if(cur==='step7')return 'step8';
   if(['step7a','step7b','step7c','step7d'].includes(cur))return nextFxStepId();
-  if(cur==='step8')return 'step9';
-  if(cur==='step9')return S.liveMusic===false?'step11':'step10';
-  if(cur==='step10')return 'step11';
+  if(cur==='step8')return 'step11';
+  if(cur==='step9')return S.liveMusic===false?'step3':'step10';
+  if(cur==='step10')return 'step3';
   return 'step11';
 }
 
